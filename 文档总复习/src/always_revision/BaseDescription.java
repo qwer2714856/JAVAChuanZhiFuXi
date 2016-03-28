@@ -86,6 +86,14 @@
  *     System.out.println(0X11); 这样返回的是一个10进制
  *     Integer 里面有进制转换函数。
  *     
+ *     数据类型
+ *     整形
+ *     byte			8位		1字节	范围-128-127 		0-255 		一共2^8 个数字 
+ *     short		16位		2字节	范围-32768-32767 	0-65535		一共2^16个数字
+ *     int 			32位		4字节	范围					0-（2^32）-1	一共2^32个数字
+ *     long			64位		8字节	范围					0-（2^64）-1	一共2^64个数字
+ *     **
+ *     如果一个数值没有经过特除处理是int类型的
  *     
  */		
 package always_revision;
@@ -102,7 +110,7 @@ public class BaseDescription {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		int a = 1+1;
 	}
 
 }
