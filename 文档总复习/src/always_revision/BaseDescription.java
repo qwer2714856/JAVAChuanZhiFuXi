@@ -176,12 +176,52 @@
  *     
  *     所有小数据类型和大数据类型进行算数运算得到的都是大数据类型。
  *     
+ *     取摸
+ *     正负取决于被除数 如果被除数是负数结果一定是负数，如果被除数是正数结果一定是正数。
+ *     例如
+ *     10 % 3  		1
+ *     10 % -3 		1
+ *     -10 % 3 		-1
+ *     -10 % -3		-1
  *     
+ * 		三元运算必须有接收的否则错误
+ * 		data % 2 == 0 ? "偶数":"奇数";报错
+ * 		String str = data % 2 == 0 ? "偶数":"奇数";正确    
  *     
- *     
- *     
+ *     赋值运算 +=
+ *     byte a = 1;
+ *     byte b = a + 1;表达式提升所以这里编译报错；
+ *     byte a+=1不报错因为编译器做了特殊处理。
+ *    
+ *     负数的二进制码如何得到十进制
+ *     11111001
+ *     			去掉补码 -1
+ *     11111000
+ *     			取反码
+ *     00000111
+ *     			得到十进制7 然后加上一个负号搞定。
+ *      int a = 1;
+		int b = 2;
+		a = a ^ b;
+		b = b ^ a;
+		a = b ^ a;
+		
+		System.out.println(b);
+ *
+ *		<< >> >>>
+ *		左乘 右除 
+ *		3 >> 2 3*2*2
+ *		<< 被移除的位置用0不缺，包括最高为的符号位
+ *		>>  如果最高位被移 如果是 0 就用0 补如果是1用1补
+ *		>>> 全部是0补位。
+ *		
+ *		三元运算符
  */		
 package always_revision;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
@@ -195,7 +235,18 @@ public class BaseDescription {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println('a' + 'a');
+		/*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+		
+			int data = Integer.parseInt(br.readLine());
+			//System.out.println(data % 2 == 0 ? "偶数":"奇数");
+			System.out.println(true & false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+	 
 	}
 
 }
