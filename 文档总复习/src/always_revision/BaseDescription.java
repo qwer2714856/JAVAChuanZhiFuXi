@@ -219,9 +219,7 @@
  */		
 package always_revision;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 
 /**
@@ -245,8 +243,29 @@ public class BaseDescription {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		/*Scanner sc = new Scanner(System.in);
+		int str = Integer.parseInt(sc.next());
+		int guess = (int)(Math.random() * 10);
+		while(true){
+			if(str  > guess){
+				System.out.println(str+"大于了");
+			}else if(str < guess){
+				System.out.println(str+"小于了");
+			}else{
+				System.out.println("猜中");
+				break;
+			}
+			str = Integer.parseInt(sc.next());
+		}*/
 		
-	 
+		/*for(int i = 1; i < 10; i++){
+			for(int j = 1; j <= i; j++){
+				System.out.print(i+"*"+j+"="+(i*j)+"\t");
+			}
+			System.out.println();
+		}*/
+		
+		
 	}
 
 }
