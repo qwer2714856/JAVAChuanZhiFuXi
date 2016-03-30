@@ -215,11 +215,43 @@
  *		>>  如果最高位被移 如果是 0 就用0 补如果是1用1补
  *		>>> 全部是0补位。
  *		
+ *		函数的重载
+ *		只要函数名相同 参数列表不同就可以 与返回值无关
+ *
+ *
+ *		数组
+ *		三种定义格式
+ *		int []a = new int[2];
+ *		int []a = {1,2};
+ *		int []a = new int[]{1,2};
+ *		
+ *		Object []a = new Object[10];可以存储任意类型
+ *
+ *		二维数组
+ *		声明一个三行两列的二维数组
+ *		int a[][]=new int[3][2]
+ *		int [][]a = {{1,2,3,4},{1,2,3,4}};
+ *		int [][]a = new int[][]{{1}};
+ *
+ *		数组的三个方法
+ *		Arrays.toString(a);  返回数组元素字符串[1,2,3,4]
+ *		
+ *		int [] a = {4,3,2,1};
+		Arrays.sort(a);
+		System.out.println(Arrays.toString(a));  没有返回值，在原有数组上排序
+		
+ *		int [] a = {4,3,2,1};
+		System.out.println(Arrays.binarySearch(a,3));   //如果查找到元素，返回对应元素下标否则返回-1
+ *		
+ *		数组使用new和不使用new的区别
+ *		int [] a = {}  静态初始化
+ *		int [] a = new int[10]; 动态初始化
+ *
  *		
  */		
 package always_revision;
 
-import java.util.Scanner;
+import java.util.Arrays;
 
 
 /**
@@ -265,7 +297,90 @@ public class BaseDescription {
 			System.out.println();
 		}*/
 		
+		 /*int [] a = {1,2,3,4,5,6,7,8,9};
+		 int tmp = a[0];
+		 for(int i = 0; i < a.length; i++){
+			 tmp = Math.max(tmp, a[i]);
+		 }
+		 System.out.println(tmp);*/
+		
+		//直接插入排序。
+		//核心算法  从数组的第二个元素做标志比对位，往<-前找如果找到比自己大的就让大的往后挪，直到挪到第一位然后将标志位值放上。
+		//例子
+		/*int []a = {4,5,7,1,3,4,5,0};
+		for(int i = 1; i < a.length; i++){
+			int tmp = a[i];
+			int j = i - 1;
+			while(j>=0 && tmp < a[j]){
+				a[j+1] = a[j];
+				j--;
+			}
+			a[j+1] = tmp;
+		}
+		System.out.println(Arrays.toString(a));*/
+		
+		//冒泡排序
+		/*int []a = {4,5,7,1,3,4,5,0};
+		for(int i = 0; i < a.length - 1; i++){
+			for(int j = i+1;j<a.length;j++){
+				if(a[i] > a[j]){
+					a[i] = a[i] ^ a[j];
+					a[j] = a[i] ^ a[j];
+					a[i] = a[i] ^ a[j];
+				}
+			}
+		}
+		System.out.println(Arrays.toString(a));*/
+		
+		//选择排序
+		/*int []a = {4,5,7,1,3,4,5,0};
+		for(int i = 0; i < a.length - 1; i++){
+			int tmp = a[i];
+			int tmpIdx = i;
+			for(int j = i + 1; j < a.length; j++){
+				if(tmp > a[j]){
+					tmp = a[j];
+					tmpIdx = j;
+				}
+			}
+			a[tmpIdx] = a[i];
+			a[i] = tmp;
+		}*/
+		//二分查找
+		/*int find = 0;
+		int left = 0;
+		int right = a.length - 1;
+		int md = (left + right) / 2;
+		
+		while(left <= right){
+			if(find > a[md]){
+				left = md + 1;
+			}else if(find < a[md]){
+				right = md - 1;
+			}else{
+				System.out.println("find it position is" + md);
+				break;
+			}
+			md = (left + right) / 2;
+		}
+		
+		if(left > right){
+			System.out.println("find error");
+		}*/
+		
+		//数组翻转
+		/*int [] a = {1,2,3,4};
+		int len = (a.length - 1) / 2;
+		int len2 = a.length - 1;
+		for(int i = 0; i < len; i++){
+			a[i] = a[i] ^ a[len2 - i];
+			a[len2 - i] = a[i] ^ a[len2 - i];
+			a[i] = a[i] ^ a[len2 - i];
+		}
+		
+		System.out.println(Arrays.toString(a));*/
+		 
 		
 	}
-
+	 
 }
