@@ -182,6 +182,39 @@
  * 
  * 	 String [] args 是dos下的参数列表 java ... a b c 都保存在args里面 如果传入参数相当于 jvm 相当做了一个 new String[]{a,b,c}
  * 	 
+ * 继承
+ * 类和类之间的关系
+ * is a 关系 学生和人。 
+ * has a 整体和部分。
+ * 
+ * class 球场{
+ * 	private 球场的座位 a = null;
+ * }
+ * 球场和球场的座位就是整体和部分的关系。 has a 关系
+ * 
+ * class Person{
+ * 
+ * }
+ * 
+ * class work extends Persion{
+ * 
+ * } 这个就是继承的关系，工人继承自人。is a 
+ * 
+ * is a 解释 什么是一个什么
+ * has a  什么里面有什么
+ * 
+ * 继承的细节
+ * 父类中除了构造，所有的东西都会继承下来，包括private(隐式继承)不能由子类调用，只能由父类方法调用。包括静态非静态。 父类的静态成员是可以通过子类类名调用的
+ * 
+ * 如何使用继承
+ * 不能为了继承而用继承，一定要出现is a的关系。
+ * 狗和人类有共同方法 不能为了简写让狗继承人，狗和人没关系。
+ * 使用继承是建立在is a的关系上的
+ * 
+ * java是单继承的。
+ * 
+ * super 关键字
+ * 
  * 
  */
 package always_revision;
@@ -211,7 +244,7 @@ public class ClassDescription {
 	}
 	public static void say(){}
 	public void say1(){
-	 
+	
 	}
 }
 
@@ -235,3 +268,6 @@ class Car{
 		System.out.println(this.Lt);
 	}
 }
+
+
+ 
