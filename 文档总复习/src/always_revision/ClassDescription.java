@@ -316,7 +316,7 @@ class Car{
 	{
 		System.out.println(this.Lt);
 	}
-	public Car(String color, char c, int a, int lt) {	
+	public Car(String color, char c, int a, int lt) { 	
 		this.color = color;
 		this.c = c;
 		this.a = a;
