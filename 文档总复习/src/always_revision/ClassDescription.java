@@ -214,8 +214,56 @@
  * java是单继承的。
  * 
  * super 关键字
+ * 指向的是父类
+ * 主要用于子类调用父类的方法成员，如果子类重写父类的方法，还想调父类原来的方法就只能在子类用super.父类方法。 调用父类的构造super();
+ * 
+ * super和this很像
+ * this指向当前对象，super指向父辈对象。
+ * 如果使用children 那么继承的父类也被加载到内存。
+ * 注意在使用继承的时候，如果子类继承了父类，实例化子类那么默认是会调用父类的无参构造方法相当于super()。 
+ * 创建子类对象的时候也创建了父类对象this 子类 super父类实例，但是这个父类实例只能在子类中使用。
+ * 子类的构造函数默认第一行会调用父类的构造super();当然如果你手动写上了就用你的。
+ * 但是如果父类没有构造方法就直接报错了。 super() this();不能同时放到第一行，但这两个必须都在第一行。
+ * 
+ * Object 是所有类的父类 普通类也可用super 没有继承关系的类如果用了super代表的是Object。
  * 
  * 
+ * 方法重写
+ * 重写的细节
+ * 1.必须是字符类关系，子类重写父类
+ * 2.函数名，形参列表相同
+ * 3.子类重写父类的时候修饰权限必须大于等于父类，例如父类protected那么子类只能是protected或public
+ * 4.子类的返回值类型必须是父类的子类或者和父类一样。
+ * 5.抛出异常，子类不能抛出比父类大的异常，如果父类没异常子类不允许抛出异常.
+ * 
+ * 子类的对象调用方法先使用this的然后使用super最后没有找到就报错，就近原则。
+ * 
+ * 重载 与 重写的不同
+ * 重载所有函数必须放在同一个类中，函数名相同，形参列表不同
+ * 重写要满足五个需求。
+ * 
+ * instanceof 
+ * instanceof 是比较运算符中的。
+ * 
+ * Person extends Ps
+ * Person p = new Person();
+ * p instanceof Persion true
+ * p instanceof Ps true
+ * 
+ * 只要是继承关系，实现关系，类实例关系，都返回true,这么讲有关系就返回true.
+ * 
+ * 
+ * final
+ * 主要用于修改 类 成员,形参
+ * 被final修饰的不能够再次赋值，重写，以及继承。
+ * 如果修饰的是形参
+ * 那么这个形参在方法中不能二次赋值，如果形参是引用类型的不能够在次赋值引用给他。
+ * final 修饰成员变量的时候必须赋初值，因为只有一次的赋值机会。
+ * 
+ * final 修饰普通类型不能换值
+ * final 修饰引用的数据类型不能换另外一个对象引用。
+ * 
+ * 一般和static 结合使用作为常量
  */
 package always_revision;
 
@@ -241,6 +289,7 @@ public class ClassDescription {
 		ClassDescription.say();
 		new ClassDescription();
 		new ClassDescription();*/
+		
 	}
 	public static void say(){}
 	public void say1(){
@@ -267,7 +316,14 @@ class Car{
 	{
 		System.out.println(this.Lt);
 	}
+	public Car(String color, char c, int a, int lt) {	
+		this.color = color;
+		this.c = c;
+		this.a = a;
+		Lt = lt;
+	}
+	public Car(){};
 }
 
-
+interface l{}
  
