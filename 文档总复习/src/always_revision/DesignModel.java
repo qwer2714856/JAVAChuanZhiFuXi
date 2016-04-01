@@ -45,6 +45,8 @@
  * 8.class a implements b,c,d{}
  * 9.interface x extends m,q{}  接口在继承接口的可以多继承。类在实现接口可以多实现。
  * 
+ * 多态
+ * 
  */
 package always_revision;
 
