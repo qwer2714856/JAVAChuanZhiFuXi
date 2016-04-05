@@ -13,6 +13,12 @@
  * 2.如果内部类定义了静态的成员，那么这个内部类必须被static 修饰，静态类内部必须使用静态成员。
  * 3.如果内部类和外部类的成员名字重复，如果想调用外部的可以使用OutClass.this
  * 
+ * 
+ * 局部内部类
+ * 只能访问外部函数的final 修饰的成员变量
+ * 
+ * 
+ * 匿名内部类
  */
 package always_revision;
 
@@ -51,5 +57,11 @@ class OutClass {
 	void say(){
 		System.out.println("out call in");
 		new InClass().say();
+		final int a = 1;
+		class hi{
+			void say(){
+				System.out.println(a);
+			}
+		}
 	}
 }
