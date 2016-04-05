@@ -19,6 +19,30 @@
  * 
  * 
  * 匿名内部类
+ * 
+ * //匿名类
+ * 匿名类必须存在父类或父接口，因为需要用到父类或父接口创建匿名类。
+ * interface NiMing_InClass{
+	void say();
+	}
+
+	new NiMing_InClass(){
+
+		@Override
+		public void say() {
+			// TODO Auto-generated method stub
+			
+		}
+		 
+	};
+	
+	定义在类内部的匿名类是匿名内部类。
+	如果需要在类内部多次调用匿名类让它指向变量
+	NiMing_InClass ni = new NiMing_InClass(){
+	
+	}
+	ni....
+	ni....
  */
 package always_revision;
 
@@ -64,4 +88,9 @@ class OutClass {
 			}
 		}
 	}
+}
+
+
+interface NiMing_InClass{
+	void say();
 }
