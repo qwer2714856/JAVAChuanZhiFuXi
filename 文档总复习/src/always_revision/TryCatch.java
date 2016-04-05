@@ -52,9 +52,31 @@
  * 7.异常作用，就是当程序代码错误的时候不抛给用户，采取其他的解决方案。
  * 
  * 
+ * 
+ * 自定义异常
+ * class NoIpException extends Exception{	
+	public NoIpException(String msg){
+		super(msg);
+	}
+	}
+ * 1.继承Exception 在自定义异常类后面也要加Exception这个是遵守规范而已。
+ * 
+ * 运行时异常
+ * RuntimeException 这个异常可以当做壳子，经过它包装的异常抛出后 调用者可以处理也可不出处理，在抛出的时候自己的函数也可以不用throws声明。
+ * throw new RuntimeException(new Exception()); 使用壳子包装一下 就可以不用throws 声明和调用者处理了。
+ * 但是如果没有捕获，出现了异常程序就停止了。
+ * 
+ * 非运行时异常就是编译的时候会去检查
+ * 如果出现了非运行时异常必须用try catch 或 throws 扔出去处理
+ * 只要是不继承自RuntimeException 就是非运行异常。
+ * 自定义的异常，一般都是非运行时异常
+ * 
+ * 子类从写父类带异常的方法，只能抛出比父类级别小的或者不抛出！！！ 父类抛出几个异常子类就抛出几个异常。
+ * 
+ * finally 适合放释放资源的代码。不管是否异常都会执行的代码块。当程序退出了就不执行了。只有System.exit(0); 可以停止；return 都不能停止。
  */
 package always_revision;
-
+ 
 /**
  * @author www.23.com
  *
@@ -68,6 +90,7 @@ public class TryCatch {
 		// TODO Auto-generated method stub
 		//Throwable t = new Throwable("myself create message");
 		call();
+		
 	}
 	static void call(){
 		try{
@@ -75,7 +98,16 @@ public class TryCatch {
 			System.out.println(a / 0);
 		} catch(Exception e){
 			e.printStackTrace();
+			 
 		}
 	}
+	static void noIp() throws NoIpException{
+		throw new NoIpException("no ip address");
+	}
+}
 
+class NoIpException extends Exception{	
+	public NoIpException(String msg){
+		super(msg);
+	}
 }
