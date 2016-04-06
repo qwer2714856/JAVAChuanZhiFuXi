@@ -37,6 +37,8 @@
  * 2.char charAt(int index) 获取特定位置的字符。(存在越界)
  * 3.int indexOf(String str) 获取指定字符串的位置。
  * 4.int lastIndexOf(int char) 返回最后一个字符的位置。
+ * 
+ * 判断方法
  */
 package always_revision;
 
@@ -54,7 +56,7 @@ public class JavaApi {
 		/*Persion p1 = new Persion("a",1);
 		Persion p2 = new Persion("a",1);
 		System.out.println(p1.equals(p2));*/
-
+ 
 	}
 
 }
