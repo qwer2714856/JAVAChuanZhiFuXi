@@ -16,7 +16,27 @@
  * 3.hashcode
  * 
  * 
+ * String 类
+ * 创建字符串的两种方式
+ * 1.String str = new String("admin"); //这个是创建了一个实实在在的对象，这个每次都会创建一个新的对象。并且检查字符常量池是否有该对象"admin"没有就创建
+ *   实际上是创建了两个对象，最后的引用是堆里面的那个字符串引用，不是字符串常量池种的。 这里多创建了一个是因为"admin" 这个是往常量池创建。
+ * 2.String str = "admin";//这个会在字符串常量池种去找，如果没找到就在常量池里面建一个，如果有了就让变量直接只想它。
  * 
+ * 字符串的比较
+ * String str="admin";
+ * String str2 = "admin";
+ * String str3 = new String("admin");
+ * String str4 = new String("admin");
+ * 
+ * str == str2 true 因为"admin"在字符串池中如果存在就直接赋值给变量引用地址。所以这里的==比较的也是内存地址
+ * str == str3 false
+ * str3 == str4 false
+ * 
+ * 字符串的方法
+ * 1.int length() 获取字符串长度。
+ * 2.char charAt(int index) 获取特定位置的字符。(存在越界)
+ * 3.int indexOf(String str) 获取指定字符串的位置。
+ * 4.int lastIndexOf(int char) 返回最后一个字符的位置。
  */
 package always_revision;
 
@@ -31,9 +51,10 @@ public class JavaApi {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Persion p1 = new Persion("a",1);
+		/*Persion p1 = new Persion("a",1);
 		Persion p2 = new Persion("a",1);
-		System.out.println(p1.equals(p2));
+		System.out.println(p1.equals(p2));*/
+
 	}
 
 }
