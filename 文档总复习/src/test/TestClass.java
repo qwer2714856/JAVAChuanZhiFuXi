@@ -1,7 +1,7 @@
 /**
  * 
  */
-package always_revision;
+package test;
 
 /**
  * @author www.23.com

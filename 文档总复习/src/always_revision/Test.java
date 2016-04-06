@@ -2,7 +2,7 @@
  * 
  */
 package always_revision;
-import always_revision.*;
+import test.*;
 /**
  * @author www.23.com
  *
