@@ -62,6 +62,33 @@
  * 6.String toUpperCase();											小写变大写
  * 7.String trim();													去除两边空格	
  * 
+ * StringBuffer
+ * 当对字符串进行频繁的操作的时候使用 + 会造成字符串池中的字符串对象泛滥。
+ * 所以当进行频繁的字符串操作考虑使用
+ * StringBuffer 这个是线程安全的。
+ * 它的特点
+ * 1.默认缓冲区是16个字符
+ * 2.它是线程安全的，比起StringBuilder效率低
+ * StringBuilder str = new StringBuilder("jack");
+ * str.append("str").append("ding").append("lu"); 支持链式编程
+ * str.toString();
+ * str.insert(2,"java");在原来字符串的第二个位置插入java
+ * 返回字符串内容
+ * str.toString();
+ * str.indexOf("");返回指定字符串第一次出现位置。
+ * str.substring(0);截取字符串
+ * 修改
+ * str.replace(0,end,String str) 从第0个到第end-1个替换为str
+ * str.setChar(0,char ch) 第0个替换为指定字符
+ * 删除
+ * str.delete(2,5) 从第二个开始删删到第5-1个结束 清空的话就是str.delete(0,str.length());
+ * str.deleteCharAt(2) 删除指定字符
+ * 反序
+ * str.reverse();
+ * 
+ * StringBuilder 这个和StringBuffer 完全一样唯一区别是它不是线程安全的，所以效率要高于StringBuffer. jdk1.5 之后又的 方法同StringBuffer
+ * 
+ * 
  * 					
  */
 package always_revision;
@@ -82,6 +109,12 @@ public class JavaApi {
 		/*Persion p1 = new Persion("a",1);
 		Persion p2 = new Persion("a",1);
 		System.out.println(p1.equals(p2));*/
+		
+		/*StringBuffer sb = new StringBuffer("admin");
+		sb.append(false).append(3.06d).append('a');
+		sb.insert(0, "ding");
+		sb.deleteCharAt(5);
+		System.out.println(sb.reverse());*/
 		
 	}
 
