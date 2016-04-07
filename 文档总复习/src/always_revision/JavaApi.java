@@ -39,8 +39,34 @@
  * 4.int lastIndexOf(int char) 返回最后一个字符的位置。
  * 
  * 判断方法
+ * 1.boolean endsWith(String str);									是否以指定字符串结尾
+ * 2.boolean isEmpty()												判断字符串是不是""   
+ * 3.boolean contains(CharSequences);								判断是否包含指定字符串序列
+ * 4.boolean equals(Object anObject);								判断字符串是否相等
+ * 5.boolean equalsIgnoreCase(String anotherString); 				判断字符串是否相等忽略大小写
+ * 
+ * 转换方法
+ * 1.String String(char [] char);	new String(chr)					字符数组变字符串 
+ * 2.String String(char [] char, int offset, int count)				字符数组从哪个开始变几个
+ * 3.static String valueOf(char [])									静态的转换字符转字符串
+ * 4.static String valueOf(char [], int offset, int count)			静态的转换字符转字符串，从哪个开始取几个。
+ * 5.char[] toCharArray()											字符串转字符数组。
+ * 
+ * 
+ * 其它方法
+ * 1.String replace(char oldChar, char newChar);					查找出对应字符全部替换
+ * 2.String[] split(String regex);									切割
+ * 3.String substring(int beginIndex);								从哪个位置开始截取到最后
+ * 4.String substring(int beginIndex, int endIndex);				从beginIndex开始 到endIndex-1结束
+ * 5.String toLowerCase();											大写变小写
+ * 6.String toUpperCase();											小写变大写
+ * 7.String trim();													去除两边空格	
+ * 
+ * 					
  */
 package always_revision;
+
+import java.util.Arrays;
 
 /**
  * @author www.23.com
@@ -56,7 +82,7 @@ public class JavaApi {
 		/*Persion p1 = new Persion("a",1);
 		Persion p2 = new Persion("a",1);
 		System.out.println(p1.equals(p2));*/
- 
+		
 	}
 
 }
