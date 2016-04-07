@@ -111,12 +111,47 @@
  rt.gc();//手动启动垃圾回收器
  System.out.println(rt.maxMemory());//虚拟机最大内存
  System.out.println(rt.totalMemory());//内存总量		
- 	
+ 
+ * Date 日期类
+ * Date是封装了当前的系统时间的类，不过已经过时，推荐使用Calendar类 Calendar是一个日历类	
+ * 
+ * 		Date d = new Date();
+		Calendar cld = Calendar.getInstance();//静态的
+		System.out.println(cld.get(Calendar.DAY_OF_WEEK));//不同地区可能需要减去1 月需要+1 http://blog.sina.com.cn/s/blog_45c06e600100pm77.html
+		
+		SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//以这个格式为标准。
+		String str = sm.format(new Date());
+		System.out.println(sm.parse(str).toString());
+	
+		
+ * Math 类
+ * Math.PI  			返回一个π
+ * Math.ceil()			向上取整 向大的取
+ * Math.floor()			向下取整 向小的取
+ * Math.round()			四舍五入 
+ * Math.random()		随机数0-1但是不包括1
+ * 
+ * 
+ * //创建验证码
+   StringBuilder sb = new StringBuilder();
+   char [] a = {'a','b','c','d','e','f','g','h'};
+   int len = a.length;
+   int i = 0;
+   while(i < 4){
+		int as = (int) Math.floor(Math.random() * len);
+		sb.append(a[as]);
+		i++;
+	}
+	System.out.println(sb.toString());
  */
 package always_revision;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -133,8 +168,9 @@ public class JavaApi {
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
 		/*Persion p1 = new Persion("a",1);
 		Persion p2 = new Persion("a",1);
@@ -162,6 +198,17 @@ public class JavaApi {
 		System.out.println(rt.maxMemory());//虚拟机最大内存
 		System.out.println(rt.totalMemory());//内存总量
 */		
+		
+		/*Date d = new Date();
+		Calendar cld = Calendar.getInstance();//静态的
+		System.out.println(cld.get(Calendar.DAY_OF_WEEK));//不同地区可能需要减去1 月需要+1 http://blog.sina.com.cn/s/blog_45c06e600100pm77.html
+*/		
+		/*SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String str = sm.format(new Date());
+		System.out.println(sm.parse(str).toString());*/
+		 
+		
+		
 	}
 
 }
