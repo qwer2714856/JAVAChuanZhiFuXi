@@ -88,12 +88,41 @@
  * 
  * StringBuilder 这个和StringBuffer 完全一样唯一区别是它不是线程安全的，所以效率要高于StringBuffer. jdk1.5 之后又的 方法同StringBuffer
  * 
+ * System 系统层的
+ * 获取系统配置信息
+ * Properties ps = System.getProperties();
+ * ps.list(System.out);
+ * String str = System.getProperty("sun.os.patch.level");
+ * for(Map.Entry<String, String> me : System.getenv().entrySet()){
+ *	System.out.println(me.getKey()+"--"+me.getValue());
+ * }
  * 
- * 					
+ * foreach 实现Iterable接口的才能使用for增强
+ * 
+ * 
+ * Runtime 类描述应用程序的运行环境。JVM 层的
+ * Runtime rt = Runtime.getRuntime(); 单例运行时环境
+ * rt.exit(0); 退出虚拟机 0 正常1非正常System.exit(0);同	
+ * Runtime rt = Runtime.getRuntime();
+ //rt.exit(0);
+ //System.exit(0);
+ rt.exec("dir");//命令行 可以启动一个别的应用程序
+ System.out.println(rt.freeMemory());//可用内存量
+ rt.gc();//手动启动垃圾回收器
+ System.out.println(rt.maxMemory());//虚拟机最大内存
+ System.out.println(rt.totalMemory());//内存总量		
+ 	
  */
 package always_revision;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+ 
 
 /**
  * @author www.23.com
@@ -103,8 +132,9 @@ public class JavaApi {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		/*Persion p1 = new Persion("a",1);
 		Persion p2 = new Persion("a",1);
@@ -116,6 +146,22 @@ public class JavaApi {
 		sb.deleteCharAt(5);
 		System.out.println(sb.reverse());*/
 		
+		/*Properties ps = System.getProperties();
+		ps.list(System.out);
+		String str = System.getProperty("sun.os.patch.level");
+		for(Map.Entry<String, String> me : System.getenv().entrySet()){
+			System.out.println(me.getKey()+"--"+me.getValue());
+		}*/
+		
+		/*Runtime rt = Runtime.getRuntime();
+		//rt.exit(0);
+		//System.exit(0);
+		rt.exec("dir");//命令行 可以启动一个别的应用程序
+		System.out.println(rt.freeMemory());//可用内存量
+		rt.gc();//手动启动垃圾回收器
+		System.out.println(rt.maxMemory());//虚拟机最大内存
+		System.out.println(rt.totalMemory());//内存总量
+*/		
 	}
 
 }
