@@ -13,6 +13,33 @@
  * 类型固定，长度固定 都是在声明固定，不可变。
  * 
  * 
+ * 集合做什么
+ * 1.添加对象到集合
+ * 2.删除集合中的对象
+ * 3.在集合和中查询对象
+ * 4.更新集合中对象
+ * 
+ * 不过是数组也好集合也好，如果存储对象都是存储的是对象引用地址。
+ * 
+ * 集合体系
+ * Collection 顶层
+ *     |----单列集合
+ *         |----list 存储有序，可以重复。
+ *             |----ArrayList 查询快，存储慢（实现原理，内部维护了一个Object数组，当数据达到满值会变为原来的长度+原来长度/2 默认是10个 所以添加慢因为如果满了还要创建数组
+ *             						            创建完了还要在拷贝就的数组时间消耗，如果是查询是按照索引下面进行查询的所以快）
+ *             |----LinkedList 查询慢，存储快（底层是用链表实现的，增加的话，只需要记住前一个和后一个位置集合，插叙需要遍历所有的链表所以效率低）
+ *             |----Vector 这个和ArrayList 实现原理一样但是这个是线程安全的比起ArrayList 效率慢。
+ *         |----set  存储无序，不可重复。
+ *             |----HashSet
+ *             |----TreeSet
+ *             |----LinkedHashSet
+ *     |----双列集合
+ *         |----Map：键值对
+ *         |----HashMap
+ *         |----TreeMap
+ *         |----HashTable
+ *         |----LinkedHashMap
+ * 
  */
 package always_revision;
 
@@ -29,7 +56,7 @@ public class JieHe {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	 
+		ArrayList ay = new ArrayList();
 	}
 
 }
