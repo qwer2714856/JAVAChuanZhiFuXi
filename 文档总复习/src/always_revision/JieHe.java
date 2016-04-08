@@ -40,6 +40,21 @@
  *         |----HashTable
  *         |----LinkedHashMap
  * 
+ * 
+ * 为什么会出现这么多的存储容器，因为每一种的容器存储方式是不同的，我们称之为数据结构。
+ * 
+ * 什么时候该用什么样的集合
+ * 如果需要保存对象 使用Collection 这个是个接口
+ * 如果需要 保留 存储有序，可以重复 使用list
+ * 							查询多用ArrayList
+ * 							增删多用LinkedList
+ * 							线程安全用Vector
+ * 如果需要保留 存储无序，不可以重复使用set
+ * 					需要自然排序的使用 TreeSet
+ *					如果不排序HashSet效率高于TreeSet 
+ * 					如果需要保留存储顺序 且过滤重复元素需要用LinkedHashSet
+ *  
+ * 
  */
 package always_revision;
 
