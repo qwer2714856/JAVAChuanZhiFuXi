@@ -54,24 +54,97 @@
  *					如果不排序HashSet效率高于TreeSet 
  * 					如果需要保留存储顺序 且过滤重复元素需要用LinkedHashSet
  *  
+ * Collection 接口 java.util包里面
+ * Collection
+ * 		单例
+ * 			|----List 存储有序，可重复（链表|线性表）
+ * 			|----Set 存储无序，不可重复（集）
+ * Collection 描述了集合共有的方法。
+ * 
+ * 
+ * Collection 的方法
+ * boolean 增加的方法 true 添加成功 false 添加失败
+ * add() 				添加对象到容器
+ * addAll()				添加一个容器到另一个容器
+ * boolean 删
+ * remove()				删除指定对象
+ * removeAll()			删除指定集合的元素
+ * void 改
+ * clear()				清空集合
+ * int 查
+ * size()				返回集合长度
+ * boolean 判断
+ * isEmpty()			判断集合是不是空的
+ * contains()			判断一个集合是否包含指定对象
+ * containsAll()		判断一个集合是否包含另一个集合
+ * 转数组
+ * toArray()			集合转数组
+ * 
+ * 
+ * 
+ * List 
+ * 
  * 
  */
 package always_revision;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * @author www.23.com
  *
  */
 public class JieHe {
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ArrayList ay = new ArrayList();
+/*		Collection co = new ArrayList();
+		Person p1 = new Person("a1",1);
+		Person p2 = new Person("a1",2);
+		Person p3 = new Person("a3",3);
+		Person p4 = new Person("a4",4);
+		co.add(p1);
+		
+		System.out.println(co);*/
+		
+		
+		
+		
 	}
 
+}
+class Person{
+	String name;
+	int age;
+	public Person(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		boolean rt = false;
+		Person p = null;
+		if(obj instanceof Person){
+			p = (Person)obj;
+			if(name.equals(p.name)){
+				rt = true;
+			}
+		}
+		return rt;
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return name.hashCode();
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name+age;
+	}
 }
