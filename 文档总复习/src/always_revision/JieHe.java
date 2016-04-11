@@ -115,6 +115,32 @@
  * 例如
  * new ArrayList(20) 默认的大小为20.
  * 
+ * LinkedList 插入快，查询慢。 底层采用了链表实现的。
+ * 链表，内存地址不是连续的，虽然他也有下标，但是他们的结构是前一个记住后一个的位置，查询的时候需要遍历所有的，如果要查找的在最后一个，那就要
+ * 遍历所有的链表，相反如果插入很快，只要插入记住前一个和后一个位置就搞定。
+ * 特有的方法：
+ * void
+	 * addFirst(E e)
+	 * addLast(E e)
+ * E e
+	 * getFirst(E e)
+	 * getLast(E e)
+	 * removeFirst(E e)
+	 * removeLast(E e)
+ * 如果集合中没有元素删除和获取都将抛出NoSuchElementException
+ * 数据结构
+ * 栈
+ * void 
+ * push 进栈
+ * E e
+ * pop 出栈
+ * 队列
+ * void
+ * offer 进队
+ * E e
+ * poll	出对
+ * 返回逆序迭代器
+ * descencodingIterator()
  * 
  */
 package always_revision;
@@ -123,6 +149,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -197,6 +225,26 @@ public class JieHe {
 			}
 		}
 		System.out.println(ay);*/
+		
+		
+		//LinkedList
+		/*LinkedList<String> ll = new LinkedList<String>();
+		ll.addFirst("a");
+		ll.addLast("b");
+		System.out.println(ll.getFirst());
+		System.out.println(ll.getLast());
+		System.out.println(ll.removeLast());
+		System.out.println(ll.removeFirst());
+		ll.push("admin");
+		System.out.println(ll.pop());
+		ll.offer("jindui");
+		System.out.println(ll.poll());
+		ll.addFirst("ding");
+		ll.addLast("lu");
+		Iterator<String> it = ll.descendingIterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}*/
 		
 		
 	}
