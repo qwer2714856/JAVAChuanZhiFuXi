@@ -81,20 +81,36 @@
  * toArray()			集合转数组
  * 
  * 
+ * Iterable 接口
+ * 			Iterator iterator 定义在Collection内部 
+ * 		--| Collection 接口
+ * 			--| List 	接口特点存储有序，元素可以重复,允许在指定位置插入，并且通过索引返回。
+ * List 方法
+ * 增
+ * 	void add(int index, E element)指定位置添加元素
+ *  boolean addAll(int index, Collection c) 指定位置添加集合
+ * 删
+ * 	E remove(int index) 删除指定位置元素 ， 返回被删的元素。
+ * 改
+ * 	E set(int index, E element) 替换指定位置元素，返回被替换的元素。
+ * 查
+ *  E get(int index) 指定位置元素返回。 和数组一样当大于范围会有越界
+ *  int indexOf(Object o) 查找指定的对象所在的索引
+ *  int lastIndexOf(Objec o) 从后向前找
  * 
- * List 
- * 
- * 
+ * 求子集合
+ *  List<E> SubList(int fromIndex, int toIndex)//不包含toIndex
  */
 package always_revision;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author www.23.com
- *
+ * 
  */
 public class JieHe {
 	/**
@@ -102,49 +118,73 @@ public class JieHe {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-/*		Collection co = new ArrayList();
-		Person p1 = new Person("a1",1);
-		Person p2 = new Person("a1",2);
-		Person p3 = new Person("a3",3);
-		Person p4 = new Person("a4",4);
-		co.add(p1);
-		
-		System.out.println(co);*/
-		
-		
+		/*
+		 * Collection co = new ArrayList(); Person p1 = new Person("a1",1);
+		 * Person p2 = new Person("a1",2); Person p3 = new Person("a3",3);
+		 * Person p4 = new Person("a4",4); co.add(p1);
+		 * 
+		 * System.out.println(co);
+		 */
+	 
+		/* List list = new ArrayList();
+		 Person p1 = new Person("a1",1);
+		 Person p2 = new Person("a2",2);
+		 //add void add(int index, E element);
+		 list.add(0,p1);
+		 list.add(0,p2);
+		 System.out.println(list);
+		 //add boolean add(int index, Collection co) 添加 成功返回true
+		 System.out.println(list.addAll(0, list));
+		 // E remove(int index); 返回的删除指定位置的元素
+		 System.out.println(list.remove(0));
+		 // 改 E set(int index, E element); 返回被替换的元素
+		 System.out.println(list.set(0, p2));
+		 // 查 E get(int index)
+		 System.out.println(list.get(0));
+		 // 查 对象的位置
+		 System.out.println(list.indexOf(p1));
+		 // 查 返回最后的位置
+		 System.out.println(list.lastIndexOf(p1));
+		 // List subList(int fromIndex,int toIndex) 返回从哪个位置截取的哪个位置。
+		 List l = list.subList(0, 1);*/
 		
 		
 	}
 
 }
-class Person{
+
+class Person {
 	String name;
 	int age;
+
 	public Person(String name, int age) {
 		this.name = name;
 		this.age = age;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		boolean rt = false;
 		Person p = null;
-		if(obj instanceof Person){
-			p = (Person)obj;
-			if(name.equals(p.name)){
+		if (obj instanceof Person) {
+			p = (Person) obj;
+			if (name.equals(p.name)) {
 				rt = true;
 			}
 		}
 		return rt;
 	}
+
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
 		return name.hashCode();
 	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return name+age;
+		return name + age;
 	}
 }
