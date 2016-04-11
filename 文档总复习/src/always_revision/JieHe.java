@@ -115,7 +115,7 @@
  * 例如
  * new ArrayList(20) 默认的大小为20.
  * 
- * LinkedList 插入快，查询慢。 底层采用了链表实现的。
+ * LinkedList 插入快，查询慢。 底层采用了双链表实现的。
  * 链表，内存地址不是连续的，虽然他也有下标，但是他们的结构是前一个记住后一个的位置，查询的时候需要遍历所有的，如果要查找的在最后一个，那就要
  * 遍历所有的链表，相反如果插入很快，只要插入记住前一个和后一个位置就搞定。
  * 特有的方法：
@@ -131,16 +131,41 @@
  * 数据结构
  * 栈
  * void 
- * push 进栈
+ * push 
  * E e
- * pop 出栈
+ * pop 
  * 队列
  * void
- * offer 进队
+ * offer 
  * E e
- * poll	出对
+ * poll	
  * 返回逆序迭代器
  * descencodingIterator()
+ * E e
+ * element 返回但不删除头元素
+ * 
+ * 栈先进后出
+ * push pop
+ * 
+ * 队列先进先出
+ * offer poll
+ * 
+ * 队列
+ * ---------------------
+ * offer -> -> ->      poll
+ * ---------------------
+ * 
+ * 栈
+ * -------
+ * |push<-
+ * |->pop
+ * -------
+ * 
+ * peekFirst  peek 获取对头元素但不删除
+ * peekLast 获取队尾元素但不删除。
+ * 
+ * ArrayList 对比 LinkedList 
+ * 如果添加多选后者，如果查询多选前者。
  * 
  */
 package always_revision;
@@ -241,12 +266,21 @@ public class JieHe {
 		System.out.println(ll.poll());
 		ll.addFirst("ding");
 		ll.addLast("lu");
+		ll.addFirst(null);
 		Iterator<String> it = ll.descendingIterator();
 		while(it.hasNext()){
 			System.out.println(it.next());
-		}*/
+		}
+		System.out.println(ll.element());*/
 		
-		
+		/*LinkedList<String> ll = new LinkedList<String>();
+		ll.offer("a");
+		ll.offer("a1");
+		ll.offer("a2");
+		ll.offer("a3");
+		ll.offer("a4");
+		System.out.println(ll.poll());*/
+	 
 	}
 
 }
