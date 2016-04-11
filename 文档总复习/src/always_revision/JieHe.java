@@ -221,7 +221,19 @@
         }
         
         
-        
+    ListIterator
+    		//add() 使用当前游标 添加然后游标加1
+			//hasNext 当前游标是不是处于最大 
+			//hasPrevious 当前游标不等于0可以向上
+			//next返回当前指针元素然后指针向下
+			//nextIndex() 返回当前游标
+			
+			//li.remove();//游标减一在删除元素
+			//li.previous();//先将游标减一在返回元素
+			//previousIndex() 将当前游标减一在返回
+			//set 当 next 或preiouse 之后就是将当前的替换
+ * 当集合被迭代器操作，不能直接通过集合的方法影响到集合的个数否则报错。
+ * 
  */
 package always_revision;
 
@@ -234,6 +246,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
@@ -356,7 +369,31 @@ public class JieHe {
 			System.out.println(en.nextElement());
 		}*/
 		
-		 
+		/*ArrayList<String> ay = new ArrayList<String>();
+		ay.add("");
+		ay.set(0,"aaa");
+		ListIterator<String> li = ay.listIterator();
+	
+		while(li.hasNext()){
+			li.next();
+			li.set("qqq");
+		}
+		System.out.println(ay);
+		//逆向回来
+		while(li.hasPrevious()){//当前游标和0比较
+			//add() 使用当前游标 添加然后游标加1
+			//hasNext 当前游标是不是处于最大 
+			//hasPrevious 当前游标不等于0可以向上
+			//next返回当前指针元素然后指针向下
+			//nextIndex() 返回当前游标
+			
+			//li.remove();//游标减一在删除元素
+			//li.previous();//先将游标减一在返回元素
+			//previousIndex() 将当前游标减一在返回
+			//set 当 next 或preiouse 之后就是将当前的替换
+			
+		}*/
+	 
 	}
 
 }
