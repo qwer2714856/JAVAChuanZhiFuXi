@@ -167,6 +167,18 @@
  * ArrayList 对比 LinkedList 
  * 如果添加多选后者，如果查询多选前者。
  * 
+ * Vector
+ * 这个和ArrayList实现原理一样，只不过他是线程安全的。 它所有的方法都带element
+ * void addElement(E e);
+ * E elementAt(int index); 返回指定下标的元素。
+ * Enumeration elements(); 返回所有的元素，封装到Enumeration对象中
+ * 
+ * Enumeration 接口：
+ * boolean hasMoreElements()
+ * 测试此枚举是否包含更多元素。
+ * E nextElement()
+ * 返回元素角标下移。
+ * 
  */
 package always_revision;
 
@@ -174,9 +186,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @author www.23.com
@@ -280,7 +294,22 @@ public class JieHe {
 		ll.offer("a3");
 		ll.offer("a4");
 		System.out.println(ll.poll());*/
-	 
+		
+		/*Vector<String> vctor = new Vector<String>();
+		vctor.addElement("admin");
+		//System.out.println(vctor.elementAt(0));
+		Enumeration<String> en = vctor.elements();
+		while(en.hasMoreElements()){
+			System.out.println(en.nextElement());
+		}*/
+		
+		/*Vector<String> vc = new Vector<>();
+		vc.addElement("administrator");
+		//System.out.println(vc.elementAt(0));
+		Enumeration<String> en = vc.elements();
+		while(en.hasMoreElements()){
+			System.out.println(en.nextElement());
+		}*/
 	}
 
 }
