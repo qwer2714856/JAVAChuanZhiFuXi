@@ -120,13 +120,13 @@
  * 遍历所有的链表，相反如果插入很快，只要插入记住前一个和后一个位置就搞定。
  * 特有的方法：
  * void
-	 * addFirst(E e)
-	 * addLast(E e)
+ * addFirst(E e)
+ * addLast(E e)
  * E e
-	 * getFirst(E e)
-	 * getLast(E e)
-	 * removeFirst(E e)
-	 * removeLast(E e)
+ * getFirst(E e)
+ * getLast(E e)
+ * removeFirst(E e)
+ * removeLast(E e)
  * 如果集合中没有元素删除和获取都将抛出NoSuchElementException
  * 数据结构
  * 栈
@@ -179,17 +179,62 @@
  * E nextElement()
  * 返回元素角标下移。
  * 
+ * 
+ * 
+ * 迭代器
+ * Iterator
+ * 为了方便处理集合中的元素，java提供了一个迭代器，所有实现Collection的类都实现了Iterator功能通过实现类内部的一个iterator方法得到了Iterator的实现
+ * 类，内部类完成的。
+ * 方法
+ * hasNext()判断下一个是否可以遍历
+ * next()返回当前元素指针向下
+ * remove是删除当前指针的上一个元素
+ * public boolean hasNext() {
+     return cursor != size;//cursor 当前游标  size集合长度
+   }
+   
+   public E next() {
+            checkForComodification();
+            int i = cursor;
+            if (i >= size)
+                throw new NoSuchElementException();
+            Object[] elementData = ArrayList.this.elementData;
+            if (i >= elementData.length)
+                throw new ConcurrentModificationException();
+            cursor = i + 1;
+            return (E) elementData[lastRet = i];
+        }
+        
+  public void remove() {
+            if (lastRet < 0)
+                throw new IllegalStateException();
+            checkForComodification();
+
+            try {
+                ArrayList.this.remove(lastRet);
+                cursor = lastRet;
+                lastRet = -1;
+                expectedModCount = modCount;
+            } catch (IndexOutOfBoundsException ex) {
+                throw new ConcurrentModificationException();
+            }
+        }
+        
+        
+        
  */
 package always_revision;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
 /**
@@ -310,6 +355,8 @@ public class JieHe {
 		while(en.hasMoreElements()){
 			System.out.println(en.nextElement());
 		}*/
+		
+		 
 	}
 
 }
