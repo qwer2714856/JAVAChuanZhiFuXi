@@ -100,12 +100,29 @@
  * 
  * 求子集合
  *  List<E> SubList(int fromIndex, int toIndex)//不包含toIndex
+ *  
+ *  
+ * Collection 
+ *     ----| list
+ *    		    ----| ArrayList
+ * 
+ * ArrayList 查询效率高，增删慢 内部维护了一个Object数组 初始大小10  为什么查询快，因为数组的所以连续移动索引就可以找到，
+ * 增删慢是因为，当添加的时候会去判断数组是否满了，如果没满如果在0位置添加其余的位置都要向后移动，
+ * 如果满了就需要新建一个原来数组容量+容量/2的大小数组，然后在拷贝。
+ * 为什么数组的查询速度快？
+ * 数组的内存空间地址是连续的。
+ * 可以通过ArrayList的构造，去初始化默认的Object [] 的值
+ * 例如
+ * new ArrayList(20) 默认的大小为20.
+ * 
+ * 
  */
 package always_revision;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -147,6 +164,39 @@ public class JieHe {
 		 System.out.println(list.lastIndexOf(p1));
 		 // List subList(int fromIndex,int toIndex) 返回从哪个位置截取的哪个位置。
 		 List l = list.subList(0, 1);*/
+		
+		//删除重复元素
+		/*ArrayList<String> ay = new ArrayList<String>();
+		ay.add("admin");
+		ay.add("admin");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin2");
+		ay.add("admin");
+		ay.add("admin");
+		ay.add("admin");
+		ay.add("admin");
+
+		
+		
+		for(int i = ay.size() - 1; i>=0;i--){
+			for(int j = i - 1; j >= 0; j--){
+				if(ay.get(i).equals(ay.get(j))){
+					ay.remove(i);
+					break;
+				}
+			}
+		}
+		System.out.println(ay);*/
 		
 		
 	}
