@@ -329,8 +329,25 @@
  *  |---- HashTable 和HashMap一样只不过它是线程安全的。 不可以存入null key null value
  *  |---- LinkedHashMap 融入了链表存入有序可以提高增删效率。
  *  
+ *  Map 集合的常见方法
+ *  增
+ *  V put(K key, V val) 当出现重复的key 新的会把旧的值替换掉，替换的值返回，如果没有可替换的就返回null,判断key是否重复的依据是
+ *  利用key对象的hashCode计算出哈希值然后根据哈希值存这个key对象这个key对象就关联着它的value。
+ *  putAll(Map<? extends K, ? extends V> m) 集合添加集合 没有返回值 如果是相同的集合只是更新值
+ *  删
+ *  1.remove() 删除关联对象传入key 返回被删元素的值
+ *  2.clear()	清空集合 没有返回值
+ *  查
+ *  get()  传入key获取value没有值就返回null
+ *  size() 返回长度
+ *  遍历需要借助Set
+ *  判断
+ *  boolean isEmpty() 长度0返回 true 否则 false
+ *  boolean containsKey() 是否包含指定的key
+ *  boolean containsValue() 是否包含指定的值
  *  
  *  
+ *  如果key 没有对应的值就是null
  */
 package always_revision;
 
@@ -341,11 +358,13 @@ import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.Spliterator;
@@ -552,8 +571,19 @@ public class JieHe {
 		ts.add(new ComparableXs("saaa",1));
 		System.out.println(ts);*/
 		
-		
-		
+		//Map
+		/*Map<Maps,String> mps = new HashMap<Maps,String>();
+		System.out.println(mps.put(new Maps("a",1),"hi"));
+		System.out.println(mps.put(new Maps("a",1),"his"));
+		System.out.println(mps.put(new Maps("a",1),"hisw"));
+		mps.putAll(mps);
+		System.out.println(mps.size());
+		System.out.println(mps.remove(new Maps("a",1)));
+		mps.clear();
+		System.out.println(mps.get(new Maps("a",1)));
+		System.out.println(mps.isEmpty());
+		System.out.println(mps.containsKey(new Maps("a",1)));
+		System.out.println(mps.containsValue(new Maps("a",1)));*/
 	}
 
 }
@@ -671,5 +701,37 @@ class Sort implements Comparator<ComparableXs>{
 			it = o1.age - o2.age;
 		}
 		return it;
+	}
+}
+
+class Maps{
+	String name;
+	int age;
+	public Maps(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return this.name.hashCode()+this.age;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		Maps mp = null;
+		boolean b = false;
+		if(obj instanceof Maps){
+			mp = (Maps)obj;
+			if(name.equals(mp.name)){
+				b = true;
+			}
+		}
+		return b;
 	}
 }
