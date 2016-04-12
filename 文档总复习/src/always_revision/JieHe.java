@@ -266,6 +266,26 @@
  * ArrayList HashSet 都有contains 他们是如何工作的？
  * ArrayList 使用的是equals 
  * HashSet   使用的是hashCode 先相同在用equals
+ *
+ * 当需要元素排序且不重复那么可以使用TreeSet
+ * TreeSet底部用的是红黑树，默认对元素进行自然排序，如果比较的时候对象返回0那么元素重复。红黑树左小又大。 （红黑树是一种特定的二叉树）
+ * 既然TreeSet 有排序，那么就有排序规则。
+ * 1.让存入的元素自定义比较规则
+	 * 1.如果一个对象元素需要具备比较性，那么它要实现Comparable 接口，重写CompareTo 方法
+	 * 2.自定义一套比较规则结构传给TreeSet构造 用这个通用性好 自定义类实现接口Comparator 重写 Compare 方法
+	 * 3.当Comparable和Comparator 同时存在以Comparator为准。
+	 * 4.重写compare 和 compareTo 的时候返回 0 代表 相同 -1 位于比较元素左边，1位于比较元素右边
+ * 
+ * Comparable				元素本身实现  字符串了实现了Comparable 并且可以直接调用CompareTo 返回比较大小值
+ *     ----| compareTo 
+ *     
+ * Comparator				自定义比较类通过TreeSet构造传入
+ *     ----| compare
+ * 
+ * 
+ * 
+ * LinkedHashSet 会保存插入顺序
+ * 
  * 
  * 
  * for的增强版foreach 
@@ -277,7 +297,11 @@
  * 使用for遍历iterator比while节省内存
  * for(Interator it = it.iterator();it.next();){}
  * 
- * 
+ * 集合的口诀
+ * 看到Array想到 角标
+ * 看到Link 想到 first last
+ * 看到HashSet 想到 hashCode equals
+ * 看到TreeSet 想到 【Comparator compare 自定义筛选器TreeSet构造传入】 【Comparable compareTo 让元素本身实现】
  * 
  */
 package always_revision;
@@ -285,6 +309,7 @@ package always_revision;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
@@ -296,8 +321,13 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.Spliterator;
+import java.util.TreeSet;
 import java.util.Vector;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 /**
  * @author www.23.com
@@ -470,6 +500,32 @@ public class JieHe {
 		System.out.println(st.add(new Person("a2",1)));
 		System.out.println(st.add(new Person("a",1)));
 		System.out.println(st);*/
+		
+		
+		//TreeSet
+		/*TreeSet<String> ts = new TreeSet<String>();
+		ts.add("z");
+		ts.add("y");
+		ts.add("x");
+		System.out.println(ts);*/
+		
+		//自定义排序 元素本身实现Comparable compareTo
+		/*TreeSet<ComparableXs> ts = new TreeSet<ComparableXs>();
+		ts.add(new ComparableXs("zaaa",9));
+		ts.add(new ComparableXs("daaa",2));
+		ts.add(new ComparableXs("xaaa",10));
+		ts.add(new ComparableXs("saaa",1));
+		System.out.println(ts);*/
+		//自定义排序类  定义一个排序类实现Comparator 重写compare
+		/*TreeSet<ComparableXs> ts = new TreeSet<ComparableXs>(new Sort());
+		ts.add(new ComparableXs("zaaa",9));
+		ts.add(new ComparableXs("daaa",2));
+		ts.add(new ComparableXs("xaaa",10));
+		ts.add(new ComparableXs("saaa",1));
+		System.out.println(ts);*/
+		
+		
+		
 	}
 
 }
@@ -546,5 +602,46 @@ class Person {
 	}
 }
 
+class ComparableXs implements Comparable<ComparableXs>{
+	String name;
+	int age;
+	
+	public ComparableXs(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
 
+	@Override
+	public int compareTo(ComparableXs o) {
+		// TODO Auto-generated method stub
+		int it = 0;
+		if(name.equals(o.name) && age == o.age){
+			
+		}else{
+			it = age-o.age;
+		}
+		return it;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+}
  
+
+
+class Sort implements Comparator<ComparableXs>{
+
+	@Override
+	public int compare(ComparableXs o1, ComparableXs o2) {
+		// TODO Auto-generated method stub
+		int it = 0;
+		if(o1.equals(o2.name) && o1.age == o2.age){
+			
+		}else{
+			it = o1.age - o2.age;
+		}
+		return it;
+	}
+}
