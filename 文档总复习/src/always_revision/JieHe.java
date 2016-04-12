@@ -378,6 +378,14 @@
 		for(Map.Entry<String, Integer> mps : hs.entrySet()){
 			
 		}
+		
+		
+ * HashMap --底部是哈希表，非线程安全，可以存入null key null value,要确保key的唯一就必须重写key的 hashCode和 equals方法。
+ * TreeMap --底部是维护红黑树，可以使用Comparator compare Comparable compareTo 来对key排序
+ * 
+ * 注意 Set 集合如果遇到重复值add的时候将不做出返回false
+ *    Map 集合如果遇到重复的值put的时候将原来的干掉放上新值，返回被替换的值，如果没有值返回null
+ * 
  */
 package always_revision;
 
@@ -398,6 +406,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.Spliterator;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 import java.util.function.Consumer;
@@ -655,6 +664,20 @@ public class JieHe {
 			System.out.println(ms.getValue());
 		}*/
 		
+		
+		/*TreeMap<MapComparatorClass,String> tm = new TreeMap<MapComparatorClass, String>(new MapCompatatorFilter());
+		tm.put(new MapComparatorClass("z",4), "hi");
+		tm.put(new MapComparatorClass("z",3), "hi1");
+		tm.put(new MapComparatorClass("z",2), "hi2");
+		tm.put(new MapComparatorClass("z",1), "hi3");
+		
+		Set<Map.Entry<MapComparatorClass, String>> et = tm.entrySet();
+		Iterator<Map.Entry<MapComparatorClass, String>> it = et.iterator();
+		while(it.hasNext()){
+			Map.Entry<MapComparatorClass, String> me = it.next();
+			System.out.println("key="+me.getKey()+",value="+me.getValue());
+		}*/
+		
 	}
 
 }
@@ -806,3 +829,35 @@ class Maps{
 		return b;
 	}
 }
+
+class MapComparatorClass{
+	String name;
+	int age;
+	public MapComparatorClass(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+}
+class MapCompatatorFilter implements Comparator<MapComparatorClass>{
+
+	@Override
+	public int compare(MapComparatorClass o1, MapComparatorClass o2) {
+		// TODO Auto-generated method stub
+		int rt = 0;
+		if(o1.name != o2.name || o1.age != o2.age){
+			if(o1.name != o2.name){
+				rt = o1.name.compareTo(o2.name);
+			}else{
+				rt = o1.age - o2.age;
+			}
+		}
+		return rt;
+	}	
+}
+
+
