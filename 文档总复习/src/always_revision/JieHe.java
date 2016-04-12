@@ -348,6 +348,36 @@
  *  
  *  
  *  如果key 没有对应的值就是null
+ *  
+ *  
+ *  
+ *  遍历Map集合遍历需要借助于单列的Set
+ *  有三种遍历方式
+ *  1.Set<Key>
+ *  	HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Set<String> s = hs.keySet();
+		Iterator<String> it = s.iterator();
+		while(it.hasNext()){
+			System.out.println(hs.get(it.next()));
+		}
+ *  2.values();
+ *  	HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Collection<Integer> c = hs.values();//不能获取到key
+ *  3.Map.Entry();
+ * 		HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Set<Map.Entry<String, Integer>> et = hs.entrySet();
+		Iterator<Map.Entry<String, Integer>> it = et.iterator();
+		while(it.hasNext()){
+			Map.Entry<String, Integer> mp = it.next();
+			mp.getKey();
+			mp.getValue();
+		}
+		for(Map.Entry<String, Integer> mps : hs.entrySet()){
+			
+		}
  */
 package always_revision;
 
@@ -590,6 +620,41 @@ public class JieHe {
 		hs2.put("a", "value2");
 		hs.putAll(hs2);
 		System.out.println(hs);*/
+		
+		//Map遍历
+		/*HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Set<String> s = hs.keySet();
+		Iterator<String> it = s.iterator();
+		while(it.hasNext()){
+			System.out.println(hs.get(it.next()));
+		}*/
+		/*HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Collection<Integer> c = hs.values();//不能获取到key
+*/	
+		/*HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Set<Map.Entry<String, Integer>> et = hs.entrySet();
+		Iterator<Map.Entry<String, Integer>> it = et.iterator();
+		while(it.hasNext()){
+			Map.Entry<String, Integer> mp = it.next();
+			mp.getKey();
+			mp.getValue();
+		}
+		for(Map.Entry<String, Integer> mps : hs.entrySet()){
+			
+		}*/
+		
+		/*HashMap<String,Integer> hs = new HashMap<String, Integer>();
+		hs.put("a", 1);
+		Set<Map.Entry<String, Integer>> s = hs.entrySet();
+		Iterator<Map.Entry<String, Integer>> it = s.iterator();
+		while(it.hasNext()){
+			Map.Entry<String, Integer> ms = it.next();
+			System.out.println(ms.getValue());
+		}*/
+		
 	}
 
 }
