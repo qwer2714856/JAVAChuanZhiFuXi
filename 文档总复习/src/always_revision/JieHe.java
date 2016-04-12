@@ -246,6 +246,28 @@
  * 		----| hasprevious()
  * 		----| previous()
  * 
+ * 
+ * Set 存储无序，插入不可重复（注重独一无二的本质，不可以重复）
+ * 引用到堆上同一个对象的两个引用是否相同。
+ * 比较
+ * 首先调用两个对象的hashCode方法如果相同，在比较两个对象的equals 如果在相同视为重复将拒绝插入。
+ * 如果自定义对象需要重写hashCode和equals方法，hashCode返回内存地址，然后通过移位得到存储位置，在比较equals是否相同，才能决定是否存储。
+ * 该集合没有特殊方法继承Collection方法 
+ * Set 接口下的只能使用迭代器了iterator遍历
+ * 
+ * HashSet 线程不安全，存取速度按快，底层是用的hash表。
+ * 哈希表存放的是哈希值，存储无序是根据哈希值来决定存在哪的，HashSet不重复是根据HashCode 和 equals决定的。
+ * 元素的哈希值是通过对象的hashCode 移位取得的 查看这个哈希值是否有存储元素有比较两个对象的equals.都相同视为重复。如果同样哈希值有元素，
+ * 但是equals不同可以理解为木桶相同哈希值下的元素顺延。
+ * ！！！一个哈希值可以存放多个元素！！！
+ * hashCode和equals的顺序，hashCode先调用如果不同equals直接就不调用了。
+ * 
+ * 
+ * ArrayList HashSet 都有contains 他们是如何工作的？
+ * ArrayList 使用的是equals 
+ * HashSet   使用的是hashCode 先相同在用equals
+ * 
+ * 
  * for的增强版foreach 
  * jdk1.5 后出了一个Iterable 接口，当你实现了它就可以使用foreach
  * Collection 的符结构Iterable
@@ -266,11 +288,13 @@ import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.Spliterator;
 import java.util.Vector;
 import java.util.function.Consumer;
@@ -437,6 +461,15 @@ public class JieHe {
 			li.add("ccc");
 		}
 		System.out.println(ay);*/
+		
+		
+		
+		//Set
+		/*Set<Person> st = new HashSet<Person>();
+		System.out.println(st.add(new Person("a",1)));
+		System.out.println(st.add(new Person("a2",1)));
+		System.out.println(st.add(new Person("a",1)));
+		System.out.println(st);*/
 	}
 
 }
