@@ -303,6 +303,11 @@
  * 看到HashSet 想到 hashCode equals
  * 看到TreeSet 想到 【Comparator compare 自定义筛选器TreeSet构造传入】 【Comparable compareTo 让元素本身实现】
  * 
+ * 
+ * 
+ * 双列结合
+ * Map
+ * 
  */
 package always_revision;
 
