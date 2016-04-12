@@ -323,7 +323,14 @@
  * 
  * Map 一次存一对，Collection一次存一个。
  * 双列的体系
- * 
+ * Map
+ * 	|---- HashMap 采用哈希表，无序 可以存入key null value null 为了确保key的唯一需要覆盖key对象的 hashCode equals
+ *  |---- TreeMap 采用红黑树，有序 可以对map中的键进行排序使用comparator compare comparable compareTo
+ *  |---- HashTable 和HashMap一样只不过它是线程安全的。 不可以存入null key null value
+ *  |---- LinkedHashMap 融入了链表存入有序可以提高增删效率。
+ *  
+ *  
+ *  
  */
 package always_revision;
 
