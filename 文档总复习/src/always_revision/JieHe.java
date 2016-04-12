@@ -234,6 +234,29 @@
 			//set 当 next 或preiouse 之后就是将当前的替换
  * 当集合被迭代器操作，不能直接通过集合的方法影响到集合的个数否则报错。
  * 
+ * * 细节
+ * 1.如果next()已经指向末尾在调用抛出 NoSuchElementException 或者如果集合是空的调用也抛错误.
+ * 2.如果remove之前没有调用  next() 或者previous() 抛出 IllegalStateException
+ * 3.迭代器原理 看源码
+ * 4.当对集合进行迭代的时候不允许使用集合的方法对集合个数进行操作，否则抛出ConcurrentModificationException.
+ * 5.list接口特有的迭代器是ListIterator. ListIterator extends Iterator
+ * ListIterator
+ * 		----| add(E e)
+ * 		----| set(E e)
+ * 		----| hasprevious()
+ * 		----| previous()
+ * 
+ * for的增强版foreach 
+ * jdk1.5 后出了一个Iterable 接口，当你实现了它就可以使用foreach
+ * Collection 的符结构Iterable
+ * 这个接口只有一个方法 iterator
+ * iterator 需要实现 hasNext next (remove 可以实现也可以不实现)
+ * 
+ * 使用for遍历iterator比while节省内存
+ * for(Interator it = it.iterator();it.next();){}
+ * 
+ * 
+ * 
  */
 package always_revision;
 
@@ -248,7 +271,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Spliterator;
 import java.util.Vector;
+import java.util.function.Consumer;
 
 /**
  * @author www.23.com
@@ -393,10 +418,64 @@ public class JieHe {
 			//set 当 next 或preiouse 之后就是将当前的替换
 			
 		}*/
-	 
+		
+		/*MyselfItems<String> mys = new MyselfItems<String>();
+		mys.add("admin");
+		mys.add("admin");
+		mys.add("admin");
+		mys.add("admin");
+		
+		for(String str : mys){
+			System.out.println(str);
+		}*/
+		
+		/*ArrayList<String> ay = new ArrayList<String>();
+		ay.add("bbb");
+		
+		for(ListIterator<String> li = ay.listIterator();li.hasNext();){
+			System.out.println(li.next());
+			li.add("ccc");
+		}
+		System.out.println(ay);*/
 	}
 
 }
+
+class MyselfItems<T> implements Iterable<T>{
+	Object [] elementData = new Object[100];
+	int size = 100;
+	int cursor = 0;
+	public void add(T str){
+		size = cursor;
+		elementData[cursor++] = str;
+	}
+	private class Itr implements Iterator<T>{
+		int cursor = 0;
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return cursor != size;
+		}
+
+		@Override
+		public T next() {
+			// TODO Auto-generated method stub
+			return (T)elementData[cursor++];
+		}
+
+		 
+		
+	}
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return new Itr();
+	}
+ 
+	
+	
+}
+
 
 class Person {
 	String name;
@@ -433,3 +512,6 @@ class Person {
 		return name + age;
 	}
 }
+
+
+ 
