@@ -450,8 +450,8 @@
  * 9.collection to array 用的是 Collection实例的方法 toArray() 找到相应类型数组接行了
  * 		ArrayList<Integer> ay = new ArrayList<Integer>();
 		Object [] it = ay.toArray();
-		
-		
+ * 10.Collections.fill(list, obj) 使用obj 替换集合中所有的元素	
+   11.数组转集合 List<Integer> li = Arrays.asList(new Integer[]{1,3,4})
  * Arrays 工具集
  * 
  */
