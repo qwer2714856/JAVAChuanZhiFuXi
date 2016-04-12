@@ -385,13 +385,78 @@
  * 
  * 注意 Set 集合如果遇到重复值add的时候将不做出返回false
  *    Map 集合如果遇到重复的值put的时候将原来的干掉放上新值，返回被替换的值，如果没有值返回null
+ *    
+ * Collections and Arrays 集合工具和数组工具
+ * 集合框架中的工具，方法都是静态的。
+ * 1.int binarySearch(list, key, Comparator) 前提集合有序，采用二分法查找到对应对象的位置，可以传入排序器
+ * 		ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(2);
+		ay.add(9);
+		ay.add(4);
+		System.out.println(Collections.binarySearch(ay, 3));
+ * 注意这里只能传入list不能传入其它的。 Comparator 查找比较器
  * 
+ * 2. void sort list用的
+ * 		ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(2);
+		ay.add(9);
+		ay.add(4);
+		Collections.sort(ay,new IntegerComparator());//需要一个排序comparator
+		System.out.println(ay);
+		
+ * 3. 最大最小值
+ * 	  Collections.max(Collection,Comparator);
+ * 	  Collections.min(Collection,Comparator);
+ * 
+ * 4.Collections.reverse(list);
+ * 
+ * 5.Collections.reverseOrder(); 自然顺序从小到大，它强制修改从大到小
+ * 	  list.add(-28);  
+      list.add(20);  
+      list.add(-12);  
+      list.add(8);
+      Comparator cmp = Collections.reverseOrder();  
+      Collections.sort(list, cmp);  
+ * 6.swap(list,x,y); 对list的元素进行换位 将对应角标的元素换位置
+ * 		ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(2);
+		ay.add(9);
+		ay.add(4);
+		Collections.swap(ay, 1, 0);
+		System.out.println(ay);
+ * 7.replaceAll(list, old, new); 替换集合中的元素如果原来的不存在集合不变
+ * 		ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(1);
+		ay.add(9);
+		ay.add(4);
+		Collections.replaceAll(ay, 1, 99);
+		System.out.println(ay);
+ * 8.将不同的变为同步
+ * Set  synchronizedSet(Set<T> s);
+ * Map  synchronizedMap(Map<k,v> mp);
+ * List synchronizedList(List<T> list);
+ * 		ArrayList<Integer> ay = new ArrayList<Integer>();
+		List<Integer> ls = Collections.synchronizedList(ay);
+		
+		HashSet<String> hs = new HashSet<String>();
+		Set<String> s = Collections.synchronizedSet(hs);
+		
+		HashMap<String,String> hm = new HashMap<String, String>();
+		Map<String,String> m = Collections.synchronizedMap(hm);
+ * 9.collection to array 用的是 Collection实例的方法 toArray() 找到相应类型数组接行了
+ * 		ArrayList<Integer> ay = new ArrayList<Integer>();
+		Object [] it = ay.toArray();
  */
 package always_revision;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
@@ -678,6 +743,49 @@ public class JieHe {
 			System.out.println("key="+me.getKey()+",value="+me.getValue());
 		}*/
 		
+		/*ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(2);
+		ay.add(9);
+		ay.add(4);
+		System.out.println(Collections.binarySearch(ay, 3));*/
+		
+		/*ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(2);
+		ay.add(9);
+		ay.add(4);
+		Collections.sort(ay,new IntegerComparator());//需要一个排序comparator
+		System.out.println(ay);*/
+		
+		/*ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(2);
+		ay.add(9);
+		ay.add(4);
+		Collections.swap(ay, 1, 0);
+		System.out.println(ay);*/
+		
+		/*ArrayList<Integer> ay = new ArrayList<Integer>();
+		ay.add(1);
+		ay.add(1);
+		ay.add(9);
+		ay.add(4);
+		Collections.replaceAll(ay, 1, 99);
+		System.out.println(ay);*/
+		
+		/*ArrayList<Integer> ay = new ArrayList<Integer>();
+		List<Integer> ls = Collections.synchronizedList(ay);
+		
+		HashSet<String> hs = new HashSet<String>();
+		Set<String> s = Collections.synchronizedSet(hs);
+		
+		HashMap<String,String> hm = new HashMap<String, String>();
+		Map<String,String> m = Collections.synchronizedMap(hm);*/
+		
+		/*ArrayList<Integer> ay = new ArrayList<Integer>();
+		Object [] it = ay.toArray();*/
+		
 	}
 
 }
@@ -860,4 +968,12 @@ class MapCompatatorFilter implements Comparator<MapComparatorClass>{
 	}	
 }
 
+class IntegerComparator implements Comparator<Integer>{
 
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		// TODO Auto-generated method stub
+		return o1-o2;
+	}
+	
+}
