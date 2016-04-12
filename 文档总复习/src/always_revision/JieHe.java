@@ -584,6 +584,12 @@ public class JieHe {
 		System.out.println(mps.isEmpty());
 		System.out.println(mps.containsKey(new Maps("a",1)));
 		System.out.println(mps.containsValue(new Maps("a",1)));*/
+		/*HashMap<String,String> hs = new HashMap<String, String>();
+		hs.put("a", "value");
+		HashMap<String,String> hs2 = new HashMap<String, String>();
+		hs2.put("a", "value2");
+		hs.putAll(hs2);
+		System.out.println(hs);*/
 	}
 
 }
