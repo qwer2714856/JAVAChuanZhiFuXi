@@ -33,7 +33,8 @@
  *             |----HashSet
  *             |----TreeSet
  *             |----LinkedHashSet
- *     |----双列集合
+ * Map
+ * 		|----双列集合
  *         |----Map：键值对
  *         |----HashMap
  *         |----TreeMap
@@ -307,6 +308,21 @@
  * 
  * 双列结合
  * Map
+ * 使用的是键值对的形式存储的。
+ * Map中其实是两个对象，一个作为键，一个作为值，键不可重复，值可以重复。
+ * 1.Collection 和 Map 属于并列的他们没有从属关系 
+ * 	Collection 单列
+ * 	Map 是双列
+ * 集合
+ *     |----单列集合 只有一个对象
+ *     |----双列集合 两个对象，一个key对象一个value对象，key不可以重复
+ * 2.Map存储的是键值对
+ * 3.Map 使用put添加元素
+ * 4.Map没有直接取出需要转Set在读取。
+ * 5.Map键唯一
+ * 
+ * Map 一次存一对，Collection一次存一个。
+ * 双列的体系
  * 
  */
 package always_revision;
