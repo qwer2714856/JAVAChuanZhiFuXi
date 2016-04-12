@@ -826,9 +826,11 @@ public class JieHe {
 		int [] b = {1,2,3,4,5};
 		System.out.println(Arrays.equals(a, b));*/
 		
-		Integer []it = {1,2,3,4};
+		/*Integer []it = {1,2,3,4};
 		List<Integer> li = Arrays.asList(it);
-		li.add(9);
+		li.add(9);*/
+		
+	
 	}
 
 }
