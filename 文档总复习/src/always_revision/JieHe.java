@@ -388,7 +388,7 @@
  *    
  * Collections and Arrays 集合工具和数组工具
  * 集合框架中的工具，方法都是静态的。
- * 1.int binarySearch(list, key, Comparator) 前提集合有序，采用二分法查找到对应对象的位置，可以传入排序器
+ * 1.int binarySearch(list, key, Comparator) 前提集合有序，采用二分法查找到对应对象的位置，可以传入排序器 找不到返回-1
  * 		ArrayList<Integer> ay = new ArrayList<Integer>();
 		ay.add(1);
 		ay.add(2);
@@ -397,7 +397,7 @@
 		System.out.println(Collections.binarySearch(ay, 3));
  * 注意这里只能传入list不能传入其它的。 Comparator 查找比较器
  * 
- * 2. void sort list用的
+ * 2. void sort list用的 
  * 		ArrayList<Integer> ay = new ArrayList<Integer>();
 		ay.add(1);
 		ay.add(2);
@@ -450,6 +450,10 @@
  * 9.collection to array 用的是 Collection实例的方法 toArray() 找到相应类型数组接行了
  * 		ArrayList<Integer> ay = new ArrayList<Integer>();
 		Object [] it = ay.toArray();
+		
+		
+ * Arrays 工具集
+ * 
  */
 package always_revision;
 
