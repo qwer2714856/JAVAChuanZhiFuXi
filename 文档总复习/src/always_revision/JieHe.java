@@ -453,8 +453,29 @@
  * 10.Collections.fill(list, obj) 使用obj 替换集合中所有的元素	
    11.数组转集合 List<Integer> li = Arrays.asList(new Integer[]{1,3,4})
  * Arrays 工具集
- * 1.二分查找数组有序 Arrays.binarySearch(Object []) 没找到返回-1找到返回对应下标 支持所有类型数组
+ * 1.二分查找数组有序 Arrays.binarySearch(Object [],key) 没找到返回-1找到返回对应下标 支持所有类型数组
  * 2.所有类型数组排序 Arrays.sort(Object []);
+ * 3.toString(Object []) 将数组以 [a,b,c,d]字符串形式展示出来
+ * 4.copyOf(); 将一个数组复制到另外一个指定长度的数组。当新数组的大小小于旧数组，旧数组的内容将被截掉。
+ * 		int [] a = {1,2,3,4,5};
+		int [] b = Arrays.copyOf(a, 50);
+		System.out.println(Arrays.toString(b));
+ * 5.copyOfRange();
+ * 		int [] a = {1,2,3,4,5};
+		int [] b = Arrays.copyOfRange(a, 1, 3);
+		System.out.println(Arrays.toString(b));
+ * 将a数组截取n-(m-1)个后赋值给新数组返回
+ * 6.比较两个数组是否相等
+ * 		int [] a = {1,2,3,4,5};
+		int [] b = {1,2,3,4,5};
+		System.out.println(Arrays.equals(a, b));
+ * 7.Arrays.asList(Object [])
+ * 	 注意List<Integer> li = Arrays.asList(new Integer[]{1,3,4})
+ *  通过数组转的集合不可以对转的这个集合使用修改集合个数的函数否则抛出异常，因为数组是固定的。java.lang.UnsupportedOperationException
+ *  如果使用的是基本数据类型 int [] a = {1,2,3,4} 这样如果转成集合接收是  List<int []> 所以基本数据类型转集合需要使用它们的包装类。
+ *  例如
+ *  Byte Boolean Short Character Integer Long Float Double
+ *  
  */
 package always_revision;
 
@@ -794,6 +815,20 @@ public class JieHe {
 		/*int [] a = {1,2,3,4,5};
 		System.out.println(Arrays.binarySearch(a, 2));*/
 		 
+		/*int [] a = {1,2,3,4,5};
+		int [] b = Arrays.copyOf(a, 50);
+		System.out.println(Arrays.toString(b));*/
+		/*int [] a = {1,2,3,4,5};
+		int [] b = Arrays.copyOfRange(a, 1, 3);
+		System.out.println(Arrays.toString(b));*/
+		
+		/*int [] a = {1,2,3,4,5};
+		int [] b = {1,2,3,4,5};
+		System.out.println(Arrays.equals(a, b));*/
+		
+		Integer []it = {1,2,3,4};
+		List<Integer> li = Arrays.asList(it);
+		li.add(9);
 	}
 
 }
