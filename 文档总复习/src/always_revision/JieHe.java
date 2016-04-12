@@ -453,7 +453,8 @@
  * 10.Collections.fill(list, obj) 使用obj 替换集合中所有的元素	
    11.数组转集合 List<Integer> li = Arrays.asList(new Integer[]{1,3,4})
  * Arrays 工具集
- * 
+ * 1.二分查找数组有序 Arrays.binarySearch(Object []) 没找到返回-1找到返回对应下标 支持所有类型数组
+ * 2.所有类型数组排序 Arrays.sort(Object []);
  */
 package always_revision;
 
@@ -790,6 +791,9 @@ public class JieHe {
 		/*ArrayList<Integer> ay = new ArrayList<Integer>();
 		Object [] it = ay.toArray();*/
 		
+		/*int [] a = {1,2,3,4,5};
+		System.out.println(Arrays.binarySearch(a, 2));*/
+		 
 	}
 
 }
