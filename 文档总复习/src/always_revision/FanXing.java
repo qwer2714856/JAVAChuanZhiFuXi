@@ -99,6 +99,18 @@ class QDc2<T>{
 	}
 	}
  * 
+ * 泛型的继承
+ * class CustomFu<T>{
+	
+	}
+	class CustomZi<T> extends CustomFu<T>{
+		
+	}
+ * 父类的泛型如果在继承的时候不明确就让子类的对象实现 子类也需要把泛型拿过来
+ * 如果明确
+ * class CustomZi extends CustomFu<String>{
+ * 
+ * }
  */
 package always_revision;
 
@@ -173,4 +185,6 @@ class CustomF<S,N>{
 		return age;
 	}
 }
+
+
 
