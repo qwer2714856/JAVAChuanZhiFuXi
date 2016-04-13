@@ -81,6 +81,24 @@ class QDc2<T>{
    }
  * 
  * 如果创建泛型不指定具体类型就和Object一样。
+ * 
+ * 自定义泛型类
+ * System.out.println(new CustomF<String,Integer>("aa",1).getName());
+ * class CustomF<S,N>{
+	S name;
+	N age;
+	public CustomF(S name, N age) {
+		this.name = name;
+		this.age = age;
+	}
+	public S getName(){
+		return name;
+	}
+	public N getAge(){
+		return age;
+	}
+	}
+ * 
  */
 package always_revision;
 
@@ -108,6 +126,8 @@ public class FanXing {
 		
 		gcc(new Object());
 		new QDc2<Object>();
+		
+		
 	}
 	public static <T> T gcc(T str){
 		return str;
@@ -139,5 +159,18 @@ class QDc2<T>{
 	}
 	
 }
-
+class CustomF<S,N>{
+	S name;
+	N age;
+	public CustomF(S name, N age) {
+		this.name = name;
+		this.age = age;
+	}
+	public S getName(){
+		return name;
+	}
+	public N getAge(){
+		return age;
+	}
+}
 
