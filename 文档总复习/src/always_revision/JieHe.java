@@ -830,7 +830,15 @@ public class JieHe {
 		List<Integer> li = Arrays.asList(it);
 		li.add(9);*/
 		
-	
+		//剔除重复元素
+		/*PersonAy [] pa = new PersonAy[10];
+		for(int i = 0; i < 10; i++){
+			pa[i] = new PersonAy("ding",i);
+		}
+		List<PersonAy> li = Arrays.asList(pa);
+		HashSet<PersonAy> hs = new HashSet<PersonAy>();
+		hs.addAll(li);
+		System.out.println(hs);*/
 	}
 
 }
@@ -1021,4 +1029,34 @@ class IntegerComparator implements Comparator<Integer>{
 		return o1-o2;
 	}
 	
+}
+
+class PersonAy{
+	String name;
+	int age;
+	public PersonAy(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		boolean rt = false;
+		PersonAy p = null;
+		if(obj instanceof PersonAy){
+			p = (PersonAy)obj;
+			rt = name.equals(p.name);
+		}
+		return rt;
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return name.hashCode();
+	}
 }
