@@ -26,6 +26,20 @@
  * 3.共有变量在进行多线程读写的时候有线程安全性问题。
  * 4.线程的死锁，较长时间等待资源，或资源竞争以死锁等多线程症状。
  * 
+ * //创建线程的方式一
+ * 1.继承Thread类
+ * PersonThread extends Thread
+ * 重写
+ * public void run() {//线程代码}
+ * 
+ * 调用
+ * PersonThread p1 = new PersonThread("A");
+ * p1.start();//启动线程 直接就跑run中的代码了。 这里注意必须要调用start才会当做一个线程启动，如果直接使用run jvm就当做普通方法。
+ * 线程只能启动一次，如果再次启动抛出异常。
+ * 如果没有重写run那就什么都不执行
+ * 
+ * 
+ * 
  * 
  */
 package always_revision;
@@ -41,7 +55,36 @@ public class Progress {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
+		//匿名内部类的线程方式
+		new Thread(){
+			public void run(){
+				PersonThread p1 = new PersonThread("A");
+				PersonThread p2 = new PersonThread("B");
+				p1.start();
+				p2.start();
+			}
+		}.start();
+		 
 	}
 
+}
+class PersonThread extends Thread{
+	String name;
+
+	public PersonThread(String name) {
+		this.name = name;
+	}
+	
+	public void run() {
+		for(int i = 0; i < 1000; i++){
+			System.out.println(name+"--"+i);
+			try {
+				Thread.currentThread().sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
