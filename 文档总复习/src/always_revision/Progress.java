@@ -54,6 +54,14 @@
  * 4.阻塞状态是线程由于某种原因放弃cpu使用权，暂停运行，直接到线程就绪状态，才有机会转到运行状态。
  * 5.死亡线程执行完它的任务。
  * 
+ * 常见的线程方法
+ * 1.Thread() 			初始化线程名字。 new Thread(Runnable 实现类的对象，"线程名字");
+ * 2.getName()			返回线程的名字。
+ * 3.setName()			设置线程的名字。
+ * 4.getPriority()		返回当前线程的对象优先级，默认线程优先级是5.
+ * 5.setPriority(int p) 设计优先级最小1最大10 默认5。
+ * 6.currentThread()	返回cpu正在执行的线程对象。 
+ * 
  */
 package always_revision;
 
@@ -68,7 +76,7 @@ public class Progress {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		 
 		//匿名内部类的线程方式
 		new Thread(){
 			public void run(){
@@ -78,7 +86,9 @@ public class Progress {
 				p2.start();
 			}
 		}.start();
+	
 		 
+		
 	}
 
 }
@@ -101,3 +111,4 @@ class PersonThread extends Thread{
 		}
 	}
 }
+
