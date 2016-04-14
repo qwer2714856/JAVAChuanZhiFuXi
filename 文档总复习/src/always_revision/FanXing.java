@@ -111,10 +111,66 @@ class QDc2<T>{
  * class CustomZi extends CustomFu<String>{
  * 
  * }
+ * 
+ * 范型接口
+ * 	interface MSQl<T>{
+		public T getMysql(T db);
+	}
+	interface Mmysql<T> extends MSQl<T>{
+		
+	}
+ * 
+ * 
+ * 	interface MSQl<T>{
+		public T getMysql(T db);
+	}
+	interface Mmysql extends MSQl<String>{
+		
+	}
+	class a implements MSQl<String>{}
+	class a<T> implements MSQl<T>{}
+ *
+ *
+ *	泛型的通配符
+ *	public static void print(Collection<?> coll){
+		
+	}
+ * 如果形参上还有需要泛型的那么使用通配符?
+ * Collection<?> coll 形参上需要进一步使用泛型。采用参数类型<通配符> 形参 注意泛型没有多台！！！！<里面定义什么就是什么没有多台> 
+ * 非形参类型先声明在使用，形参类型直接用?
+ * public static void print(Collection<?> col){
+		Iterator<?> it = col.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
+	}
+ * ArrayList<Object> l2 = new ArrayList<Object>();
+ * l2.add(new Object());
+ * 集合中Object 是位置有好多可能所以定义形参类型的时候需要使用泛型的通配符。接收任意值
+ * 
+ *  通配符的界限
+ *  在形参类型后面的那个通配符可以定义它的界限
+ *  例如
+ *  Collection<? extends Object> coll
+ *  那么在传入的时候就是Object或者Object的子类的类型都可以传入
+ *  Collection<? super String> 那么可以传入String或者String的父类
+ *  
+ *  JDK5 中的泛型允许程序员编写集合代码，就限制集合的处理类型，把程序运行时的问题放到编译上，提高程序稳定性。
+ *  泛型是提供给javac编译器使用的，它限定类型，在编译上解决问题，生成的class文件是不带有泛型的。所以程序不受影响。这个过程称为擦除。
+ *  
+ *  泛型的基本术语
+ *  以ArrayList为例
+ *  ArrayList<E> E是形参 ArrayList<E> 整个称为泛型类型
+ *  new ArrayList<String> String是实参   ArrayList<String> 参数化类型 
+ *  
+ *  数据结构网站
+ *  www.cs.armstrong.edu/liang/animation/index.html
+ *  
  */
 package always_revision;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -138,13 +194,22 @@ public class FanXing {
 		
 		gcc(new Object());
 		new QDc2<Object>();
-		
-		
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("aaa");
+		ArrayList<Object> l2 = new ArrayList<Object>();
+		l2.add(new Object());
+		print(l2);
 	}
 	public static <T> T gcc(T str){
 		return str;
 	}
-
+	public static void print(Collection<? extends Object> col){
+		Iterator<?> it = col.iterator();
+		while(it.hasNext()){
+			System.out.println(it.next());
+		}
+	}
+	
 }
 class QDc1{
 	public <T> T gll(T str){
