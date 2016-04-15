@@ -85,6 +85,46 @@
  * int num = 100;// 注意将来线程会共享这一个对象，所以他不需要在去声明静态的成员，当然声明也没错，只是为了更好理解，线程共享对象。
  * SaleRunnable
  * 
+ * 锁对象
+ * 什么是锁对象？
+ * 每个java对象都有一个锁对象，而且只有一把钥匙。
+ * 如何创建锁对象？
+ * 1.使用对象直接做为锁 例如 Object p1 = new Object(); this "lock" 等等，但是如果是Object p1 = new Object();这个注意
+ * 要保持多个线程共享一个锁，要不没用！！！！ this 的话对接口实现的有用，对继承实现的没有，原因接口实现的共享一个对象，
+ * 继承的创建多个对象this也就不同，最好就是使用字符串，因为直接字符串在线程池只有一份！！！推荐使用。
+ * 
+ * 
+ * 2. 使用类的字节码作为锁
+ * 类.class
+ * 类的实例.getClass()
+ * 
+ * Java 中的每一个对象都有一个内置的锁，只有当对象具有同步方法代码时，内置锁才会起作用。
+ * 
+ * 因为一个对象只有一把锁，所以如果一个线程获得了这个锁，其它线程就不能获得了，直到拿到锁这个线程释放这个锁其它的线程才能使用，
+ * 也就说释放前任何线程都不能进入到线程代码块种执行。
+ * 
+ * 释放锁就是指只有该锁的线程退出同步方法。
+ * 
+ * 锁只能锁住两个东西
+ * 1.线程共同的代码块。synchronized("lock"){}
+ * 2.锁住线程函数。public static synchronized int setName(String name){Xxx.name = name;}
+ * 	 如果是非静态同步函数的锁是this
+           如果是静态的同步函数锁是就是当前函数所属类的字节码文件，就是Class对象，所对象是唯一的。
+ * 
+ * 
+ * 
+	关于锁和同步，有一下几个要点：
+	1）、只能同步方法，而不能同步变量和类；
+	2）、每个对象只有一个锁；当提到同步时，应该清楚在什么上同步？也就是说，在哪个对象上同步？
+	3）、不必同步类中所有的方法，类可以同时拥有同步和非同步方法。
+	4）、如果两个线程要执行一个类中的synchronized方法，并且两个线程使用相同的实例来调用方法，那么一次只能有一个线程能够执行方法，另一个需要等待，直到锁被释放。也就是说：如果一个线程在对象上获得一个锁，就没有任何其他线程可以进入（该对象的）类中的任何一个同步方法。
+	5）、如果线程拥有同步和非同步方法，则非同步方法可以被多个线程自由访问而不受锁的限制。
+	6）、线程睡眠时，它所持的任何锁都不会释放。
+	7）、线程可以获得多个锁。比如，在一个对象的同步方法里面调用另外一个对象的同步方法，则获取了两个对象的同步锁。
+	8）、同步损害并发性，应该尽可能缩小同步范围。同步不但可以同步整个方法，还可以同步方法中一部分代码块。
+	9）、在使用同步代码块时候，应该指定在哪个对象上同步，也就是说要获取哪个对象的锁。例如：
+ * 
+ * 
  * 
  * 
  */
@@ -136,12 +176,13 @@ public class Progress {
 		
 		
 		//接口版售票
-		SaleRunnable sr = new SaleRunnable();
+		/*SaleRunnable sr = new SaleRunnable();
 		Thread th1 = new Thread(sr,"售票窗口1");
 		Thread th2 = new Thread(sr,"售票窗口2");
 		
 		th1.start();
-		th2.start();
+		th2.start();*/
+		
 		
 	}
 
@@ -213,10 +254,14 @@ class Sale extends Thread {
 	static int num = 100;
 
 	public void run() {
-		while (Sale.num > 0) {
+		while (true) {
 			synchronized ("lock") {
-				System.out.println(this.getName() + "：" + "售出1张，剩余"
-						+ --Sale.num);
+				if (Sale.num > 0) {
+					System.out.println(this.getName() + "：" + "售出1张，剩余"
+							+ --Sale.num);
+				} else {
+					break;
+				}
 			}
 		}
 	}
@@ -232,16 +277,20 @@ class SaleRunnable implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
-		while (num > 0) {
+		while (true) {
 			synchronized ("lock2") {
-				System.out.println(Thread.currentThread().getName() + "："
-						+ "售出1张，剩余" + --num);
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (num > 0) {
+					System.out.println(Thread.currentThread().getName() + "："
+							+ "售出1张，剩余" + --num);
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{
+					System.out.println(Thread.currentThread().getName() + ": 售罄");
+					break;
 				}
 			}
 		}
