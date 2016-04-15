@@ -62,6 +62,12 @@
  * 5.setPriority(int p) 设计优先级最小1最大10 默认5。
  * 6.currentThread()	返回cpu正在执行的线程对象。 
  * 
+ * extends Thread 的类叫做线程对象 可以直接用this.getName setName getPriority setPriority
+ * 线程对象中this == Thread.currentThread()
+ * 这些方法都是父类Thread的方法所以可以直接用super.getName ....
+ * 
+ * implements Runnable 的只是实现了接口的类不是线程对象，它无法直接用this.  它只能从 Thread.currentThread() 获取set get .
+ * 
  */
 package always_revision;
 
@@ -78,7 +84,7 @@ public class Progress {
 		// TODO Auto-generated method stub
 		 
 		//匿名内部类的线程方式
-		new Thread(){
+		/*new Thread(){
 			public void run(){
 				PersonThread p1 = new PersonThread("A");
 				PersonThread p2 = new PersonThread("B");
@@ -86,8 +92,21 @@ public class Progress {
 				p2.start();
 			}
 		}.start();
-	
-		 
+		 */
+		/*ThreadDeom t1 = new ThreadDeom("t1");
+		ThreadDeom t2 = new ThreadDeom("t2");
+		t1.setName("kakaxi1");
+		t2.setName("卡卡西2");
+		t1.setPriority(1);
+		t2.setPriority(8);
+		t1.start();
+		t2.start();*/
+		
+		/*System.out.println(Thread.MAX_PRIORITY);
+		System.out.println(Thread.MIN_PRIORITY);
+		System.out.println(Thread.NORM_PRIORITY);*/
+		
+		/*new Thread(new  rt(),"t").start();*/
 		
 	}
 
@@ -112,3 +131,40 @@ class PersonThread extends Thread{
 	}
 }
 
+class ThreadDeom extends Thread{
+	public ThreadDeom(String ThreadName){
+		super(ThreadName);
+	}
+	public void run(){
+		String tn = Thread.currentThread().getName();
+		for(int i = 0; i < 100; i++){
+			System.out.println(tn+":"+i);
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+class rt implements Runnable{
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		String tn = Thread.currentThread().getName();
+		for(int i = 0; i < 100; i++){
+			System.out.println(tn+":"+i);
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+}
