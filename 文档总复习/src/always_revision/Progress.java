@@ -458,7 +458,6 @@ class xf implements  Runnable{
 		// TODO Auto-generated method stub
 		while(true){
 			synchronized(p){
-				if(p.name == null)break;
 				System.out.println(p.name+"---"+p.zl);
 				p.notify();//唤醒等待进程
 				try {
