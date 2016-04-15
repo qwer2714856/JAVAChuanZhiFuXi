@@ -61,6 +61,8 @@
  * 4.getPriority()		返回当前线程的对象优先级，默认线程优先级是5.
  * 5.setPriority(int p) 设计优先级最小1最大10 默认5。
  * 6.currentThread()	返回cpu正在执行的线程对象。 
+ * 7.getId()			获取线程id 没有setId()
+ * 
  * 
  * extends Thread 的类叫做线程对象 可以直接用this.getName setName getPriority setPriority
  * 线程对象中this == Thread.currentThread()
@@ -107,6 +109,15 @@ public class Progress {
 		System.out.println(Thread.NORM_PRIORITY);*/
 		
 		/*new Thread(new  rt(),"t").start();*/
+		
+		//售票系统
+		Sale s1 = new Sale("窗口1");
+		Sale s2 = new Sale("窗口2");
+		
+		s1.start();
+		s2.start();
+		
+		
 		
 	}
 
@@ -167,4 +178,22 @@ class rt implements Runnable{
 		}
 	}
 	
+}
+
+
+class Sale extends Thread {
+	public Sale(String name) {
+		super(name);
+	}
+
+	static int num = 100;
+
+	public void run() {
+		synchronized ("lock") {
+			while (Sale.num > 0) {
+				System.out.println(this.getName() + "：" + "售出1张，剩余"
+						+ --Sale.num);
+			}
+		}
+	}
 }
