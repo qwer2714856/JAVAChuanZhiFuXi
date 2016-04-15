@@ -70,6 +70,23 @@
  * 
  * implements Runnable 的只是实现了接口的类不是线程对象，它无法直接用this.  它只能从 Thread.currentThread() 获取set get .
  * 
+ * 创建线程的第二种方法
+ * 使用Runnable 接口
+ * 该类中的代码就是线程要执行的任务定义。
+ * 1.定义实现Runnable 接口
+ * 2.重写Runnable接口run方法，就是将线程代码放到run里面去。
+ * 3.通过Thread类建立线程对象。
+ * 4.将Runnable接口的子类做为实际参数，传递给Thread的构造方法。
+ * 5.调用Thread类的start()方法启动线程，将自动调用Runnable实现类的run方法。
+ * 6.为什么要传Runnable 实现类对象，因为需要Runnable 实现类对象的run方法，调用start() 自动调用Runnable实现类对象的run方法.
+ * 
+ * Runnable Sale 注意如果是实现接口的类，那么多个线程会共享一个接口实现对象。
+ * 所以以此为例做一个售票，注意票数就不需要在变为静态了，因为多个线程共享一个对象。
+ * int num = 100;// 注意将来线程会共享这一个对象，所以他不需要在去声明静态的成员，当然声明也没错，只是为了更好理解，线程共享对象。
+ * SaleRunnable
+ * 
+ * 
+ * 
  */
 package always_revision;
 
@@ -111,13 +128,20 @@ public class Progress {
 		/*new Thread(new  rt(),"t").start();*/
 		
 		//售票系统
-		Sale s1 = new Sale("窗口1");
+		/*Sale s1 = new Sale("窗口1");
 		Sale s2 = new Sale("窗口2");
 		
 		s1.start();
-		s2.start();
+		s2.start();*/
 		
 		
+		//接口版售票
+		SaleRunnable sr = new SaleRunnable();
+		Thread th1 = new Thread(sr,"售票窗口1");
+		Thread th2 = new Thread(sr,"售票窗口2");
+		
+		th1.start();
+		th2.start();
 		
 	}
 
@@ -189,11 +213,38 @@ class Sale extends Thread {
 	static int num = 100;
 
 	public void run() {
-		synchronized ("lock") {
-			while (Sale.num > 0) {
+		while (Sale.num > 0) {
+			synchronized ("lock") {
 				System.out.println(this.getName() + "：" + "售出1张，剩余"
 						+ --Sale.num);
 			}
 		}
 	}
+}
+
+/**
+* Runnable Sale 注意如果是实现接口的类，那么多个线程会共享一个接口实现对象。
+* 所以以此为例做一个售票，注意票数就不需要在变为静态了，因为多个线程共享一个对象。
+*/
+class SaleRunnable implements Runnable {
+	int num = 100;// 注意将来线程会共享这一个对象，所以他不需要在去声明静态的成员，当然声明也没错，只是为了更好理解，线程共享对象。
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+		while (num > 0) {
+			synchronized ("lock2") {
+				System.out.println(Thread.currentThread().getName() + "："
+						+ "售出1张，剩余" + --num);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }
