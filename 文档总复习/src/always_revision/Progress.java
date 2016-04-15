@@ -51,7 +51,7 @@
  * 1.创建，创建一个线程对象。
  * 2.可运行，线程对象创建后，其它线程调用了该对象start()之后，该状态的线程位于可运行的线程池中，变的可以运行，等待获取cpu的执行权。
  * 3.运行，就绪状态的线程获取了cpu执行权，执行代码
- * 4.阻塞状态是线程由于某种原因放弃cpu使用权，暂停运行，直接到线程就绪状态，才有机会转到运行状态。
+ * 4.阻塞状态是线程由于某种原因放弃cpu使用权，暂停运行，直接到线程就绪状态（继续状态不是可以运行状态，当被notify才是运行状态），才有机会转到运行状态。
  * 5.死亡线程执行完它的任务。
  * 
  * 常见的线程方法
@@ -126,6 +126,69 @@
  * 
  * 
  * 
+ * 死锁
+ * 有个今天的案例可以说明这个问题
+ * 
+ * 有五个人围成一桌吃饭每人的左边有一只筷子，如果每个人抓住自己左边的筷子，等待右边的人放下筷子，而又不愿意放掉自己左边的筷子那么就死锁了。
+ * A B 两个资源
+ * 
+ * E F两个人
+ * 
+ * E先拿到了A, F拿到了B, 这个时候E还需要B, 就等待 F释放B, 而F有等待释放A拿A, 这样相互等待就死了。 就是两个相同资源一方拿一个，等待另一方释放在拿另一个
+ * 这样双发都不释放就一直等下去，就死锁了。
+ * 
+ * 成解释
+ * A B 两个资源哈
+ * 
+ * 1号线程
+ * synchronized("lock"){
+ *   抢占A资源了
+ *   因为B资源被抢了他只能等着进不去因为被锁了
+ *   synchronized("lock2"){
+ *   
+ *   }
+ * }
+ * 
+ * 2号线程
+ * synchronized("lock2"){
+ *    一下子把B抢了
+ *    因为A资源被抢了还没有释放所以只能等待
+ *    synchronized("lock"){
+ *    
+ *    }
+ * }
+ * 
+ * 
+ * 出现死锁的情况
+ * 第一种两把锁相互锁
+ * 1号线程
+ * "lock"{
+ *    "lock2"{
+ *    
+ *    }
+ * }
+ * 
+ * "lock2"{
+ *     "lock"{
+ *     
+ *     }
+ * }
+ * 
+ * 相互锁就死了
+ * 
+ * 死锁的程序例子
+ * killLock
+ * 
+ * 
+ * 线程通信
+ * 线程通讯就是多个线程操纵同一个资源，但操作动作不同。
+ * wait
+ * notify
+ * notifyAll
+ * 等待唤醒机制
+ * wait 是告诉当前线程 放弃本次操作进入阻塞状态，放弃锁，直到其它线程拿到了和它相同的锁，然后使用notify之后，这个阻塞线程进入到可运行状态。
+ * notify 唤醒相同锁的wait的第一个线程，录入菜馆排队等待等的最久的先执行，被这个状态唤醒后进入到可运行状态。
+ * notify 唤醒相同锁所有的wait线程进入到可运行状态。
  * 
  */
 package always_revision;
@@ -183,6 +246,50 @@ public class Progress {
 		th1.start();
 		th2.start();*/
 		
+		//killLock
+		
+		//创建两条线程
+		/*new Thread(){
+			public void run(){
+				synchronized("lock1"){
+					System.out.println("等待拿lock2...");
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					synchronized("lock2"){
+						System.out.println("释放lock2 lock1");
+					}
+				}
+			}
+		}.start();
+		
+		new Thread(){
+			public void run(){
+				synchronized("lock2"){
+					System.out.println("等待拿lock1...");
+					synchronized("lock1"){
+						System.out.println("释放lock1,lock2");
+					}
+				}
+			}
+		}.start();*/
+		
+		//多个线程共享一个资源; 需求生产一次就消费一次
+		cp p = new cp();
+		//生产
+		sc s = new sc(p);
+		//输出
+		xf x = new xf(p);
+		//创建线程
+		Thread t1 = new Thread(s,"t1");
+		t1.setPriority(1);
+		Thread t2 = new Thread(x,"t2");
+		t2.setPriority(10);
+		t1.start();
+		t2.start();
 		
 	}
 
@@ -296,4 +403,72 @@ class SaleRunnable implements Runnable {
 		}
 	}
 
+}
+
+
+
+/**
+* 线程通讯
+*/
+class cp{
+	String name;
+	String zl;
+}
+//生产者
+class sc implements Runnable{
+	cp p;
+	public sc(cp p) {
+		this.p = p;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		int i = 0;
+		while(true){
+			synchronized(p){
+				if(i%2==0){
+					p.name="jack";
+					p.zl = "good";
+				}else{
+					p.name = "杰克";
+					p.zl = "好";
+				}
+				i++;
+				p.notify();//唤醒等待的进程
+				try {
+					p.wait();//当前进程休眠
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}
+	}
+	
+}
+//消费者
+class xf implements  Runnable{
+	cp p;
+	public xf(cp p) {
+		this.p = p;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(true){
+			synchronized(p){
+				if(p.name == null)break;
+				System.out.println(p.name+"---"+p.zl);
+				p.notify();//唤醒等待进程
+				try {
+					p.wait();//当前进程休眠
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 }
