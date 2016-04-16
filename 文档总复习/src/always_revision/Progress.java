@@ -181,7 +181,7 @@
  * 
  * 
  * 线程通信
- * 线程通讯就是多个线程操纵同一个资源，但操作动作不同。
+ * 线程通讯就是多个线程操纵同一个资源（同一把锁），但操作动作不同。
  * wait
  * notify
  * notifyAll
@@ -190,6 +190,31 @@
  * notify 唤醒相同锁的wait的第一个线程，录入菜馆排队等待等的最久的先执行，被这个状态唤醒后进入到可运行状态。
  * notify 唤醒相同锁所有的wait线程进入到可运行状态。
  * 
+ * 线程间的通信其实就是多个线程操作同一个资源，但操作动作不同，【都要用在synchronized 中 wait notify notifyAll 都要用在同步中！！！而且要是同一把锁，也就是将synchronized("lock")lock这个对象要唯一共享多个线程共享代码块锁】
+ * 其原因很简单，因为他们必须要要依托于锁，什么时候有锁？那就是synchronized的时候有锁这个概念。故而需要在同步中使用。
+ * 为什么这些方法要定义在Object里面？
+ * 其原因也是很简单因为锁可以是任意对象，其任意对象都继承自Object所以。
+ * 
+ * wait 和 sleep的区别
+ * wait 当前线程将交出cpu执行权，变为阻塞就绪状态，等待共同锁的其它线程使用notify唤醒它变为可运行状态。
+ * sleep 不会交出cpu执行权，睡醒了继续执行。
+ * 
+ * 举个例子
+ * wait :
+ * 一个人去茅房，关上门了，然后发现没带纸，然后就出来了把锁交给其其它人，自己就等待别人送纸，但是囊它不再排队范围内，因为没有纸
+ * 这个时候拿到相同锁的那哥们完了，出来把纸给外边等的那哥们，等待的那哥们就去排队了。 
+ * wait notify notifyAll 都是Object的方法
+ * 
+ * sleep:
+ * 一个人去茅房，关上门了，觉得挺累就在坑里面睡了会，但是外边的人是进步来的，因为他把自己锁在茅房睡着了，等醒了继续拉，拉完了出来了。
+ * sleep 是Thread的方法
+ * 
+ * 定义了notify为什么还要定义notifyAll 因为容易唤醒本方线程造成本方线程等待的情况。(可能说的是定义在finally中因为wait要在try catch里面)
+ * notifyAll使所有原来在该对象上等待被notify的线程统统退出wait的状态，变成等待该对象上的锁，一旦该对象被解锁，他们就会去竞争。
+   notify则文明得多他只是选择一个wait状态线程进行通知，并使它获得该对象上的锁，
+       但不惊动其他同样在等待被该对象notify的线程们，当第一个线程运行完毕以后释放对象上的锁此时如果该对象没有再次使用notify语句，
+       则即便该对象已经空闲，其他wait状态等待的线程由于没有得到该对象的通知，继续处在wait状态，直到这个对象发出一个notify或notifyAll，
+       它们等待的是被notify或notifyAll，而不是锁。
  */
 package always_revision;
 
@@ -279,17 +304,14 @@ public class Progress {
 		
 		//多个线程共享一个资源; 需求生产一次就消费一次
 		cp p = new cp();
-		//生产
-		sc s = new sc(p);
-		//输出
-		xf x = new xf(p);
-		//创建线程
-		Thread t1 = new Thread(s,"t1");
-		t1.setPriority(1);
-		Thread t2 = new Thread(x,"t2");
-		t2.setPriority(10);
-		t1.start();
-		t2.start();
+		producer pter = new producer(p);
+		Xf x = new Xf(p);
+		
+		Thread th1 = new Thread(pter, "生产者");
+		Thread th2 = new Thread(x, "消费者");
+		
+		th1.start();
+		th2.start();
 		
 	}
 
@@ -410,64 +432,81 @@ class SaleRunnable implements Runnable {
 /**
 * 线程通讯
 */
+/**
+ * 产品类
+ *
+ */
 class cp{
 	String name;
 	String zl;
+	boolean t = false;//代表是否生产
 }
-//生产者
-class sc implements Runnable{
+//生产类 生产一个就要被消费一个,所以生产和消费是同步的所以要用到线程
+class producer implements Runnable {
 	cp p;
-	public sc(cp p) {
+
+	public producer(cp p) {
 		this.p = p;
 	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		int i = 0;
-		while(true){
-			synchronized(p){
-				if(i%2==0){
-					p.name="jack";
+		while (true) {
+			synchronized (p) {
+				
+				if(p.t){ //有产品就要等待被消费
+					try {
+						p.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if (i % 2 == 0) {
+					p.name = "jack";
 					p.zl = "good";
-				}else{
+				} else {
 					p.name = "杰克";
 					p.zl = "好";
 				}
 				i++;
-				p.notify();//唤醒等待的进程
-				try {
-					p.wait();//当前进程休眠
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				p.t = true;
+				p.notify();
 			}
 		}
 	}
-	
+
 }
-//消费者
-class xf implements  Runnable{
+
+class Xf implements Runnable {
 	cp p;
-	public xf(cp p) {
+
+	public Xf(cp p) {
 		this.p = p;
 	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(true){
-			synchronized(p){
-				System.out.println(p.name+"---"+p.zl);
-				p.notify();//唤醒等待进程
-				try {
-					p.wait();//当前进程休眠
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		while (true) {
+			synchronized (p) {
+				if (!p.t) {//没生产就不能消费
+					try {
+						p.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+				System.out.println(p.name + "--" + p.zl);//消费完了
+				p.t = false; //告诉生产者消费完了。
+				p.notify();//激活生产者线程
+
 			}
 		}
 	}
-	
+
 }
