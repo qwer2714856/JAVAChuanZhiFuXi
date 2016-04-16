@@ -224,6 +224,38 @@
  * 2.使用标记停止线程
  * 注意stop已经过时，不推荐使用，可以使用flg来控制循环，达到停止的目录。
  * 
+ * 
+ * 后台线程
+ * 后台线程：可以理解为守护线程，就是一直隐藏起来默默运行的线程，直到进程结束。
+ * 实现方式：
+ * 让线程对象设置setDaeman(boolean on)
+ * 特点：
+ * 当所有的非后台线程结束时，程序也就终止了同时还会杀死进程中所有的后台线程。
+ * 也就是说只要有非后台线程在运行，程序就不会终止。执行main就是一个非后台的线程。
+ * 
+ * 在启动线程之前设置setDaeman(true)就可以将线程设置为后台线程。
+ * 
+ * 一旦main执行完毕了，那么程序那么程序就会终止，JVM也就退出了。没有其它非守护线程，也就是说没有其它非后台线程活动。
+ * 
+ * 可以使用isDaeman()测试线程是否为后台线程（守护线程）。
+ * 
+ * Thread t = new Thread(new tests(),"a");
+ * t.start();
+ * 这个是没有设置守护线程的
+ * 当main执行完了，因为还有其它的非后台线程在跑所以程序没有结束。
+ * 
+ * 如果
+ * t.setDaeman(true);
+ * t.start();
+ * 当main线程执行完了马上就退出，不会有等待。
+ * 
+ * 
+ * Thread join方法
+ * 当一个线程启动另外一个线程的时候，比如主线程启动一个A线程，主线程不会等待A，主线程是可以先结束的。
+ * 但是join 可以让主线等待自己起的那个线程结束了在结束。
+ * 搜索join看实例 
+ * 
+ * 
  */
 package always_revision;
 
@@ -323,19 +355,51 @@ public class Progress {
 		th2.start();*/
 		
 		//如何停止一个正在执行的线程？ 注意stop已经过时不建议在使用，可以在线程实现类里面使用flg来做表示例子如下
-		StopThread st = new StopThread();
+		/*StopThread st = new StopThread();
 		Thread th = new Thread(st,"stop");
-		th.start();
+		th.start();*/
 		
 		//在主线程中关闭子线程
 		//因为子线程开放了一个开关出来所以用开关控制
-		try {
+		/*try {
 			Thread.sleep(1000);
 			st.isRun = false;//关闭有主线程开的子线程，这个也叫作回收子线程。 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		
+		/*Thread t = new Thread(new tests(),"a");
+		t.start();*/
+		
+		//如果没有使用加入线程两个是，各运行各的。
+		/*Thread t = new Thread(new JoinThread(),"a");
+		t.start();*/
+		//如果使用加入线程被加入的要等待加入的运行完了再运行 
+		/*Thread t = new Thread(new JoinThread(),"a");
+		
+		int i = 0;
+		while(i < 100){
+			if(i == 50){
+				try {
+					t.start();//启动线程
+					t.join();//想线程加入到主线程中来。
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(Thread.currentThread().getId()+":"+i++);
+		}*/
+		
+		
 	}
 
 }
@@ -552,6 +616,43 @@ class StopThread implements Runnable{
 			}
 		}
 		System.out.println("线程释放了!!!");
+	}
+	
+}
+
+
+class tests implements Runnable{
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("tets");
+	}
+	
+}
+
+
+class JoinThread implements Runnable{
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		int i = 0;
+		while(i < 100){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(i++);
+		}
 	}
 	
 }
