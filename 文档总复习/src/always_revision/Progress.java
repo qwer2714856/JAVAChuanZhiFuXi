@@ -215,6 +215,15 @@
        但不惊动其他同样在等待被该对象notify的线程们，当第一个线程运行完毕以后释放对象上的锁此时如果该对象没有再次使用notify语句，
        则即便该对象已经空闲，其他wait状态等待的线程由于没有得到该对象的通知，继续处在wait状态，直到这个对象发出一个notify或notifyAll，
        它们等待的是被notify或notifyAll，而不是锁。
+       
+       
+ * 线程的生命周期
+ * Thread Live
+ * 任何事物都有其自己的生命周期，线程也是的
+ * 1.正常终止，当线程的run方法执行完毕，线程死亡。
+ * 2.使用标记停止线程
+ * 注意stop已经过时，不推荐使用，可以使用flg来控制循环，达到停止的目录。
+ * 
  */
 package always_revision;
 
@@ -303,7 +312,7 @@ public class Progress {
 		}.start();*/
 		
 		//多个线程共享一个资源; 需求生产一次就消费一次
-		cp p = new cp();
+		/*cp p = new cp();
 		producer pter = new producer(p);
 		Xf x = new Xf(p);
 		
@@ -311,8 +320,22 @@ public class Progress {
 		Thread th2 = new Thread(x, "消费者");
 		
 		th1.start();
-		th2.start();
+		th2.start();*/
 		
+		//如何停止一个正在执行的线程？ 注意stop已经过时不建议在使用，可以在线程实现类里面使用flg来做表示例子如下
+		StopThread st = new StopThread();
+		Thread th = new Thread(st,"stop");
+		th.start();
+		
+		//在主线程中关闭子线程
+		//因为子线程开放了一个开关出来所以用开关控制
+		try {
+			Thread.sleep(1000);
+			st.isRun = false;//关闭有主线程开的子线程，这个也叫作回收子线程。 
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
@@ -508,5 +531,27 @@ class Xf implements Runnable {
 			}
 		}
 	}
+}
 
+/**
+ * StopThread
+ * isRun 这个就是个开关其它线程可以通过调用它关闭该线程。
+ */
+class StopThread implements Runnable{
+	public boolean isRun = true;
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(isRun){
+			System.out.println("haha");
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("线程释放了!!!");
+	}
+	
 }
