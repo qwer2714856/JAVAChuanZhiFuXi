@@ -48,9 +48,39 @@
  * 3变量重命名一个文档中变量很多如何全部重命名？
  * 选中变量 右键 refactor->rename 就可以
  * 
+ * JDK1.5
+ * 安全，高效
+ * 静态导入
+ * 自动拆装箱
+ * 增强for
+ * 可变参数
+ * 枚举
+ * 泛型
+ * 
+ * 
+ * 静态导入
+ * importa static 包名.类名.静态方法名;或者静态属性名。
+ * 
+ * 增强for循环
+ * for 只能作用于数组，和实现了Iterable的接口的类上。
+ * 
+ * 可变参数
+ * 可变参数可以定义一个接受，多个同类型实参，同类型数组，以及即传数组又传参数
+ * 语法：
+ * 数据类型...变量 可变参数是object数组（可变参数存的是对象数组）
+ * 可变形参只能有一个，有且只能在最后一个位置。
+ * 可以传0-n个参数。
+ * 其本质就是一个数组。
+ * 当传递0个参数时，参数数组是有值的，不为null,长度是0
+ * 
  */
+//静态导入
 package always_revision;
+import static java.lang.System.out;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.function.Consumer;
 /**
  * @author www.23.com
  * 
@@ -63,12 +93,73 @@ public class UseEclipse {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		haha();
+		/*int [] a = {1,2,3,4};
+		for(int sa : a){
+			System.out.println(sa);
+		}*/
+		/*HashMap<String,String> hm = new HashMap<String,String>();
+		hm.put("a", "b");
+		Set<Map.Entry<String, String>> nt = hm.entrySet();
+		for(Map.Entry<String, String> mp : nt){
+			System.out.println(mp.getValue());
+		}*/
+		/*SXInterable<String> s = new SXInterable<String>();
+		s.addObject("admin");
+		s.addObject("admin1");
+		s.addObject("admin2");
+		s.addObject("admin3");
+		for(String str : s){
+			System.out.println(str);
+		}*/
+		
+		
+		/*sum(1,1,2,3,4);
+		sum(1,new int[]{1,2,3,4,5,6});*/
+		/*sum(1);*/
 	}
 
 	public static void haha() {
 		{
-			
+			out.println("import static ");
 		}
 	}
+	public static void sum(int s, int... num){
+	 
+		int sums = 0;
+		for(int n:num){
+			sums+=n;
+		}
+		System.out.println(sums);
+	}
 
+}
+class SXInterable<T> implements Iterable<T>{
+	String name;
+	Object [] c = new Object [100];
+	int cursor;
+	int step;
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return new nbl();
+	}
+	private class nbl implements Iterator<T>{
+
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return step < cursor;
+		}
+
+		@Override
+		public T next() {
+			// TODO Auto-generated method stub
+			return (T)c[step++];
+		}
+		
+	}
+	
+	public void addObject(T t){
+		c[cursor++] = t;
+	}
 }
