@@ -145,69 +145,95 @@
  * 
  * 为什么
  * 因为
- * Integer 对象默认 缓存 -128-127 之间的对象。 所以上面那个是同一个对象，后面的不是。
+ * Integer 对象默认 缓存 -128-127 之间的对象。 所以上面那个是同一个对象，后面的不是。	
+ * 
+ * 
+ * 枚举类
+ * 在某个值的范围 例如性别，只有男女
+ * enum Sex{
+ *     body,woman
+ * }
+ * enum 定义的枚举类也会有class
+ * 枚举注意
+ * 1.
+ * javap -c -l private 枚举类我们发现 枚举成员是 
+ * public static final Sex body;
+ * public static final Sex woman;
+ * 每一个枚举值都是public static final 枚举类  枚举值;
+ * 枚举中声明的每一个值，都是对应当前枚举类的实例。
+ * 当枚举类没有重写toString() 直接输出返回的是枚举值
+ * 2.
+ * 和其它类一样它也可以定义成员等。
+ * 3.构造方法私有化，当构造方法带参数可以让枚举值赋值比如 body("hi") 这个是在给构造函数赋值。
+ * 4.因为枚举值是对象可以直接用枚举值调用对象的方法。
+ * 5.当枚举类定义抽象方法的时候，枚举值需要实现抽象方法 body("hi"){public void speak(){}}
+ * 6.枚举也可以实现接口，序列化，或继承抽象类。
+ * 7.jdk5 switch 支持枚举
+ * switch(Sex.body) {
+   	case body:;break;
+   }
+ * 8.枚举只有一个值，可以设计单例设计模式。
  * 
  */
 //静态导入
 package always_revision;
+
 import static java.lang.System.out;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
+
 /**
  * @author www.23.com
  * 
  */
 public class UseEclipse {
-	
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//haha();
-		/*int [] a = {1,2,3,4};
-		for(int sa : a){
-			System.out.println(sa);
-		}*/
-		/*HashMap<String,String> hm = new HashMap<String,String>();
-		hm.put("a", "b");
-		Set<Map.Entry<String, String>> nt = hm.entrySet();
-		for(Map.Entry<String, String> mp : nt){
-			System.out.println(mp.getValue());
-		}*/
-		/*SXInterable<String> s = new SXInterable<String>();
-		s.addObject("admin");
-		s.addObject("admin1");
-		s.addObject("admin2");
-		s.addObject("admin3");
-		for(String str : s){
-			System.out.println(str);
-		}*/
+		// haha();
+		/*
+		 * int [] a = {1,2,3,4}; for(int sa : a){ System.out.println(sa); }
+		 */
+		/*
+		 * HashMap<String,String> hm = new HashMap<String,String>(); hm.put("a",
+		 * "b"); Set<Map.Entry<String, String>> nt = hm.entrySet();
+		 * for(Map.Entry<String, String> mp : nt){
+		 * System.out.println(mp.getValue()); }
+		 */
+		/*
+		 * SXInterable<String> s = new SXInterable<String>();
+		 * s.addObject("admin"); s.addObject("admin1"); s.addObject("admin2");
+		 * s.addObject("admin3"); for(String str : s){ System.out.println(str);
+		 * }
+		 */
+
+		/*
+		 * sum(1,1,2,3,4); sum(1,new int[]{1,2,3,4,5,6});
+		 */
+		/* sum(1); */
+
+		/*
+		 * int a = 1; Integer ac = a; //装箱 Integer ab = 1; //装箱 int b = ab;//拆箱
+		 */
+
+		/*
+		 * int a = 10; //十进制转其它进制 System.out.println(Integer.toBinaryString(a));
+		 * System.out.println(Integer.toOctalString(a));
+		 * System.out.println(Integer.toHexString(a)); //其它进制转十进制
+		 * System.out.println(Integer.parseInt("0010",2));
+		 * System.out.println(Integer.parseInt("07",8));
+		 * System.out.println(Integer.parseInt("11",16));
+		 */
+
+		System.out.println(Sex.body.toString());
+	
 		
-		
-		/*sum(1,1,2,3,4);
-		sum(1,new int[]{1,2,3,4,5,6});*/
-		/*sum(1);*/
-		
-		
-		/*int a = 1;
-		Integer ac = a; //装箱
-		Integer ab = 1; //装箱
-		int b = ab;//拆箱*/
-		
-		/*int a = 10;
-		//十进制转其它进制
-		System.out.println(Integer.toBinaryString(a));
-		System.out.println(Integer.toOctalString(a));
-		System.out.println(Integer.toHexString(a));
-		//其它进制转十进制
-		System.out.println(Integer.parseInt("0010",2));
-		System.out.println(Integer.parseInt("07",8));
-		System.out.println(Integer.parseInt("11",16));*/
-		
-		
+
 	}
 
 	public static void haha() {
@@ -215,27 +241,31 @@ public class UseEclipse {
 			out.println("import static ");
 		}
 	}
-	public static void sum(int s, int... num){
-	 
+
+	public static void sum(int s, int... num) {
+
 		int sums = 0;
-		for(int n:num){
-			sums+=n;
+		for (int n : num) {
+			sums += n;
 		}
 		System.out.println(sums);
 	}
 
 }
-class SXInterable<T> implements Iterable<T>{
+
+class SXInterable<T> implements Iterable<T> {
 	String name;
-	Object [] c = new Object [100];
+	Object[] c = new Object[100];
 	int cursor;
 	int step;
+
 	@Override
 	public Iterator<T> iterator() {
 		// TODO Auto-generated method stub
 		return new nbl();
 	}
-	private class nbl implements Iterator<T>{
+
+	private class nbl implements Iterator<T> {
 
 		@Override
 		public boolean hasNext() {
@@ -246,12 +276,42 @@ class SXInterable<T> implements Iterable<T>{
 		@Override
 		public T next() {
 			// TODO Auto-generated method stub
-			return (T)c[step++];
+			return (T) c[step++];
 		}
-		
+
 	}
-	
-	public void addObject(T t){
+
+	public void addObject(T t) {
 		c[cursor++] = t;
 	}
 }
+
+// 枚举
+enum Sex {
+	body("hi"){
+		//重写抽象方法
+		public void speak(){
+			
+		}
+	}, girl{
+		//重写抽象方法
+		public void speak(){
+			
+		}
+	};
+	private Sex(){
+		
+	}
+	private Sex(String hi){
+		
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "aa";
+	}
+	//定义抽放方法
+	abstract public void speak();
+}
+
+ 
