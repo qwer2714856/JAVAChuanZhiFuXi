@@ -73,6 +73,80 @@
  * 其本质就是一个数组。
  * 当传递0个参数时，参数数组是有值的，不为null,长度是0
  * 
+ * 自动拆装箱
+ * 装箱： 基本数据类型直接赋值给包装类
+ * 拆箱：包装类直接赋值给基本数据类型
+ *		int a = 1;
+		Integer ac = a; //装箱
+		Integer ab = 1; //装箱
+		int b = ab;//拆箱
+ * 基本数据类型包装类
+ * byte		Byte
+ * short    Short
+ * int		Integer
+ * char		Character
+ * long 	Long
+ * boolean	Boolean
+ * float	Float
+ * double	Double
+ * 
+ * java 所有的基本数据类型都有自己的包装类
+ * 好处是包装类对象，可以扩展一些方法。
+ * 例如
+ * 1.
+ * Integer.MAX_VALUE
+ * Integer.MIN_VALUE
+ * 
+ * 2.
+ * Integer parseInt() 静态 intValue()非静态 toString()静态
+ * 
+ * parseInt() 里面必须是字符串数字，否则抛出异常
+ * 
+ * Double.parseDouble(); 字符串转double
+ * 
+ * 每个类型都有自己类型的parse包装类
+ * 
+ * 3.进制之间的转换
+ * 十进制转其它进制 返回对应进制无符号字符串
+ * toBinaryString(int i); 二进制
+ * toHexString(int i); 十六进制
+ * toOctalString(int i);八进制
+ * 
+ * 其它进制转十进制
+ * parseInt(String redix);
+ * parseInt(String s,int redix); "123321",2 这个代表 2进制的123321 转为十进制 转换错误抛异常。
+ * 
+ *  //十进制转其它进制
+	System.out.println(Integer.toBinaryString(a));
+	System.out.println(Integer.toOctalString(a));
+	System.out.println(Integer.toHexString(a));
+	//其它进制转十进制
+	System.out.println(Integer.parseInt("0010",2));
+	System.out.println(Integer.parseInt("07",8));
+	System.out.println(Integer.parseInt("11",16));
+	
+ * 
+ * intValue jdk5 以后用不到
+ * Integer x = new Integer(1);//装箱
+ * int intValue = x.intValue;//拆箱
+ * 
+ * 现在直接赋值
+ * int i = x;
+ * 
+ * Integer a = 127;
+ * Integer b = 127;
+ * 
+ * a == b ? true 
+ * 
+ * Integer a = 128;
+ * Integer b = 128;
+ * 
+ * a == b false
+ * 
+ * 为什么
+ * 因为
+ * Integer 对象默认 缓存 -128-127 之间的对象。 所以上面那个是同一个对象，后面的不是。
+ * 
  */
 //静态导入
 package always_revision;
@@ -92,7 +166,7 @@ public class UseEclipse {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		haha();
+		//haha();
 		/*int [] a = {1,2,3,4};
 		for(int sa : a){
 			System.out.println(sa);
@@ -116,6 +190,24 @@ public class UseEclipse {
 		/*sum(1,1,2,3,4);
 		sum(1,new int[]{1,2,3,4,5,6});*/
 		/*sum(1);*/
+		
+		
+		/*int a = 1;
+		Integer ac = a; //装箱
+		Integer ab = 1; //装箱
+		int b = ab;//拆箱*/
+		
+		/*int a = 10;
+		//十进制转其它进制
+		System.out.println(Integer.toBinaryString(a));
+		System.out.println(Integer.toOctalString(a));
+		System.out.println(Integer.toHexString(a));
+		//其它进制转十进制
+		System.out.println(Integer.parseInt("0010",2));
+		System.out.println(Integer.parseInt("07",8));
+		System.out.println(Integer.parseInt("11",16));*/
+		
+		
 	}
 
 	public static void haha() {
