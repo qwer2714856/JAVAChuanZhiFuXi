@@ -251,13 +251,106 @@
  * 查找比较麻烦需要用的正则对象，匹配器对象。
  * Pattern 正则对象
  * Matcher 匹配器
+ * 		//正则字符串获取
+		String str = "aaa bb ccc ddddd eeee ffff ddd aaV dddd";
+		//正则对象
+		Pattern pt = Pattern.compile("\\b[a-zA-Z]{3}\\b");
+		//获取匹配器
+		Matcher mc = pt.matcher(str);
+		//开始获取
+		while(mc.find()){//必须调用find以后才能用 group
+			int start = mc.start();
+			int end = mc.end();
+			System.out.println(str.substring(start, end));
+			System.out.println(mc.group());
+			System.out.println("=====================");
+		}
+		
+		
+ * URL 类
+ * import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
+import XmlHelper;
+
+public class QXOutStream {
+public String outPutStr(String urlStr, String input) throws Exception{
+StringBuffer strBuf = new StringBuffer();
+String Resulst="";
+try{
+URL url = new URL(urlStr);
+HttpURLConnection con = (HttpURLConnection)url.openConnection();
+con.setDoInput(true);
+con.setDoOutput(true);
+con.setRequestMethod("POST");
+con.setAllowUserInteraction(false);	
+con.setUseCaches(false);
+con.setRequestProperty("Accept-Charset", "GBK");
+BufferedOutputStream bufOutPut = new BufferedOutputStream(con.getOutputStream());
+
+byte[] bdat = input.getBytes("UTF-8");//解决中文乱码问题
+bufOutPut.write(bdat, 0, bdat.length);
+bufOutPut.flush();
+BufferedInputStream inp = new BufferedInputStream(con.getInputStream());
+InputStreamReader in = new InputStreamReader(inp,Charset.forName("GBK"));
+BufferedReader bufReador = new BufferedReader(in);
+
+String tempStr = "";
+while (tempStr != null) {
+strBuf.append(tempStr);
+tempStr = bufReador.readLine();
+
+}
+Resulst = XmlHelper.getPostNodeText(strBuf.toString(), "OPERATOR_RESULT");//.getPostFirstRowText(strBuf.toString(), "OPERATOR_RESULT");
+
+}
+catch (Exception e) {
+//System.err.println("Exception:"+e.toString());
+throw e;
+//return "N";
+}
+finally{
+return Resulst;
+}
+
+}
+}
+		//爬虫程序 核心类URL java.net里面的
+		try {
+			URL url = new URL("http://www.baidu.com");
+			URLConnection uc = url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+			String line = null;
+			while((line = br.readLine()) != null){
+				System.out.println(line);
+			}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
  * 
  */
+
 //静态导入
 package always_revision;
   
 import static java.lang.System.out;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -322,15 +415,57 @@ public class UseEclipse {
 		/*String str = "adminstrstr";
 		System.out.println(str.replaceAll("(\\w+)\\1", "$1"));*/
 		
-		//正则字符串获取
+		/*//正则字符串获取
 		String str = "aaa bb ccc ddddd eeee ffff ddd aaV dddd";
 		//正则对象
 		Pattern pt = Pattern.compile("\\b[a-zA-Z]{3}\\b");
 		//获取匹配器
 		Matcher mc = pt.matcher(str);
-		while(mc.find()){
+		//开始获取
+		while(mc.find()){//必须调用find以后才能用 group
+			int start = mc.start();
+			int end = mc.end();
+			System.out.println(str.substring(start, end));
 			System.out.println(mc.group());
+			System.out.println("=====================");
+		}*/
+		
+		/*String str = "我我。。。我。。我要。。。。要要。。。学学。。。学习。。编程。编程";
+		Pattern pt = Pattern.compile("[\u4e00-\u9fa5]");
+		Matcher mc = pt.matcher(str);
+		String newStr = "";
+		String tmp = "";
+		while(mc.find()){
+			tmp = mc.group();
+			if(newStr.indexOf(tmp) == -1){
+				newStr += tmp;
+			}
 		}
+		System.out.println(newStr);*/
+		
+		/*String emailStr = "116710782@169.com";
+		if(emailStr.matches("\\d{5,16}@(126|163|sina|gmail|qq)\\.(com|cn)")){
+			System.out.println("done");
+		}*/
+		
+		/*//爬虫程序 核心类URL java.net里面的
+		try {
+			URL url = new URL("http://www.baidu.com");
+			URLConnection uc = url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+			String line = null;
+			while((line = br.readLine()) != null){
+				System.out.println(line);
+			}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		
 	}
 
 	public static void haha() {
