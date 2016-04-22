@@ -13,8 +13,10 @@
  * 1.exists()			 		描述的目标文件是否存在
  * 2.isDirectory()				目标是否是文件夹
  * 3.isFile()					目标是否是文件
+ * 4.getAbsolutePath()			获取绝对路径
  * 
- * 
+ * 路径
+ * java 的相对路径 java命令运行时所在的目录，对于ecplise来讲相对目录是java项目所在的目录。
  * 
  * 
  */
@@ -33,10 +35,14 @@ public class IO {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		File file = new File("d:/iofuxi.txt");
+		File file = new File("./");
 		System.out.println(file.exists());
 		System.out.println(file.isDirectory());
 		System.out.println(file.isFile());
+		System.out.println(file.getAbsolutePath());
+		System.out.println(file.getAbsolutePath());
+		
+		
 	}
 
 }
