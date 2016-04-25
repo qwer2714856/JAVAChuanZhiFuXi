@@ -80,7 +80,21 @@
  *     
  * 打开api发现
  * read一次只读取一个字节，如果读到文件末尾返回-1
- *      
+ * 
+ * read(byte []b) 方法,使用缓冲区（关键是缓冲区大小的确定）
+ * 使用read流读取一次就处理一次，可以将读取到的数据放到字节数组里面去，一次读取多个提交效率。
+ * 
+ * 总结
+ * 问题一 为什么输出的是数字不是字符，这个很简单因为读取的是字节，将二进制，变为十进制的字节所以是数字。如果需要变为字符需要char的强转
+ * 问题二 换行 linux 是 \n window 是 \r\n 	码标值是 \r 13  \n 10
+ * 
+ * 形式3
+ * read(byte [] b, int off, int len);
+ * b是一个字节数据
+ * off从数组什么位置开始存
+ * len 存多少个 超过这个值的就不存了
+ * 
+ * 其实就是使用数组的一部分来存储，通过控制偏移量来实现。
  *     
  * 流的操作
  * 1.获取资源文件    
@@ -126,6 +140,29 @@ public class IO {
 			while((rd = is.read(by)) != -1){
 				System.out.println(new String(by,0, rd));
 			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				is.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
+		
+		
+		/*形式3
+		 * InputStream is = null;
+		try {
+			is = new FileInputStream(new File("d:/iotest.txt"));
+			byte [] by = new byte[1024];
+			is.read(by,10,2);
+			System.out.println(new String(by,10,4));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
