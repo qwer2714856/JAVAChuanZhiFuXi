@@ -34,14 +34,34 @@
  * 21.list(FilenameFilter filter)返回过滤的
  * 22.listFiles()				返回的都是对象 如果遍历文件也是null
  * 23.listFiles(FilenameFilter filter) 返回过滤的
+ * class FileNameFilter implements FilenameFilter {
+	private String kzm;
+	
+	public FileNameFilter(String kzm){
+		this.kzm = kzm;
+	}
+	@Override
+	public boolean accept(File dir, String name) {
+		// TODO Auto-generated method stub
+		return name.endsWith(kzm);
+	}
+	
+	}
+	File [] flItems = new File("d:/").listFiles(new FileNameFilter(".txt"));
+	System.out.println(flItems.length);
+	
  * 路径
  * java 的相对路径 java命令运行时所在的目录，对于ecplise来讲相对目录是java项目所在的目录。
  * 
+ * 
+ * IO 流
  * 
  */
 package always_revision;
 
 import java.io.File;
+import java.io.FilenameFilter;
+ 
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -56,8 +76,36 @@ public class IO {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//show_list(new File("d:/bbb"),	"-|");
 		
+		//FilenameFilter
+		File [] list = new File("d:/").listFiles(new FileNameFilter(".txt"));
+		System.out.println(list.length);
 		
 	}
+	public static void show_list(File fl,	String fg){
+		if(fl.isDirectory()){
+			File [] fileItems = fl.listFiles();
+			for(File flItem : fileItems){
+				System.out.println(fg + flItem.getName());
+				if(flItem.isDirectory()){
+					show_list(flItem, "--"+fg);
+				}
+			}
+		}
+	}
 
+}
+
+class FileNameFilter implements FilenameFilter{
+	private String kzm;
+	public FileNameFilter(String kzm){
+		this.kzm = kzm;
+	}
+	@Override
+	public boolean accept(File dir, String name) {
+		// TODO Auto-generated method stub
+		return name.endsWith(kzm);
+	}
+	
 }
