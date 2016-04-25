@@ -72,13 +72,30 @@
  * 他们的派生子类有个特点，所有的都是***InputStream ***OutputStream
  * 字节流处理的就是字节，用于操作二进制文件（计算机所有的文件都是二进制的文件）。
  * 
- * 
- * 
+ * InputStream 输入字节流
+ * 需求1
+ *     1.读取一个非中文文件。
+ * 	   2.使用read()方法实现
+ *     3.使用int read(byte [] b)实现
+ *     
+ * 打开api发现
+ * read一次只读取一个字节，如果读到文件末尾返回-1
+ *      
+ *     
+ * 流的操作
+ * 1.获取资源文件    
+ * 2.创建流的管道
+ * 3.操作
+ * 4.关闭流管道  
  */
 package always_revision;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.FilterInputStream;
+import java.io.InputStream;
  
 import java.io.IOException;
 import java.util.Arrays;
@@ -97,8 +114,32 @@ public class IO {
 		//show_list(new File("d:/bbb"),	"-|");
 		
 		//FilenameFilter
-		File [] list = new File("d:/").listFiles(new FileNameFilter(".txt"));
-		System.out.println(list.length);
+		/*File [] list = new File("d:/").listFiles(new FileNameFilter(".txt"));
+		System.out.println(list.length);*/
+		
+		//io 需求1
+		/*InputStream is = null;
+		try {
+			is = new FileInputStream(new File("d:/iotest.txt"));
+			int rd = -1;
+			byte [] by = new byte[200];
+			while((rd = is.read(by)) != -1){
+				System.out.println(new String(by,0, rd));
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				is.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
 		
 	}
 	public static void show_list(File fl,	String fg){
