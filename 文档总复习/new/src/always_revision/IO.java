@@ -156,13 +156,13 @@ public class IO {
 		}*/
 		
 		
-		/*形式3
+		/* 形式3
 		 * InputStream is = null;
 		try {
 			is = new FileInputStream(new File("d:/iotest.txt"));
 			byte [] by = new byte[1024];
-			is.read(by,10,2);
-			System.out.println(new String(by,10,4));
+			System.out.println(is.read(by,10,2));//实际上也就读了2个。这里如果设置了读取个数就只读取指定的读取个数。
+			System.out.println(new String(by,10,4));//因为读了2个，其它的就是些空的，如果是字节数组打印默认是0。
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,7 +177,7 @@ public class IO {
 				e.printStackTrace();
 			}
 		}*/
-		
+		 
 	}
 	public static void show_list(File fl,	String fg){
 		if(fl.isDirectory()){
