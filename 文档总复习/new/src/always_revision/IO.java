@@ -204,7 +204,10 @@
  * writer(string str); 字符串写出去
  * flush(); 将缓冲去的数据写出去 buf 是1024
  * 
- * 
+ * Reader Writer 
+ * 操作的是字符，我们读取的时候由二进制解码到字符，写入由字符编码到二进制，核心就是StreamDecoder 以及 StreamEncoder,没有指定字符集用默认的
+ * 默认的就是当前项目的字符集。
+ *  
  * 字符流拷贝
  * characterCp();
  *		
@@ -214,6 +217,15 @@
  * 俨然就不是原来的值了。
  *
  *
+ * 字符缓冲类
+ * BufferedReader
+ * BufferedWriter
+ * readLine()读一行\r\n为标志
+ * newLine()写入一行\r\n，否则readLine()是不会自己加的，所以写的时候需要自己写。
+ * 
+ * 缓冲区类拷贝
+ * bufferedRW();
+ * 
  * 
  *
  * 流的操作
@@ -226,6 +238,8 @@ package always_revision;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -375,6 +389,31 @@ public class IO {
 		
 		//字符流拷贝
 		//characterCp(new File("d:/iotest.txt"),new File("d:/iotestcp.txt"));
+		/*BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader("d:/iotest.txt"));
+			String tmp = "";
+			while((tmp = br.readLine()) != null){//这没有维护什么数组就是当读到\r\n 为结束标志
+				System.out.println(tmp);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				br.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
+		
+		//使用字符流缓冲区类拷贝文件
+		//bufferedRW(new File("d:/iotest.txt"),new File("d:/iotestcp.txt"));
+		
 		
 		
 	}
@@ -569,6 +608,51 @@ public class IO {
 					try {
 						if(fr != null){
 						fr.close();
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
+		}
+	}
+	public static void bufferedRW(File fl,	File fg){
+		if(fl.isFile()){
+			BufferedReader br = null;
+			BufferedWriter bw = null;
+			
+			try {
+				br = new BufferedReader(new FileReader(fl));
+				bw = new BufferedWriter(new FileWriter(fg));
+				
+				String tmp = null;
+				if((tmp = br.readLine()) != null){
+					bw.write(tmp);
+					bw.flush();//刷出去，因为底层用的还是FileWriter的writer所以有个缓冲刷出去的问题。
+					bw.newLine();
+				}
+				System.out.println("is done");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally{
+				try {
+					if(bw!=null){
+					bw.close();
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally{
+					try {
+						if(br != null){
+						br.close();
 						}
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
