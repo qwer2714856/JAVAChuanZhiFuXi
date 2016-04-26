@@ -95,7 +95,50 @@
  * len 存多少个 超过这个值的就不存了
  * 
  * 其实就是使用数组的一部分来存储，通过控制偏移量来实现。
+ * 
  *     
+ * skip 文件指针跳    
+ * skip(long n);   如果n大于了源文件个数也不报错。
+ * 
+ *     
+ *     
+ * 输出字节流
+ * OutputStream 
+ * 需求2 
+ * 使用write 和 write(byte[] b) 写入     
+ * os.write(10);//这里有个暗坑这里虽然是个int但是写入的也只能是个byte的，如果大于byte将发生精度错误.
+ * 
+ * 一次写入多个字节
+ * byte [] by = new byte[1024];
+   for(int i = 0; i < by.length; i++){
+       by[i] = 97;
+   }
+   os.write(by);
+ * 如果目标文件不存在创建，如果中间目录不存在就异常了。
+ *
+ *     
+ * FileOutputStream    
+ * FileOutputStream(String name, boolean append);
+ * FileOutputStream(File name, boolean append);
+ * FileOutputStream(String name);
+ * FileOutputStream(File name); 
+ * 
+ * 字节拷贝
+ * cpSize //先建立的管道最后关闭，后开的先关
+ * 
+ * io的字节流的异常处理
+ * finally 关闭资源流 异常可以用throw new RuntimeException(e);包装下抛出
+ * 
+ * 字节缓冲流
+ * BufferedInputStream
+ * BufferedOutputStream（由于内部维护着一个缓冲数组，如果缓冲数组没有满，可以调用flush将其刷出去。也可以关闭资源数组自动刷出）
+ * 内部的缓冲数组大小是8192字节 内部默认维护着一个缓冲字节数组。
+ * cpSizeBuffered
+ * 这个基本没啥用处，最好还是用原生的byte [] 缓冲来做。
+ * 
+ * 
+ * 字符流
+ * 
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -104,9 +147,12 @@
  */
 package always_revision;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.FilterInputStream;
 import java.io.InputStream;
@@ -177,7 +223,31 @@ public class IO {
 				e.printStackTrace();
 			}
 		}*/
-		 
+		
+		
+		/*InputStream is = null;
+		try {
+			is = new FileInputStream(new File("d:/iotest.txt"));
+			is.skip(10000);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		//需求2
+		//System.out.println((int)'定');
+		//write();
+		
+		//cpSize
+		//cpSize(new File("d:/a/org.apache.http.legacy.jar"), new File("d:/b/org.apache.http.legacy.jar"));
+		
+		//cpSizeBuffered
+		//cpSizeBuffered(new File("d:/a/org.apache.http.legacy.jar"), new File("d:/b/org.apache.http.legacy.jar"));
+		
+		
 	}
 	public static void show_list(File fl,	String fg){
 		if(fl.isDirectory()){
@@ -191,6 +261,133 @@ public class IO {
 		}
 	}
 
+	public static void write() {
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(new File("d:/iotest.txt"));//FileOutputStream 如果没有第二个追加参数，每次创建这个实例都会清空目标文件。
+			//os.write(10);//这里有个暗坑这里虽然是个int但是写入的也只能是个byte的，如果大于byte将发生精度错误.
+			/*
+			 * 一次写入多个字节
+			 * byte [] by = new byte[1024];
+			for(int i = 0; i < by.length; i++){
+				by[i] = 97;
+			}
+			os.write(by);*/
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (os != null) {
+				try {
+					os.close();
+					System.out.print("done");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	public static void cpSize(File from, File to) {
+		if (from.isFile() && to.getParentFile().isDirectory()) {
+			FileInputStream fi = null;
+			FileOutputStream fo = null;
+
+			try {
+				fi = new FileInputStream(from);
+				fo = new FileOutputStream(to);
+
+				// 创建缓冲数组
+				byte[] by = new byte[1024];
+				int len = 0;
+				while ((len = fi.read(by)) != -1) {
+					fo.write(by, 0, len);
+				}
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException(e);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				 
+				try {
+					if(fo != null){
+						fo.close();
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally{
+					if(fi != null){
+						try {
+							fi.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				
+				
+
+			}
+
+		}
+	}
+	
+	public static void cpSizeBuffered(File from, File to){
+		if (from.isFile() && to.getParentFile().isDirectory()) {
+			BufferedInputStream fis = null;
+			BufferedOutputStream bos = null;
+			
+			try {
+				fis = new BufferedInputStream(new FileInputStream(from));
+				bos = new BufferedOutputStream(new FileOutputStream(to));
+				
+				byte [] by = new byte[1024];
+				int len = 0;
+				while((len = fis.read(by)) != -1){//如果没达到8192的边界就直接从缓冲数组拿。
+					bos.write(by,0,len);//这里并没有真正的写出去因为内部的缓冲数组，当达到8192才会出去。
+					//bos.flush(); 这里可以强制写出去
+				}
+				System.out.println("is done");
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally{
+				try {
+					if(bos != null){
+						bos.close();//关闭也可写出去
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally{
+					try {
+						if(fis != null){
+							fis.close();
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		}
+	}
 }
 
 class FileNameFilter implements FilenameFilter{
