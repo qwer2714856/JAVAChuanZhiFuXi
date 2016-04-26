@@ -157,8 +157,65 @@
  * 总之就是用什么编码写的就用什么编码读取否则乱码。
  * 
  * 
+ * 使用字节流操作字符
+ * charDoSize()
+ * 由于字节流无法满足读取字符的需求，所以需要使用字符流
+ * 字节流写没有问题（只要按照写的编码打开即可），当在读的时候如果这个字符占1个字节以上（编码表相同）那么也会乱码，
+ * 原因是读进来的是一个字节的原来的是两个字节的
+ * 		System.out.println(new String("中国".getBytes(),0,6));
+		try {
+			FileInputStream fi = new FileInputStream(new File("d:/iotest.txt"));
+			byte [] s = new byte[3];//这理必须读三个如果1个那么将错误，因为一个汉字在utf-8下为3个字节
+			int len = fi.read(s);
+			System.out.println(new String(s,0,len));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ * 
+ * 字符流就是 字节流+编码表
+ * 抽象类
+ * Reader 输入字符流
+ * Writer 输出字符流
+ * 
+ * Reader 
+ * int read();
+ * 读取一个字符，返回的是读取的那个字符（理解是读到的那个字符以数字的形式返回），末尾为-1
+ * int read(char [] buf);
+ * 和字节一样只不过读出来的是字符。
+ * 
+ * 对应的两个类是
+ * FileReader
+ * FileWriter
+ * http://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/ 
+ * 关于
+ * InputStream StreamDecoder Reader  读取
+ * OutputStream StreamEncoder Writer 写入  
+ * 关系
  * 
  * 
+ * Writer
+ * writer(int ch); 字符集 字符对应的值，写出去
+ * writer(char ch); 字符写出去
+ * writer(char [] ch); 字符数组写出去
+ * writer(string str); 字符串写出去
+ * flush(); 将缓冲去的数据写出去 buf 是1024
+ * 
+ * 
+ * 字符流拷贝
+ * characterCp();
+ *		
+ *
+ * 字节流拷贝视频音频等等不会损坏，为什么字符流会？
+ * 其原因很简单，在读取的时候视频也好音频也好它们的二进制可能在streamDecoder的编码表里面没有对应，这样就会用一个空字符对应的值代替，这个时候在写回去
+ * 俨然就不是原来的值了。
+ *
+ *
+ * 
+ *
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -173,6 +230,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.FilterInputStream;
 import java.io.InputStream;
@@ -266,6 +325,56 @@ public class IO {
 		
 		//cpSizeBuffered
 		//cpSizeBuffered(new File("d:/a/org.apache.http.legacy.jar"), new File("d:/b/org.apache.http.legacy.jar"));
+		
+		//charDoSize
+		//charDoSize(new File("d:/iotest.txt"));
+		/*FileReader fr = null;
+		try {
+			fr = new FileReader(new File("d:/iotest.txt"));
+			int i = 0;
+			while((i = fr.read()) != -1){
+				System.out.println((char)i);
+			}
+			char [] byf = new char[10];//缓冲字符数组
+			int len = 0;
+			while((len = fr.read(byf)) != -1){
+				System.out.println(new String(byf,0,len));
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				fr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
+		
+		
+		/*FileWriter fw = null;
+		try {
+			fw = new FileWriter(new File("d:/iotest.txt"));//和输出字节流一样追加需要第二个参数否则直接清空
+			fw.write(185600000);//这个就是字符集对应的字符的值
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				fw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
+		
+		//字符流拷贝
+		//characterCp(new File("d:/iotest.txt"),new File("d:/iotestcp.txt"));
 		
 		
 	}
@@ -404,6 +513,69 @@ public class IO {
 						e.printStackTrace();
 					}
 				}
+			}
+			
+		}
+	}
+	
+	public static void charDoSize(File fl){
+		if(fl.isFile()){
+			try {
+				FileInputStream fi = new FileInputStream(fl);
+				byte [] by = new byte[1024];
+				int len = 0;
+				while((len = fi.read(by)) != -1){//由于中文在utf-8下是一个汉字3字节，GBK也有两个字节，而这个每次读一个字节当然是乱码
+					System.out.println(new String(by,0,len));
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void characterCp(File fl,	File fg){
+		if(fl.isFile()){
+			FileReader fr = null;
+			FileWriter fw = null;
+			
+			try {
+				fr = new FileReader(fl);
+				fw = new FileWriter(fg);
+				
+				char [] by = new char[1024];
+				int len = 0;
+				while((len = fr.read(by)) != -1){
+					fw.write(by,0,len);
+				}
+				System.out.println("done");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally{
+				try {
+					if(fw != null){
+					fw.close();
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally{
+					try {
+						if(fr != null){
+						fr.close();
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 			}
 			
 		}
