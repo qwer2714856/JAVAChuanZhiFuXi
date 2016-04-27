@@ -335,6 +335,9 @@
  * 所有的write都是些到了内存除非writeTo
  * 
  * 
+ * 基本数据类型流
+ * DataInputStream
+ * DataOutputStream
  * 
  * 
  * 流的操作
@@ -353,6 +356,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayReader;
 import java.io.CharArrayWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -678,7 +683,30 @@ public class IO {
 		/*StringReader sr = new StringReader("aaaaaaaa");
 		StringWriter sw = new StringWriter();*/
 		
-		
+		//基本数据类型流
+		/*try {
+			DataOutputStream ds = new DataOutputStream(new FileOutputStream("d:/a.txt"));
+			
+			ds.writeBoolean(true);
+			ds.writeByte(97);
+			ds.writeBytes("admin");
+			ds.writeShort(97);
+			ds.writeInt(98);
+			ds.writeDouble(3.25454);
+			
+			DataInputStream di = new DataInputStream(new FileInputStream("d:/a.txt"));
+			System.out.println(di.readInt());
+			System.out.println(di.readBoolean());
+			System.out.println(di.readByte());
+			System.out.println(di.readDouble());
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 		
 	}
