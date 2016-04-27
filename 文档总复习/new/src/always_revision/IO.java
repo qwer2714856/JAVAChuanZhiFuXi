@@ -380,7 +380,8 @@
  * 
  * 注意默认Reader Writer使用的都是默认码表，如果想指定码表必须要通过转换流来转换设置码表!!!
  * 
- * 
+ * 递归
+ * 就是自己调用自己
  * 
  * 
  * 流的操作
@@ -763,6 +764,25 @@ public class IO {
 		//转换流
 		//inputStreamLZ();
 		//new OutputStreamWriter(new FileOutputStream(file),"utf-8");
+		
+		//递归
+		showList(new File("d:/android - 副本"),"");
+	}
+	public static void showList(File fl,String rg){
+		 if(fl.isDirectory()){
+			 File [] it = fl.listFiles();
+			 for(File i:it){
+				 if(i.isDirectory()){
+					 showList(i,"|  ");
+				 }else{
+					 //remove File
+					 i.delete();
+					 System.out.println(i.getName()+"remove done");
+				 }
+			 }
+			 fl.delete();
+			 System.out.println(fl.getName()+"remove done");
+		 }
 	}
 	public static void show_list(File fl,	String fg){
 		if(fl.isDirectory()){
