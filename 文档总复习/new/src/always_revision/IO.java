@@ -227,7 +227,43 @@
  * bufferedRW();
  * 
  * 
+ * 其它流
+ * 
+ * 序列流（合并流）
+ * SequenceInputStream
+ * 对多个字节流进行合并
+ * 构造函数
+ * 合并两个流 sequenceInputStream();
+ * SequenceInputStream(InputStream s1, InputStream s2);
+ * 
+ * 
+ * 对象序列化
+ * ObjectInput
+ * 	readObject()  
+ * ObjectOutput 
+ *	writeObject() 
  *
+ * ObjectInput,ObjectOutput 是两个接口，需要实现类实现。
+ * 实现类
+ * ObjectInputStream
+ * ObjectOutputStream	被写入对象必须实现serializable 否则抛出异常
+ * 核心的操作流程是
+ * 1.类实现标志接口serializable 标志接口没有实现方法，子类不用重写方法。
+ * 2.创建输出流ObjectOutStream(new FileOutputStream("path")) writeObject(对象) 将对象序列化，然后写出去
+ * 3.创建输入流ObjectInputStream(new FileInputStream("path")) readObject() 将序列流读进来，在反序列化 读进来的是个Object需要自己在强转回来
+ *
+ * 序列化
+ * 1.Serializable --标志接口 所有类如果想序列化必须实现它。包括类中引用着其它类，也必须实现这个接口。
+ * 如果没有实现这个接口，试图序列化将抛出NotSerializableException
+ * 2.transient 如果一个类的成员前面加上这个关键字将跳过不序列化
+ * 3.序列化只适应非静态的成员。
+ * 4.序列化基本数据类型  writeBoolean(true); writeDouble(3.14);
+ * 5.基本数据类型反序列化 readBoolean(); readDouble();
+ * 6.Serializable SerialVersionUID 
+ *   用于给类指定一个UID 该UID 是通过类中的可序列化成员的数字签名运算出来的一个long值。
+ *   只要是这些成员没有变化，那么该值每次都一样。
+ *   该值用于判断，序列化前类 和序列化后类是否发生改变 假如，序列化后，类变了，反序列化那对象的SerialVersionUID 和类的SerialVersionUID对不起来了就报错了。
+ * 
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -249,9 +285,20 @@ import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.FilterInputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.SequenceInputStream;
+import java.io.Serializable;
  
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Iterator;
+
+import javax.sound.midi.Sequence;
 
 /**
  * @author www.23.com
@@ -414,7 +461,44 @@ public class IO {
 		//使用字符流缓冲区类拷贝文件
 		//bufferedRW(new File("d:/iotest.txt"),new File("d:/iotestcp.txt"));
 		
+		//序列流
+		//sequenceInputStream();
 		
+		//对象存储
+	/*	serializableObject so = new serializableObject();
+		try {
+			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("d:/object.txt"));
+			os.writeObject(so);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			ObjectInputStream oi = new ObjectInputStream(new FileInputStream("d:/object.txt"));
+			serializableObject ssl = (serializableObject)oi.readObject();
+			System.out.println(ssl.a);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		 
+		//不存文件的序列化
+		/*try {
+			//网络接口
+			URL url = new URL("http://www.baodu.com");
+			URLConnection uc = url.openConnection();
+			uc.setDoOutput(true);
+			ObjectOutputStream os = new ObjectOutputStream(uc.getOutputStream());
+			os.writeObject(new serializableObject());
+		 
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 	}
 	public static void show_list(File fl,	String fg){
@@ -664,6 +748,77 @@ public class IO {
 			
 		}
 	}
+	
+	public static void sequenceInputStream(){
+		
+		//合并两个流
+		/*try {
+			FileInputStream fi1 = new FileInputStream("d:/test.txt");
+			FileInputStream fi2 = new FileInputStream("d:/test2.txt");
+			
+			SequenceInputStream si = new SequenceInputStream(fi1,fi2);
+			byte [] by = new byte[1024];
+			int len = 0;
+			while((len = si.read(by)) != -1){
+				System.out.println(new String(by,0,len));
+			}
+			si.close();//关闭多个流
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		//合并多个流
+		/*ArrayList<FileInputStream> fileItems = new ArrayList<FileInputStream>();
+		try {
+			fileItems.add(new FileInputStream("d:/test.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		final Iterator<FileInputStream> it = fileItems.iterator();
+		SequenceInputStream si = new SequenceInputStream(new Enumeration<FileInputStream>(){
+
+			@Override
+			public boolean hasMoreElements() {
+				// TODO Auto-generated method stub
+				return it.hasNext();
+			}
+
+			@Override
+			public FileInputStream nextElement() {
+				// TODO Auto-generated method stub
+				return it.next();
+			}
+
+			
+		
+		});
+		
+		byte [] by = new byte[1024];
+		int len = 0;
+		try {
+			while((len = si.read(by)) != -1){
+				System.out.println(new String(by,0,len));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			si.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//关闭多个流
+*/		
+		
+		
+	}
 }
 
 class FileNameFilter implements FilenameFilter{
@@ -676,5 +831,19 @@ class FileNameFilter implements FilenameFilter{
 		// TODO Auto-generated method stub
 		return name.endsWith(kzm);
 	}
+	
+}
+
+
+
+//对象序列化
+class serializableObject implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public int a = 1;
+	public int c = 2;
 	
 }
