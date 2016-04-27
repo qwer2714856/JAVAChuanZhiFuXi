@@ -340,6 +340,27 @@
  * DataOutputStream
  * 
  * 
+ * 
+ * 编码
+ * 看io文档61页
+ * 码表
+ * --------------------------
+ * 符号		| 码值
+ * --------------------------
+ * 中		| 100（一个码表中的，在其它码表中这个值可能就不是100了而是其它值）
+ * ---------------------------
+ * 
+ * 编码
+ * 字符串->字节数组
+ * "".getBytes(可以指定码表，根据码表的符号，转成值，变为二进制存储)
+ * java 通过System.getProperty("file.encoding") 查看当前码值
+ * 
+ * 解码
+ * 字节数字->字符串
+ * new String(new byte[]{97,98},"UTF-8"); 使用UTF-8去解码
+ * 
+ * 注意GBK是兼容GB2312的
+ * 
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -704,6 +725,15 @@ public class IO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		/*System.out.println(System.getProperty("file.encoding"));*/
+		
+		/*try {
+			new String(new byte[]{97,98},"UTF-8");
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
