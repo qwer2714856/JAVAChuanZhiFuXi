@@ -330,6 +330,8 @@
 		
  * Scanner sc = new Scanner();
  * sc.next();//接收键盘输入
+ * 
+ * 操作数组的对象
  *
  * 流的操作
  * 1.获取资源文件    
@@ -343,6 +345,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -359,6 +365,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.SequenceInputStream;
 import java.io.Serializable;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
  
 import java.io.IOException;
@@ -639,6 +647,32 @@ public class IO {
 		}*/
 		
 		
+		//操作数组的对象
+		//写出去公用的方法
+		//toString,to[Byte|char]Array writeTo
+		//字节数组流
+		//ByteArrayInputStream
+		//byteArrayOutputStream
+		
+		/*ByteArrayInputStream bai = new ByteArrayInputStream(new byte[]{1,2,3,4});
+		ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		bao.write(97);//写到bao里面去
+		System.out.println(bao.toString());
+		System.out.println(bao.toByteArray());
+		System.out.println(bao.writeTo(new FileOutputStream()));//写到其它流去*/
+		
+		//字符数组流
+		//CharArrayReader;
+		//CharArrayWriter
+		
+		/*CharArrayReader cr = new CharArrayReader(new char[]{'a'});
+		CharArrayWriter cw = new CharArrayWriter();*/
+		
+		 
+		/*StringWriter;
+		StringReader*/
+		/*StringReader sr = new StringReader("aaaaaaaa");
+		StringWriter sw = new StringWriter();*/
 		
 	}
 	public static void show_list(File fl,	String fg){
