@@ -300,6 +300,21 @@
  * System.getProperties();
  * 
  * 
+ * 打印流
+ * printStream（是一个字节打印流） 可以接收文件，和其它字节输出流，所以打印流是对普通字节输出流的增强。
+ * 其中定义了很多重载的print println 方便输出各种类型 可以做log 因为默认就是追加的形式
+ * 打印流的三种方法
+ * print			
+ * println
+ * printlf(String format, Object ...args)
+ * 
+ * print和write 区别  print有刷新 write 需要手动flush 或 close输出数据
+ * println 加换行
+ * printlf 可以格式化
+ * printlnf("%d,%f",199,3.12);
+ * 
+ * 
+ * 
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -579,8 +594,29 @@ public class IO {
 			e.printStackTrace();
 		}*/
 		
+		//构造可以接收
+		//OutputStream filename  File
+		//PrintStream ps = System.out;
 		
+		//普通的write 需要flush 或 close
+		/*ps.write(97);
+		ps.close();//关闭*/		
 		
+		/*ps.print(false);//向控制台输出
+		
+		try {
+			PrintStream ps2 = new PrintStream("d:/a.txt");
+			System.setOut(ps2);//改变System.out的流向为ps2
+			ps2.print(false);
+			ps2.print(false);
+			ps2.print(false);//流向了a.txt 
+			ps2.println(1234);
+			ps2.println(1234);
+			System.out.println("dddd");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 	}
 	public static void show_list(File fl,	String fg){
