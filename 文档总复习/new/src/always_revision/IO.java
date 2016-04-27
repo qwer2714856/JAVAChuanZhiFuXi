@@ -328,6 +328,8 @@
 			e.printStackTrace();
 		}
 		
+ * Scanner sc = new Scanner();
+ * sc.next();//接收键盘输入
  *
  * 流的操作
  * 1.获取资源文件    
@@ -369,6 +371,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.Set;
 
 import javax.sound.midi.Sequence;
@@ -634,7 +637,6 @@ public class IO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
 		
 		
 		
