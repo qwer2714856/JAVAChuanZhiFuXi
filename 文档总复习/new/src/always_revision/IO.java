@@ -301,7 +301,7 @@
  * 
  * 
  * 打印流
- * printStream（是一个字节打印流） 可以接收文件，和其它字节输出流，所以打印流是对普通字节输出流的增强。
+ * printStream（是一个字节打印流） 可以接收文件，和其它字节输出流，所以打印流是对普通字节输出流的增强。字符串路径和文件路径可以 -- 这两个可以指定编码表
  * 其中定义了很多重载的print println 方便输出各种类型 可以做log 因为默认就是追加的形式
  * 打印流的三种方法
  * print			
@@ -313,8 +313,22 @@
  * printlf 可以格式化
  * printlnf("%d,%f",199,3.12);
  * 
- * 
- * 
+ * printWriter();
+ * 		//PrintWriter 是一个字符打印流，构造函数可以接收四种数据类型。
+		//字符串路径，File对象，这两个可以指定编码表，OutputStream, Writer
+		//3 4可以指定自动刷新 true 该类只有三个方法可用 print println format
+		//如果既想用OutputStream 又想用自动刷新 又想用编码表
+		try {
+			new PrintWriter(new OutputStreamWriter(new FileOutputStream("d:/a.txt"), "utf-8"),true);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+ *
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -338,9 +352,12 @@ import java.io.FilterInputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.SequenceInputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
  
 import java.io.IOException;
 import java.net.URL;
@@ -617,6 +634,9 @@ public class IO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+		
+		
 		
 	}
 	public static void show_list(File fl,	String fg){
