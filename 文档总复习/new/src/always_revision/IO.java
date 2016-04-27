@@ -332,7 +332,11 @@
  * sc.next();//接收键盘输入
  * 
  * 操作数组的对象
- *
+ * 所有的write都是些到了内存除非writeTo
+ * 
+ * 
+ * 
+ * 
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -673,6 +677,9 @@ public class IO {
 		StringReader*/
 		/*StringReader sr = new StringReader("aaaaaaaa");
 		StringWriter sw = new StringWriter();*/
+		
+		
+		
 		
 	}
 	public static void show_list(File fl,	String fg){
