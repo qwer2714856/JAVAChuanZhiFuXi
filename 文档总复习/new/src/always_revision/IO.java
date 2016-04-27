@@ -361,6 +361,28 @@
  * 
  * 注意GBK是兼容GB2312的
  * 
+ * 转换流
+ * InputStreamReader(InputStream,charset) 输入字节流转字符流 		字节流+码表解释出字符,到字符 流					字节流到字符流的桥梁
+ * InputStreamWriter(OutputStrem,charset) 输出字节流转字符流		 字符流+码表编译成字节流,到InputStream			字符流到字节流的桥梁
+ * 
+ * 这个字节流通往字符流的桥梁
+ * 查看构造方法，可以指定传递的字节流，和指定字符编码。该流是Reader的子类。
+ * inputStreamLZ();
+ * 
+ * Reader
+ *     InputStreamReader
+ *     		FileReader
+ *     
+ *     
+ * Writer
+ * 		InputStreamWriter
+ * 			FileWriter
+ * 
+ * 注意默认Reader Writer使用的都是默认码表，如果想指定码表必须要通过转换流来转换设置码表!!!
+ * 
+ * 
+ * 
+ * 
  * 流的操作
  * 1.获取资源文件    
  * 2.创建流的管道
@@ -388,6 +410,7 @@ import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.FilterInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
@@ -737,8 +760,9 @@ public class IO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
-		
+		//转换流
+		//inputStreamLZ();
+		//new OutputStreamWriter(new FileOutputStream(file),"utf-8");
 	}
 	public static void show_list(File fl,	String fg){
 		if(fl.isDirectory()){
@@ -1055,6 +1079,34 @@ public class IO {
 			e.printStackTrace();
 		}//关闭多个流
 */		
+		
+		
+	}
+	public static void inputStreamLZ(){
+		FileInputStream gbk = null;
+		FileInputStream utf8 = null;
+		try {
+			gbk = new FileInputStream("d:/gbk.txt");
+			utf8 = new FileInputStream("d:/utf8.txt");
+			
+			//BufferedReader rd = new BufferedReader(new InputStreamReader(utf8,"UTF-8"));
+			//BufferedReader rd = new BufferedReader(new InputStreamReader(gbk,"GBK"));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(utf8));//默认用当前的码表解码
+			String tmp = "";
+			while((tmp = rd.readLine()) != null){
+				System.out.println(tmp);
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
