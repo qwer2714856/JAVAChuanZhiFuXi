@@ -264,6 +264,40 @@
  *   只要是这些成员没有变化，那么该值每次都一样。
  *   该值用于判断，序列化前类 和序列化后类是否发生改变 假如，序列化后，类变了，反序列化那对象的SerialVersionUID 和类的SerialVersionUID对不起来了就报错了。
  * 
+ * 读写配置文件Properties
+ * Map
+ *   HashTable
+ *       Properies 这个无须泛型，默认就是String
+ * 方法
+ * setProperty(key, value);		设置配置文件键值
+ * getProperty(key);			获取键的值 如果没有key值就返回的值是null
+ * get(key);					获取键的值
+ * Enumeration propertyNames()  获取集合中所有键值元素
+ * jdk1.6 
+ * StringPropertyNames()	
+ * 
+ * 列出集合中所有的键值对，可以通过参数打印到指定的目的地
+ * list(PrintStream)
+ * list(PrintWriter)
+ * 例如
+ * list(System.out) 打印到控制台
+ * list(new PrintStream("pro.txt")); 放到文件里面
+ * 
+ * 可以将流中的内容载入到集合中
+ * load(InputStream)
+ * jdk 1.6 
+ * load(Reader)
+ * 注意流中的数据要是键=值的规则
+ * 
+ * 将集合中的数据存储
+ * store(Writer, String comment); comment的会在开头用#comment表示
+ * 使用该方法存储会带着存储时间
+ * 注意：
+ * properties 只加载key=value与文件名无关，注释使用#  这句话Properties p = System.getProperties(); 诠释了和文件无关
+ * 
+ * 
+ * 获取系统配置文件
+ * System.getProperties();
  * 
  * 
  * 流的操作
@@ -289,6 +323,7 @@ import java.io.FilterInputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.io.SequenceInputStream;
 import java.io.Serializable;
  
@@ -299,6 +334,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.sound.midi.Sequence;
 
@@ -501,6 +540,47 @@ public class IO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+		//读写配置文件Properties
+		/*Properties p = System.getProperties();//获取系统的配置信息
+		//将所有的配置信息打印到控制台
+		p.list(System.out);
+		//获取 所有的key stringPropertyNames 这个是1.6才出的
+		Set<String> st = p.stringPropertyNames();
+		Iterator<String> it = st.iterator();
+		while(it.hasNext()){
+			System.out.println("ding:"+it.next()+"="+p.getProperty(it.next()));
+		}*/
+		
+		//读取本地配置文件
+		/*Properties p = new Properties();
+		//加载进来
+		try {
+			p.load(new FileReader("d:/jvmSetting.txt"));
+			//遍历集合中的元素
+			Set<Map.Entry<Object, Object>> m = p.entrySet();
+			for(Map.Entry<Object, Object> mx : m){
+				System.out.println((String)mx.getKey()+"---"+(String)mx.getValue());
+			}
+			
+			//获取键的值
+			System.out.println(p.get("java.specification.vendor"));
+			p.setProperty("java.specification.vendor", "hahahahahahahahahahahahahahahahahahahahahahahahahahahaha");
+			
+			//回写
+			p.store(new FileWriter("d:/jvmSetting.txt"), "dingluchao");
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		
+		
 		
 	}
 	public static void show_list(File fl,	String fg){
