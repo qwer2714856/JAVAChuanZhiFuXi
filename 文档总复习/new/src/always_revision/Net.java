@@ -57,6 +57,29 @@
  * 1024-49151 松散服务端口 一般定义在这个范围
  * 49152-65535 私有端口
  * 
+ * windows netstat -ano  taskkill /F /PID
+ * linux   netstat -anp  kill -9 progress id
+ * 
+ * 常用的一些端口 
+ * 21 ftp
+ * 22 ssh
+ * 433 https
+ * 80  http
+ * 8080 tomcat
+ * 等等
+ * 
+ * 网络的两种协议（传输层协议）
+ * 
+ * UDP
+ * 面向无连接，不可靠，传输的是数据包，大小限制64K内
+ * TCP
+ * 传输的字节码，面向连接，可靠协议，传输内容大小没有限制
+ * 
+ * 通信的三个要素
+ * 协议
+ * port
+ * ip
+ * 
  * 
  * 
  */
