@@ -72,8 +72,29 @@
  * 
  * UDP
  * 面向无连接，不可靠，传输的是数据包，大小限制64K内
+ * 案例 魔兽世界 对讲机
+ * 
  * TCP
  * 传输的字节码，面向连接，可靠协议，传输内容大小没有限制
+ * 案例 电话
+ * 建立连接需要
+ * 三次握手
+ * 客户端											服务器
+ * 1											2
+ * 我要连接你你同意吗？（进入等待）						同意你连接吧（发出消息进行等等）
+ * 3											4
+ * 开始发数据										响应
+ * 5
+ * 得到数据
+ * 这样一次的连接加收发消息就结束了
+ * 
+ * 客户端和服务器都存在一个发送后等待，所以这个等待就所谓的超时时间。客户端连接多久后没有效应就超时，服务器没有接到消息多久就超时
+ * 这个是连接超时
+ * 
+ * 如果连接上了还有个会话超时
+ * 
+ * 
+ * 
  * 
  * 通信的三个要素
  * 协议
@@ -81,6 +102,42 @@
  * ip
  * 
  * 
+ * java 网络编程
+ * 实现局域网或互联网之间的通信
+ * Java 编程的三要素
+ * 协议，Ip port
+ * Java的网络包是java.net.*
+ * 对象的映射
+ * ip  主机名 有ip对象
+ * 端口 数字表示 没有封装
+ * 
+ * InetAddress 对象
+ * 这些方法都是静态的 返回值都是InetAddress
+ * getLocalHost();
+ * getByName(String Host); 通过一个ip字符串找对应主机，如果不存在解析不了对应地址，而且显示为对应Ip且 查询很慢。
+ * getAllByName(String Host);通过域名查找所有的绑定IP 返回的是数组InetAddress
+ * InetAddress 实例有
+ * getHostAddress(); ip地址
+ * getHostName();    主机名
+ * 
+ * Socket(套接字) 网络编程
+ * 不同协议Java有不同的对象套接字
+ * UDP 这个不分服务端和客户端就是一个收一个发反之亦然
+ * DatagramSocket DatagramPacket
+ * TCP
+ * ServerSocket Socket
+ * 
+ * 
+ * 
+ * socket 可以想成一个插座 一个口，数据从这进，从这出去。（TCP 是这样的一个进出都在一个口上）（UDP的话应该有个人  口用来发数据包 耳朵用来接收数据包 ）
+ * 插座  ->  插座
+ * 	   <-
+ * 
+ * UDP的 DatagramSocket DatagramPacket
+ * 发送端和接收端是两个独立运行的程序
+ * 发送端的接口是随机的
+ * 
+ * 建立socket 也要关闭socket
  * 
  */
 package always_revision;
@@ -88,8 +145,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 /**
@@ -119,6 +182,41 @@ public class Net {
 			new T().start();
 		}*/
 		
+		
+		/**
+		 * InetAddress 对象
+		 */
+		InetAddress [] ia;
+		try {
+			/*ia = InetAddress.getLocalHost();
+			System.out.println(ia.getHostAddress());
+			System.out.println(ia.getHostName());*/
+			
+			/*ia = InetAddress.getByName("192.168.1.1");
+			System.out.println(ia.getHostName());
+			System.out.println(ia.getHostAddress());*/
+			//不需要带http
+			/*ia = InetAddress.getAllByName("qd.cityhouse.cn");
+			for(InetAddress i : ia){
+				System.out.println(i.getHostAddress());
+				System.out.println(i.getHostName());
+			}*/
+			 
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		/**
+		 * UDP建立包和发送包
+		 * DatagramSocket
+		 * DatagramPacket
+		 */
+		//建立和发送数据包
+		 
 	}
 
 }
