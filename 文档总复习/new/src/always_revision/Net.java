@@ -137,17 +137,39 @@
  * 发送端和接收端是两个独立运行的程序
  * 发送端的接口是随机的
  * 
+ * 
+ * 
+ * TCP 的数据通信
+ * ServerSocket Socket
+ * 建立服务端和客户端
+ * 建立后，Socket使用io流进行数据的传输
+ * 原理就是服务端获取客户端的套接字
+ * 然后对套接字的输入输出控制。
+ * 注意一个问题
+ * 任意一端的read都会造成线程等待
+ * 服务端的socket也会线程等待
+ * 任意一端写完了就要shutdownOutput 否则容易造成另一端一直等待
+ * 
+ * 
+ * socket服务端可以接收http发过来请求，说白了http 协议 底层也是tcp协议。 http是应用层的协议，tcp是传输层的协议。
+ * 
  * 建立socket 也要关闭socket
  * 
  */
 package always_revision;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -155,6 +177,9 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+
+import com.sun.corba.se.spi.activation.Server;
 /**
  * @author www.23.com
  *
@@ -186,27 +211,27 @@ public class Net {
 		/**
 		 * InetAddress 对象
 		 */
-		InetAddress [] ia;
+		/*InetAddress [] ia;
 		try {
-			/*ia = InetAddress.getLocalHost();
+			ia = InetAddress.getLocalHost();
 			System.out.println(ia.getHostAddress());
-			System.out.println(ia.getHostName());*/
-			
-			/*ia = InetAddress.getByName("192.168.1.1");
 			System.out.println(ia.getHostName());
-			System.out.println(ia.getHostAddress());*/
+			
+			ia = InetAddress.getByName("192.168.1.1");
+			System.out.println(ia.getHostName());
+			System.out.println(ia.getHostAddress());
 			//不需要带http
-			/*ia = InetAddress.getAllByName("qd.cityhouse.cn");
+			ia = InetAddress.getAllByName("qd.cityhouse.cn");
 			for(InetAddress i : ia){
 				System.out.println(i.getHostAddress());
 				System.out.println(i.getHostName());
-			}*/
+			}
 			 
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		
 		
@@ -216,9 +241,101 @@ public class Net {
 		 * DatagramPacket
 		 */
 		//建立和发送数据包
-		 
+		/*DatagramSocket ds = null;
+		try {
+			//建立数据包
+			//创建码头
+			ds = new DatagramSocket();
+			//要发送的数据
+			byte [] by ={97,98,99,100};
+			//将要发送的数据打包为数据包发出去 InetAddress.getByName("192.168.1.255") 广播出的，只有UDP有这个
+			DatagramPacket dp = new DatagramPacket(by,0,by.length,InetAddress.getByName("192.168.1.255"),3305);
+			//将打包的数据包从码头发出去
+			ds.send(dp);
+			
+			
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			//关闭码头
+			if(ds != null){
+				ds.close();
+			}
+		}*/
+		
+		//TCP的客户端
+		/*Socket sk = null;
+		try {
+			sk = new Socket(InetAddress.getByName("192.168.1.105"),3309);
+			OutputStream os = sk.getOutputStream();
+			String tmp = "admin";
+			Thread.sleep(10000);
+			os.write(tmp.getBytes());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if(sk != null){
+				try {
+					sk.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}*/
+		
+		talkAbout();
 	}
 
+	public static void talkAbout() {
+		Socket sk = null;
+		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+
+		while (true) {
+			try {
+				sk = new Socket(InetAddress.getByName("192.168.1.105"), 9503);
+				// 拿到写入流
+				BufferedWriter os = new BufferedWriter(new OutputStreamWriter(
+						sk.getOutputStream()));// 如果是utf-8接就不用转了，windowscmd默认是GBK所以转一下
+				// sc.next() 默认是根据当前项目编码来的默认是utf-8的所以转GBK就错了，它和直接 “测试中文”
+				// 不一样，这个是用GBK发出去，sc.next()是UTF-8在用GBK转出去所以错了
+				os.write(sc.readLine());// 因为默认是utf-8转GBK就错了所以只能发英文
+				os.newLine();
+				os.flush();
+				sk.shutdownOutput();// !!!这个是重点否则容易造成死等待 写完了就关闭写出流服务端的读入流也就自动关了
+				System.out.println("==读服务端回复==");
+
+				// 读取服务端的数据
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						sk.getInputStream()));
+				String tmp = null;
+				while ((tmp = br.readLine()) != null) {// 线程等待
+					System.out.println(tmp);
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (sk != null) {
+					try {
+						sk.close();// 关闭和服务器的连接
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 }
 
 class HttpRequest {
