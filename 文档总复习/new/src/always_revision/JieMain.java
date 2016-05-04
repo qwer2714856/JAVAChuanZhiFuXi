@@ -58,9 +58,18 @@ import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -228,7 +237,7 @@ public class JieMain {
 		jf.setVisible(true);*/
 		
 		//菜单组件
-		JFrame jf = new JFrame("非容器组件");
+		/*JFrame jf = new JFrame("非容器组件");
 		jf.setBounds(0, 0, 500, 500);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -258,6 +267,129 @@ public class JieMain {
 		
 		
 		
+		
+		jf.setVisible(true);*/
+		
+		
+		//事件
+		//1 事件源 2 监听器 3 处理方案 4 事件
+		
+		JFrame jf = new JFrame("非容器组件");
+		jf.setBounds(0, 0, 500, 500);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final JButton jmt = new JButton("点我");
+		jf.add(jmt);
+		//事件event
+		
+		//事件源
+		
+		//监听者
+		//addActionListener 动作监听器 只要是鼠标和空格都是有反应的
+		//addMouseListener
+		//适配器 Adapter 鼠标的是MouseAdapter 键盘的是KeyAdapter
+		
+		//事件
+		
+		//处理过程
+		
+		//keyTyped keyPressed 会在某些键上有区别  keyTyped（有字符的起作用） keyPressed（全部起作用）
+		jmt.addKeyListener(new KeyListener(){
+
+			@Override
+			//键入某个键
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("键入某个键"+e.getKeyCode());
+			}
+
+			@Override
+			//按下
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("按下"+e.getKeyCode());//获取码值
+				System.out.println("按下"+e.getKeyChar());//获取字符
+			}
+
+			@Override
+			//松开
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("松开");
+			}
+			
+		});
+		
+		jmt.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		//需要实现所有的，很不爽如何只实现点击的其它不实现，空实现就行了。
+		jmt.addMouseListener(new MouseListener(){
+
+			@Override
+			//点击
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(e.getClickCount());//获取点击次数 如果==2就是双击 如果不连续会从1算，如果连续才会累加
+			}
+
+			@Override
+			//按下
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("pass");
+			}
+
+			@Override
+			//松开
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("release");
+			}
+
+			@Override
+			//鼠标进入
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("in");
+			}
+
+			@Override
+			//鼠标移除
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("out");
+			}
+			
+			
+			
+		});
+		//也可以用适配器
+		jmt.addMouseListener(new MouseAdapter() {
+			//这样用到哪个就重写哪个因为MouseAdapter已经空实现了MouseListener的方法。
+			//鼠标移除
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("out");
+			}
+		});
+		
+		
+		
+		jmt.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {//对应的事件传给ActionEvent e e就是事件
+				// TODO Auto-generated method stub
+			JButton jb	= (JButton)e.getSource();//获取事件源
+			jb.setText("aaa");
+			}
+			
+		});
+		 
 		
 		jf.setVisible(true);
 		
