@@ -51,6 +51,7 @@
  */
 package always_revision;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -65,6 +66,9 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -72,6 +76,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 /**
  * @author www.23.com
@@ -171,7 +176,7 @@ public class JieMain {
 		
 		
 		//非容器组件
-		JFrame jf = new JFrame("非容器组件");
+		/*JFrame jf = new JFrame("非容器组件");
 		jf.setBounds(0, 0, 500, 500);
 		JPanel jp = new JPanel();
 		jp.setBackground(Color.BLUE);
@@ -220,8 +225,41 @@ public class JieMain {
 		jp.add(jcbox);
 		jp.add(jsp);
 	 
-		jf.setVisible(true);
+		jf.setVisible(true);*/
 		
+		//菜单组件
+		JFrame jf = new JFrame("非容器组件");
+		jf.setBounds(0, 0, 500, 500);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JTextArea jt = new JTextArea(20,20);
+		jt.setLineWrap(true);
+		JScrollPane jsp = new JScrollPane();
+		jsp.setAutoscrolls(true);
+		jsp.setViewportView(jt);
+		
+		JMenuBar jmb = new JMenuBar();//菜单条
+		JMenu jm = new JMenu("文件");//菜单
+		JMenu jm2 = new JMenu("编辑");
+		
+		JMenuItem jmt = new JMenuItem("打开");
+		jm.add(jmt);
+		jmb.add(jm);
+		//复选菜单
+		//菜单添加菜单，菜单添加菜单项
+		JMenu jm2qh = new JMenu("复选菜单");
+		JMenuItem jmt2qh = new JMenuItem("子项");
+		jm2qh.add(jmt2qh);
+		jm2.add(jm2qh);
+		jmb.add(jm2);
+		
+		jf.add(jmb,BorderLayout.NORTH);
+		jf.add(jsp);
+		
+		
+		
+		
+		jf.setVisible(true);
 		
 	}
 
