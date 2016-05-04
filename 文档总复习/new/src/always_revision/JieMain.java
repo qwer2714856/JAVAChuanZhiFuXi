@@ -54,11 +54,14 @@ package always_revision;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.Toolkit;
+import java.io.File;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * @author www.23.com
@@ -70,6 +73,7 @@ public class JieMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+	 
 		// TODO Auto-generated method stub
 		//JFrame(String title) 创建一个新的、初始不可见的、具有指定标题的 Frame。
 		/*JFrame jf = new JFrame("窗体的标题");
@@ -97,16 +101,16 @@ public class JieMain {
 		*/
 		
 		//对话框 dialog
-		JFrame jf = new JFrame("dialog");
-		Dimension di = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = 600;
-		int height = 600;
-		int x = (int) ((di.getWidth() - width) / 2);
-		int y = (int) ((di.getHeight() - height) / 2);
-		jf.setBounds(x, y, width, height);
+		//JFrame jf = new JFrame("dialog");
+		//Dimension di = Toolkit.getDefaultToolkit().getScreenSize();
+		//int width = 600;
+		//int height = 600;
+		//int x = (int) ((di.getWidth() - width) / 2);
+		//int y = (int) ((di.getHeight() - height) / 2);
+		//jf.setBounds(x, y, width, height);
 		
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setVisible(true);
+		//jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//jf.setVisible(true);
 		
 		//第一参数是所有者，它属于哪个JFrame 第二个参数dialog的名字，第三个 boolean模式 模式是什么？ 当弹出窗体不能操作后面的内容就为true,false可以操作
 		//JDialog dg = new JDialog(jf,"JDialog",true);
@@ -116,19 +120,46 @@ public class JieMain {
 		//第二种对话框 JOptionPane
 		//分为：消息对话框，警告对话框，错误对话框，输入对话框，确认对话框
 		//第一个参数所有者jframe 	第二个：消息主体  	第三个 ：消息标题 	第四个：要把它显示什么类型对话框，【警告，消息等】。
-		JOptionPane.showMessageDialog(jf, "信息对话框","title", JOptionPane.INFORMATION_MESSAGE);//不需要setVisible了， 不管什么对话框就是JOptionPane.INFORMATION_MESSAGE这个不同
-		JOptionPane.showMessageDialog(jf, "信息对话框","title", JOptionPane.WARNING_MESSAGE);
-		JOptionPane.showMessageDialog(jf, "信息对话框","title", JOptionPane.ERROR_MESSAGE);
+		//JOptionPane.showMessageDialog(jf, "信息对话框","title", JOptionPane.INFORMATION_MESSAGE);//不需要setVisible了， 不管什么对话框就是JOptionPane.INFORMATION_MESSAGE这个不同
+		//JOptionPane.showMessageDialog(jf, "信息对话框","title", JOptionPane.WARNING_MESSAGE);
+		//JOptionPane.showMessageDialog(jf, "信息对话框","title", JOptionPane.ERROR_MESSAGE);
 		//输入对话框 这个和上面一样也有4个参数作用一样，也可以搞警告 提示 错误等等 返回string
-		System.out.println(JOptionPane.showInputDialog(jf,"请输入金额","title",JOptionPane.WARNING_MESSAGE));
+		//System.out.println(JOptionPane.showInputDialog(jf,"请输入金额","title",JOptionPane.WARNING_MESSAGE));
 		//确认框 0 确认 1 否 2 取消 返回int
-		System.out.println(JOptionPane.showConfirmDialog(jf, "确认","title",JOptionPane.INFORMATION_MESSAGE));
+		//System.out.println(JOptionPane.showConfirmDialog(jf, "确认","title",JOptionPane.INFORMATION_MESSAGE));
 		
 		
 		
 		
 		//总结 JOptionPane.showMessageDialog;   JOptionPane.showConfirmDialog;   JOptionPane.showInputDialog; 它们三个
 		//都可以设置JOptionPane.INFORMATION_MESSAGE 显示他们的不同类型
+		
+		//文件对话框，在java.awt包里面
+		/*JFrame jf = new JFrame();
+		FileDialog fd = new FileDialog(jf,"title",FileDialog.SAVE);//最后一个参数 load(打开)和save(保存)两种状态
+		fd.setBounds(0, 0, 300, 300);
+		fd.setVisible(true);
+		File []fl = fd.getFiles();
+		for(File f:fl){
+			System.out.println(f.getAbsolutePath());
+		}
+		System.out.println(fd.getDirectory());
+		System.out.println(fd.getFile());*/
+		
+		//Panel 面板
+		/*JFrame jf = new JFrame("panel");
+		jf.setBounds(0, 0, 100, 100);
+		JPanel jp = new JPanel();
+		jp.setBackground(Color.RED);
+		jf.add(jp);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setVisible(true);*/
+		
+		
+		
+		
+		
+		
 		
 	}
 
