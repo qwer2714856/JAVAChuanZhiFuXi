@@ -273,8 +273,10 @@ public class JieMain {
 		
 		//事件
 		//1 事件源 2 监听器 3 处理方案 4 事件
+		// TextField 对 addActionListener 不起作用
+		// 所以用addMouseListener
 		
-		JFrame jf = new JFrame("非容器组件");
+		/*JFrame jf = new JFrame("非容器组件");
 		jf.setBounds(0, 0, 500, 500);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final JButton jmt = new JButton("点我");
@@ -391,7 +393,7 @@ public class JieMain {
 		});
 		 
 		
-		jf.setVisible(true);
+		jf.setVisible(true);*/
 		
 	}
 
