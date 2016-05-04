@@ -55,13 +55,23 @@ import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.FileDialog;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.io.File;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * @author www.23.com
@@ -159,6 +169,58 @@ public class JieMain {
 		
 		
 		
+		
+		//非容器组件
+		JFrame jf = new JFrame("非容器组件");
+		jf.setBounds(0, 0, 500, 500);
+		JPanel jp = new JPanel();
+		jp.setBackground(Color.BLUE);
+		FlowLayout flt = new FlowLayout(FlowLayout.LEFT,5,10);
+		jp.setLayout(flt);
+		jf.add(jp);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//添加非容器组件
+		JLabel jl = new JLabel("用户名：");
+		JTextField jfd = new JTextField("please write user name",35);//这里的是列宽，不是像素
+		
+		JLabel jpwd = new JLabel("密    码：");
+		JPasswordField pwd = new JPasswordField("输入密码",35);
+		
+		//单选必须要进行分组，同一组单选框只能选择其中一个
+		JRadioButton jb = new JRadioButton("男",true);// 如果都加true bg.add(jb);bg.add(jb2);会以这个为顺序，谁在前谁选中。
+		JRadioButton jb2 = new JRadioButton("女");
+		//建立一个组
+		ButtonGroup bg=  new ButtonGroup();
+		bg.add(jb);
+		bg.add(jb2);
+		
+		//复选框
+		JCheckBox jc = new JCheckBox("足球",true);
+		
+		//下拉框
+		JComboBox<String> jcbox = new JComboBox<>(new String[]{"a1","q2"});
+		
+		//文本域
+		JTextArea ja = new JTextArea("aaa",20,20);
+		//ja.setLineWrap(true); //文字自动换行
+		JScrollPane jsp = new JScrollPane();
+		jsp.setAutoscrolls(true);//自动加滚动条
+		jsp.setViewportView(ja);//把需要滚动的扔到这里面来
+		
+		
+		
+		jp.add(jl);
+		jp.add(jfd);
+		jp.add(jpwd);
+		jp.add(pwd);
+		jp.add(jb);
+		jp.add(jb2);
+		jp.add(jc);
+		jp.add(jcbox);
+		jp.add(jsp);
+	 
+		jf.setVisible(true);
 		
 		
 	}
