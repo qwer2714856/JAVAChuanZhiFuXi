@@ -217,6 +217,7 @@ public class JieMain {
 		
 		//文本域
 		JTextArea ja = new JTextArea("aaa",20,20);
+		//JTextArea 输入回车是\n TextArea 输入回车是\r\n
 		//ja.setLineWrap(true); //文字自动换行
 		JScrollPane jsp = new JScrollPane();
 		jsp.setAutoscrolls(true);//自动加滚动条
