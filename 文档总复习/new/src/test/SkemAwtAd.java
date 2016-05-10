@@ -163,15 +163,19 @@ class Skems extends Thread {
 			break;
 		}
 
-		lk.addFirst(pt);
+		
 		if (!isGameOver(pt)) {
+			lk.addFirst(pt);
 			if (pt.equals(fd.getPosition())) {
 				setFd(1);
 			} else {
 				lk.removeLast();
 			}
 		} else {
-			setLive(0);
+			if(live == 1){
+				lk.addFirst(pt);
+			}
+			setLive(0);	 
 		}
 
 	}
