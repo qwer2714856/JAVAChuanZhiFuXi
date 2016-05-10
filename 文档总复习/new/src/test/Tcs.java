@@ -54,7 +54,7 @@ public class Tcs {
 		//sk.setSkPosition();
 		sk.initSkem();
 		sk.drawSkem();
-		
+		sk.runTopSkem();
 		
 		Food fd = new Food(mp.getMap());
 		fd.initXY();
@@ -63,9 +63,9 @@ public class Tcs {
 		
 		
 		//start Thread
-		new Thread(sk).start();
+		//new Thread(sk).start();
 		//界面刷新
-		new Thread(mp).start();
+		//new Thread(mp).start();
 	}
 
 }
@@ -220,6 +220,17 @@ class Sk implements Runnable{
 			// 添加一个结点
 			ske2.addLast(new Point(lkF.x - 1, lkF.y));
 			//画一下
+			drawSkem(rm);
+		}
+		return rt;
+	}
+	
+	public boolean runTopSkem(){
+		boolean rt = false;
+		Point ft = ske2.getFirst();
+		if((rt = checkMove(ft.x, ft.y - 1))){
+			Point rm = ske2.removeLast();
+			ske2.addFirst(new Point(ft.x, ft.y - 1));
 			drawSkem(rm);
 		}
 		return rt;
