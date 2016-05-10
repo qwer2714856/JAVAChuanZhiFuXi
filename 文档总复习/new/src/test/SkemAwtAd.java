@@ -178,8 +178,13 @@ class Skems extends Thread {
 
 	public boolean isGameOver(Point pt) {
 		boolean rt = false;
-
-		rt = mapAy[pt.y][pt.x];
+		
+		if(pt.y < 0 || pt.x < 0 || pt.y > Settings.mapH -1 || pt.x > Settings.mapW - 1){
+			rt = true;
+		}else{
+			rt = mapAy[pt.y][pt.x];
+		}
+		
 		if (!rt) {
 			for(int i = 1; i < lk.size(); i++){
 				if(pt.equals(lk.get(i))){
