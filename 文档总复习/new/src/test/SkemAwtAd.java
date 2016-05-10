@@ -163,8 +163,7 @@ class Skems extends Thread {
 			break;
 		}
 
-		
-		
+		lk.addFirst(pt);
 		if (!isGameOver(pt)) {
 			if (pt.equals(fd.getPosition())) {
 				setFd(1);
@@ -175,21 +174,19 @@ class Skems extends Thread {
 			setLive(0);
 		}
 
-		lk.addFirst(pt);
 	}
 
 	public boolean isGameOver(Point pt) {
 		boolean rt = false;
 
-		for (Point p : lk) {
-			if (pt.equals(p)) {
-				rt = true;
-				break;
-			}
-		}
-
+		rt = mapAy[pt.y][pt.x];
 		if (!rt) {
-			rt = mapAy[pt.y][pt.x];
+			for(int i = 1; i < lk.size(); i++){
+				if(pt.equals(lk.get(i))){
+					rt = true;
+					break;
+				}
+			}
 		}
 
 		return rt;
@@ -267,7 +264,9 @@ public class SkemAwtAd extends JPanel {
 		sm.setSa(this);
 		sm.setFd(0);
 	}
+
 	private static SkemAwtAd sa;
+
 	/**
 	 * @param args
 	 */
