@@ -21,6 +21,10 @@
  * 
  * 4.运行如果有图形界面的用 双击 否则 用命令 java -jar 随意.jar
  * 
+ * 
+ * 
+ * 
+ * 
  */
 package always_revision;
 
