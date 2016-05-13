@@ -71,6 +71,17 @@
  * 
  * 装饰着模式： 结构稍微复杂，体系不大，但是扩展和扩展之间可以相互嵌套。
  * 
+ * 
+ * 
+ * 
+ * ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+ * 观察者设计 模式--解决的问题是当一个对象发生指定动作，通知另一个对象做出相应的处理。
+ * 需求 天气预报
+ * 编写一个气象站，一个工人类，当气象站更新，要通知人做出相应的处理
+ * 
+ * 1.当目前对象指定动作时要通知另外一个对象做出相应处理，这时候应该把对方的相应处理方法定义在接口上，当前对象维护接口的引用。
+ * 接口相当于中介
+ * 2.其它对象实现这个接口
  */
 package always_revision;
 
@@ -79,6 +90,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author www.23.com
@@ -145,6 +158,22 @@ public class DesignModel {
 				e.printStackTrace();
 			}
 		}*/
+		
+		
+		//观察着设计模式
+		//气象站
+		Emp a1 = new Emp("a1");
+		Emp a2 = new Emp("a2");
+		Emp a3 = new Emp("a3");
+		Emp a4 = new Emp("a4");
+		ws w = new ws();
+		w.add(a1);
+		w.add(a2);
+		w.add(a3);
+		w.add(a4);
+		w.work();
+		
+		
 	}
 
 }
@@ -268,4 +297,58 @@ class ZsC extends BufferedReader{
 	}
 }
 
+//观察着设计模式
+interface byWSdoWork{
+	public void notifyWs(String name);
+}
+/**
+ * 气象站
+ */
+class ws{
+	String []wss = {"晴天","下雨","雾霾","台风"};
+	int [] timer = {1000,1500};
+	
+	//需要通知其它对象，那么就维护一个接口，其它对象想收听这个就必须实现这个接口方法.
+	ArrayList<byWSdoWork> ay = new ArrayList<byWSdoWork>();
+	
+	public void add(byWSdoWork d){
+		ay.add(d);
+	}
+	
+	String currentWs;
+	public void updateWs(){
+		Random rd = new Random();
+		currentWs = wss[rd.nextInt(wss.length)];
+		System.out.println(currentWs);
+	}
+	public void work(){
+		while(true){
+			try {
+				Random rd = new Random();
+				Thread.sleep(rd.nextInt(501)+1000);
+				updateWs();
+				for(byWSdoWork a : ay){
+					a.notifyWs(currentWs);
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+}
+/**
+* 人根据天气做出相应处理
+*/
+class Emp implements byWSdoWork{
+	String name;
 
+	public Emp(String name) {
+		this.name = name;
+	}
+	
+	public void notifyWs(String a){
+		System.out.println(name + a);
+	}
+}
