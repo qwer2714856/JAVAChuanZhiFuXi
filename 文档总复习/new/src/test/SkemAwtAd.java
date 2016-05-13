@@ -347,7 +347,7 @@ public class SkemAwtAd extends JPanel {
 				// TODO Auto-generated method stub
 				try {
 					Runtime.getRuntime().exec(
-							"java -classpath ./ test.SkemAwtAd ");
+							"java -classpath ./test.zip test.SkemAwtAd ");//这里注意如果是bat启动的 ./是相对于bat在的目录
 					Thread.sleep(1000);
 					System.exit(0);
 				} catch (Exception e1) {

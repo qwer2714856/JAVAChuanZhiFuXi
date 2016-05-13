@@ -45,6 +45,13 @@
  * %1~%9给你p处理文件传入参数 最多只能有9个
  * run.bat 参数1 参数2 这个就控制台能用双击不能用 
  * 
+ * 
+ * 
+ * 
+ * java project 打包
+ * 进入到项目的bin目录
+ * 打包一下所有的package
+ * 
  */
 package always_revision;
 
