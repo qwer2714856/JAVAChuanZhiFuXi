@@ -82,6 +82,11 @@
  * 1.当目前对象指定动作时要通知另外一个对象做出相应处理，这时候应该把对方的相应处理方法定义在接口上，当前对象维护接口的引用。
  * 接口相当于中介
  * 2.其它对象实现这个接口
+ * 
+ * 
+ * 工厂设计模式
+ * 用于产生对象的
+ * 
  */
 package always_revision;
 
@@ -162,7 +167,7 @@ public class DesignModel {
 		
 		//观察着设计模式
 		//气象站
-		Emp a1 = new Emp("a1");
+		/*Emp a1 = new Emp("a1");
 		Emp a2 = new Emp("a2");
 		Emp a3 = new Emp("a3");
 		Emp a4 = new Emp("a4");
@@ -171,8 +176,11 @@ public class DesignModel {
 		w.add(a2);
 		w.add(a3);
 		w.add(a4);
-		w.work();
+		w.work();*/
 		
+		//工厂设计模式
+		/*CarFactory c = new CarFactory();
+		BMW o = (BMW)c.getCar(0);*/
 		
 	}
 
@@ -351,4 +359,29 @@ class Emp implements byWSdoWork{
 	public void notifyWs(String a){
 		System.out.println(name + a);
 	}
+}
+
+
+
+/**
+ * 工厂设计模式
+ */
+class Csars{
+	
+}
+class BMW extends Csars{
+	
+}
+class BSJ extends Csars{
+	
+}
+class CarFactory{
+    public Csars getCar(int i){
+    	Csars c = null;
+    	switch(i){
+    	case 0:c=new BMW();break;
+    	case 1:c=new BSJ();break;
+    	}
+    	return c;
+    }
 }

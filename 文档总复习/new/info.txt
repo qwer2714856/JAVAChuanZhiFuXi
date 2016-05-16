@@ -1,0 +1,3 @@
+test.Person
+id=1
+name=ding.luchao

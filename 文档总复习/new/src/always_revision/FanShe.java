@@ -3,15 +3,22 @@
  * 什么是反射
  * 当以个字节码，被加载到方法区jvm会对该字节码进行相应的解剖，会创建一个对应的class对象，把字节码文件信息全部都存储到该class对象中，我们
  * 只要获取class对象我们就可以操作字节码对象设置对象的属性或调用对象的方法等操作。
- * 反射技术中，一个类的任何成员都有对应的类描述。成员变量(Field) 方法(Method) --工具需要反射，比如 JSP的那套工具
+ * 反射技术中，一个类的任何成员都有对应的类描述。成员变量(Field) 方法(Method) 构造(Constructor) --工具需要反射，比如 JSP的那套工具
  * 
  * [反射就没有不能的事情。都可以获取包括私有的] 例如私有的构造也是可以实例的
  * 
  * 
+ * 注意如果 成员构造如果非public 修饰就使用Declared获取 方法
+ * 
+ * 如果空参传null
+ * 获取字段类型
+ * Field fd
+ * fd.getType == int.class 这样判断
  */
 package always_revision;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -30,8 +37,9 @@ public class FanShe {
 	 * @throws IllegalArgumentException 
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
+	 * @throws NoSuchFieldException 
 	 */
-	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
 		// TODO Auto-generated method stub
 		PF p = new PF(110,"狗娃");
 		
@@ -86,12 +94,19 @@ public class FanShe {
 						  //如果是静态的方法ps2就可以直接用null了 (null,1)
 		
 		
+		//反射获取成员变量
+		//c1.getFields();
+		//c1.getDeclaredField(name)
+		//c1.getDeclaredFields();
+		Field id = c1.getDeclaredField("id");
+		id.setAccessible(true);//私有的就需要设置访问权限
+		id.set(null, 1);//第一个和方法一样谁调用它，不是对象如果静态的就null 第二个值
 	}
 
 }
 
 class PF{
-	int id;
+	static int id;
 	String name;
 	public PF(int id, String name) {
 		this.id = id;
