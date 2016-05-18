@@ -17,9 +17,19 @@
  * 导入： file->import->preferences->找到配置文件即可(导入需要重启下)
  * 
  * 代码辅助，键盘小快手
- * 
- * 
- * 
+ * 1.显示行号  window->preferences->general->editors->text editors->show line numbers
+ * 2.打造更强的代码提示   现在提示是按了alt才有提示 如何自动提示？   window->preferences->java->editor->content assist->
+ * auto activation triggers for java 改成 abcdefghijklmnopqrstuvwxyz_.
+ * 3.shift + 鼠标左键选中松开就注释了这个试了没反应
+ * 4.当前窗口最大最小化 ctrl+m
+ * 5.当一个窗口打开了好多文件，可以使用ctrl + f6轻松切换到其它文件
+ * 6.快速大小写字母 选中字符串 ctrl + shift + x大写 ctrl + shift + y 小写
+ * 7.当行注释 ctrl + shift + c 注释状态就取消，取消状态就注释。alt + /存在热键冲突
+ * 8.快速处理行代码 删除行代码ctrl + d
+ * 9.选中alt+↑↓移动代码位置
+ * 10.复写超类的方法 在类中右键 source->over....
+ * 11.批量生成get set 方法 source->	getter setter	
+ * 12.生成构造 source-> constructor field,空的构造方法是这个下面那个super什么的
  * 
  * 设置方面的
  * 1.选中一端的花括号显示另一端 window->preferences->java->editor->app... color option
@@ -27,12 +37,14 @@
  */
 package eclipse;
 
+import java.io.BufferedReader;
+
 /**
  * @author www.23.com
  *
  */
 public class tools {
-
+private int i;
 	/**
 	 * @param args
 	 */
@@ -40,5 +52,6 @@ public class tools {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }
