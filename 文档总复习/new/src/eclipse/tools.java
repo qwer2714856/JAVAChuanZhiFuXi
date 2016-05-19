@@ -79,6 +79,28 @@
  * 
  * 14.抽取参数 一个没有动态传的可以让其变为方法传递的 选中函数的返回值变量 右键->refactor->introduce para...
  * 
+ * 
+ * 程序模块化
+ * 1.把项目转为工程库
+ * 当把一个android 打包成一个库文件后，在另一个android 中是可以引用的
+ * 如何打包？
+ * 右键android 项目->properties->android->is Library->确定（断点也是可以连调的） 23.com被打包
+ * yinyong23com引用 23.com
+ * 右键android项目->properties->android->add->23.com 就可以了
+ * 
+ * 使用jar包的方式 android 和 java 项目的连调
+ * 新建一个java项目 不需要做任何操作
+ * 新建一个android 引进 java 项目
+ * 在android 上右键properties->java Build path->projects->add->java 项目
+ * 
+ * 使用jar包的形式 将 java项目打包成jar文件在给android 使用
+ * eclipse大包jar 右键项目export  -> java ->选择保存路径
+ * andorid 项目把jar考到项目目录，然后使用 右键->java Build path->libraries->引进来行了
+ * 
+ * 
+ * 
+ * 
+ * 
  * 设置方面的
  * 1.选中一端的花括号显示另一端 window->preferences->java->editor->app... color option
  * 
@@ -159,6 +181,13 @@ class Zi extends Fu{
 
 	 public String sasy(SasyParameter parameterObject){
 		 String name = "";
+		 
+		 
+		 new Thread(){
+			 public void run(){
+				 
+			 }
+		 };
 		 return name;
 	 }
 	
