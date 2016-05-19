@@ -103,7 +103,32 @@
  * 2.如何查看某个功能函数一般需要 ctrl + 鼠标左键进入， 现在只需要 按住shift 然后鼠标滑到需要看的功能函数上
  * 3.进入定义ctrl + 鼠标右键就进入了
  * 4.看类的纲要 ctrl + o 产看当前文件的类的纲要 ctrl + o + o 会显示出详细信息，显示出父类的成员和一些信息
- * 4.查看类继承图 ctrl + t  将鼠标的光标放到类内部然后ctrl + t 可以点击定位过去
+ * 5.查看类继承图 ctrl + t  将鼠标的光标放到类内部然后ctrl + t 可以点击定位过去 在ctrl + t可以看到它都继承了谁
+ * 6.在工具条上有几个黄色的箭头，作用是当你按住ctrl + 右键进入的时候可以点箭头回来或前进。
+ * 7.查看调用层次查看这个类在那些地方被调用了ctrl + alt + h 选中类名函数名等等然后ctrl+alt+h就可以查看那些地方调用了
+ * 8.查看指定类ctrl + shift + t 
+ * 9.选中某个变量 然后ctrl + k 查看所有调用情况 多按就往下定位。
+ * 10.快速定位匹配符，ctrl + shift + p 选中一端  就会快速定位到另一端
+ * 11.增量查找（反向）ctrl + shift + j  ctrl + j(正向被占用了)
+ * 12.快速跳转到某行  未知快捷键
+ * 13.快速比较  开启 window->pre...->搜diff->quick ... -> show ...  删掉一行的时候行号下面会有一条黑线，鼠标移动上去会有提示删掉的内容 如果被修改的
+ *    会有行号颜色标注 ctrl + s 会丢失标注
+ * 14.添加书签 在行号上左键->add bookmark    当鼠标移动上去会有提示
+ * 15.在视图上显示所有的 bookmark window->show view->other->搜索book mark 可以在上图上删除标注的book mark
+ * 16.任务task 也是个标签 右键行号 add task 可以选择任务等级，显示所有的任务 window->show view->other->搜索task  显示所有的task
+ * 标签是给自己看的，task给团队看的。
+ * 
+ * 17.搜索 ctrl + f 搜索个内容，其实它的搜索很强悍 工具栏->search
+ * 
+ * 
+ * 代码调试
+ * 1.进入到debug 模式选中需要观察的变量然后右键watch 就可以监控它 切换到 variables 后可以右键监控的这个变量change value 修改它的值.
+ * 2.编辑视图里面的breakpoints 去过把checkbox前面的钩钩去掉下次就不会在跳这个断点。后去工具条上run skip all breakpoints 跳过所有断点
+ * 3.条件断点 先设置断点，然后右键断点 breakpoints pro... -> conditional 里面必须是个boolean 表达式，如果true就卡主断点 例如监控的变量如果满足条件就卡那
+ * 													hit count  命中次数多少次才卡那
+ * 4.异常断点 错误有时候出现有时候不出现怎么搞
+ *  debug breakpoints 添加异常断点 j!图标的是添加异常断点，如果出现异常就自动断到那 对付不定时的是非常有用的
+ *  
  * 
  * 设置方面的
  * 1.选中一端的花括号显示另一端 window->preferences->java->editor->app... color option
@@ -136,13 +161,21 @@ public class tools implements sk {
 
 		System.out.println(end - start);
 		 ssl(1, null);
-		 
+		 new sk(){
+			 
+		 };
 		 new RunTest().start();
+		 
+		 
+		 //运行异常
+		 String sql = null;
+		 System.out.println(sql.toString());
 	}
 
 	public static void ssl(int i, String newParam) {
-			
-		mmsql(i);
+			new sk(){
+				
+			};
 	}
 
 	private static void mmsql(int i) {
@@ -154,7 +187,6 @@ public class tools implements sk {
 			
 		}
 		String string = "aaa";
-		j = 123;
 	}
 	
 	
