@@ -44,9 +44,19 @@
 	 
  * 17. 关闭当前的打开文件ctrl + w 关闭所有的是ctrl + shift + f4
  * 
- * 
- * 
- * 
+ * 代码之美
+ * 1.格式化代码ctrl + shift + f 不用非带选中对页面就整个格式化了，选中只格式化选中的。
+ *   或者 在工具条上找到source-> format
+ *   格式化代码的风格 window->pre->输入format->edit->braces 其它的也可以看看
+ *   
+ * 2.成员排序
+ *   工具条->source->sort Members...->一般就只排方法行了
+ *   
+ * 3.整理包
+ *   工具条->source->org imports
+ *   
+ * 4.代码重构
+ * 选中变量右键refactor->rename 一改都改了
  * 
  * 设置方面的
  * 1.选中一端的花括号显示另一端 window->preferences->java->editor->app... color option
@@ -54,30 +64,29 @@
  */
 package eclipse;
 
-import java.io.BufferedReader;
-
 /**
  * @author www.23.com
- *
+ * 
  */
 
 public class tools {
-private int i;
 	/**
 	 * @param args
 	 */
+	private int i;
+
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		// TODO Auto-generated method stub
 		for (int i = 0; i < 100; i++) {
 			System.out.println("i");
-		}  
+		}
 		long end = System.currentTimeMillis();
 
 		System.out.println(end - start);
 	}
 
-	public void ssl(int i){
-		
+	public void ssl(int i) {
+
 	}
 }
