@@ -98,8 +98,12 @@
  * andorid 项目把jar考到项目目录，然后使用 右键->java Build path->libraries->引进来行了
  * 
  * 
- * 
- * 
+ * 显示
+ * 1.让包层级显示  选中项目 -> 在package Explorer 右边有个向下的小箭头 -> package...-> heir
+ * 2.如何查看某个功能函数一般需要 ctrl + 鼠标左键进入， 现在只需要 按住shift 然后鼠标滑到需要看的功能函数上
+ * 3.进入定义ctrl + 鼠标右键就进入了
+ * 4.看类的纲要 ctrl + o 产看当前文件的类的纲要 ctrl + o + o 会显示出详细信息，显示出父类的成员和一些信息
+ * 4.查看类继承图 ctrl + t  将鼠标的光标放到类内部然后ctrl + t 可以点击定位过去
  * 
  * 设置方面的
  * 1.选中一端的花括号显示另一端 window->preferences->java->editor->app... color option
