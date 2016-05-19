@@ -95,7 +95,7 @@
  * 
  * 使用jar包的形式 将 java项目打包成jar文件在给android 使用
  * eclipse大包jar 右键项目export  -> java ->选择保存路径
- * andorid 项目把jar考到项目目录，然后使用 右键->java Build path->libraries->引进来行了
+ * andorid 项目把jar考到项目目录，然后使用 右键->java Build path->libraries->引进来行了 add exten... jar
  * 
  * 
  * 显示
