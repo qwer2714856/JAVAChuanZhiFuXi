@@ -30,6 +30,23 @@
  * 10.复写超类的方法 在类中右键 source->over....
  * 11.批量生成get set 方法 source->	getter setter	
  * 12.生成构造 source-> constructor field,空的构造方法是这个下面那个super什么的
+ * 13.导包 ctrl+shift + o
+ * 14.生成文档注释alt+shift+j
+ * 15.快速生成代码块比如try catch块 选中代码alt + shift + z 
+ * 16.alt+shift+z 可以自己配置块的 configure 配置
+ * 	  弹出框 new -> 块的name description -> pattern 可以写程序的代码，然后 insert variable 插入变量已知的模板变量
+ *   ${line_selection}${cursor} line_selection选中的行  cursor光标结束位置插入 设定的代码块
+ *   long start = System.currentTimeMillis();
+		${line_selection}${cursor}		
+	 long end = System.currentTimeMillis();
+		
+	 System.out.println(end - start);
+	 
+ * 17. 关闭当前的打开文件ctrl + w 关闭所有的是ctrl + shift + f4
+ * 
+ * 
+ * 
+ * 
  * 
  * 设置方面的
  * 1.选中一端的花括号显示另一端 window->preferences->java->editor->app... color option
@@ -43,15 +60,24 @@ import java.io.BufferedReader;
  * @author www.23.com
  *
  */
+
 public class tools {
 private int i;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
 		// TODO Auto-generated method stub
+		for (int i = 0; i < 100; i++) {
+			System.out.println("i");
+		}  
+		long end = System.currentTimeMillis();
 
+		System.out.println(end - start);
 	}
 
-
+	public void ssl(int i){
+		
+	}
 }
