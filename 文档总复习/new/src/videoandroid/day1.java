@@ -68,6 +68,15 @@
  * 
  * 
  * 
+ * SDK
+ * soft developer kit 
+ * developer.android.com
+ * www.android-doc.com
+ * 翻墙 自由门 ， 无界浏览
+ * 
+ * 
+ * 
+ * 
  */
 package videoandroid;
 
