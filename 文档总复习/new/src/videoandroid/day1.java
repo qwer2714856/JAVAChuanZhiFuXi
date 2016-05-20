@@ -76,6 +76,47 @@
  * 
  * 
  * 
+ * 开发组成
+ * eclipse + adt 开发环境  或者 android studio 
+ * 
+ * 这四个都会有的
+ * =========================
+ * Android SDK
+ * Android Platform-tools
+ * 最新的Android 开发平台
+ * 最新的模拟器镜像
+ * =========================
+ * 
+ * 
+ * Android SDK
+ * 不同系统的版本，给模拟器用的 用哪个版本模拟器就下那个否则创建不了模拟器
+ * Tools
+ *     Android SDK Tools android 的可执行程序 SDK 工具集 这个必须下载  （这个不要更新）  --这个位于adt-bundle-windows-x86_64-20140702->sdk->platform-tools下面
+ *     这里需要手动用的
+ *     
+ *     Android SDK Platform-tools 平台工具集  --这个位于adt-bundle-windows-x86_64-20140702->sdk->tools下面
+ *     这里的工具大部分都是自动调用的，很少需要手动调用。
+ * 
+ * Android 4.3 (API 18) 18 这个是api的等级  android 代码中 用 18表示4.3  每个版本都有等级
+ *     SDK Platform     						SDK的平台这个就是系统平台 这个下载就可以创建4.3的模拟器了   在 adt-bundle-windows-x86_64-20140702->sdk->platforms 这里会有好多平台的进入相应的平台的即可
+ *     docment ... 								帮助文档，android api 帮助文档，android 没有中文文档。稍微好点的就是www.android-doc.com ,  这个下载下来 会在 adt-bundle-windows-x86_64-20140702->sdk->docs里面有离线的文档
+ *     (arm/inter 这两种架构) ... System image  	可以选择cpu的架构 不够cpu架构可能执行代码可能不同  这个在adt-bundle-windows-x86_64-20140702\sdk\system-images
+ *     source for andorid sdk 					android jar 包的源码 adt-bundle-windows-x86_64-20140702\sdk\sources 如果想和java 一样ctrl + 鼠标左键进去看看就行。
+ * 		
+ * Extras
+ *      android support library 
+ * 		安装支持类库
+ * 		低版本使用高版本性能 如何搞 把4.0 新特性抽出来
+ *      在2.3导入就行 
+ *      adt-bundle-windows-x86_64-20140702\sdk\extras\android\support
+ *      
+ *      inter x86 emulator accelerator (HAXM) 	
+ *      模拟器加速器，在inter平台的 必装  adt-bundle-windows-x86_64-20140702\sdk\extras\inter 这个是需要双击安装的  装这个需要 bios VT-X
+ *      如果出现VT-X错误就说明支持需要BIOS修改，如果出现not support 就不支持
+ *      
+ * 
+ * SDK Manager --这个就是不同系统在应用开发层的API
+ * 
  * 
  */
 package videoandroid;
