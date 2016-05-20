@@ -143,13 +143,14 @@ package eclipse;
 
 public class tools implements sk {
 	public static final class RunTest extends Thread {
-		public void run(){
-			 
-		 }
+		public void run() {
+
+		}
 	}
 
 	private toolsData data = new toolsData();
 	private static int j;
+	private static String string2;
 
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
@@ -160,74 +161,82 @@ public class tools implements sk {
 		long end = System.currentTimeMillis();
 
 		System.out.println(end - start);
-		 ssl(1, null);
-		 new sk(){
-			 
-		 };
-		 new RunTest().start();
-		 
-		 
-		 //运行异常
-		 String sql = null;
-		 System.out.println(sql.toString());
+		ssl(1, null);
+		new sk() {
+
+		};
+		new RunTest().start();
+
+		// 运行异常
+		String sql = null;
+		System.out.println(sql.toString());
 	}
 
 	public static void ssl(int i, String newParam) {
-			new sk(){
-				
-			};
+		new sk() {
+
+		};
 	}
 
 	private static void mmsql(int i) {
-		if(i == 1){
-			
-		}else if(i == 2){
-			
-		} else{
-			
-		}
-		String string = "aaa";
+		bbd(i);
+		string2 = "aaa";
+		String string = string2;
 	}
-	
-	
+
+	private static void bbd(int i) {
+		if (i == 1) {
+
+		} else if (i == 2) {
+
+		} else {
+
+		}
+	}
+
 }
 
-
-class Fu implements say, niuniufa{
+class Fu implements say, niuniufa {
 
 	int i;
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see eclipse.say#say()
 	 */
 	@Override
-	public void say(){
-		
+	public void say() {
+
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see eclipse.niuniufa#mmsql()
 	 */
 	@Override
-	public void mmsql(){
+	public void mmsql() {
 		String name = "";
 	}
-	
-}
-class Zi extends Fu{
 
-	 public String sasy(SasyParameter parameterObject){
-		 String name = "";
-		 
-		 
-		 new Thread(){
-			 public void run(){
-				 
-			 }
-		 };
-		 return name;
-	 }
-	
 }
-class Zi2 extends Fu{
-	
+
+class Zi extends Fu {
+
+	public String sasy(SasyParameter parameterObject, String string) {
+		String name = "";
+
+		new Thread() {
+			public void run() {
+
+			}
+		};
+		return string;
+	}
+
+}
+
+class Zi2 extends Fu {
+
 }
