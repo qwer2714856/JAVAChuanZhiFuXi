@@ -118,6 +118,25 @@
  * SDK Manager --这个就是不同系统在应用开发层的API
  * 
  * 
+ * 模拟器--配置  AVD
+ * AVD -NAME 			模拟器名字
+ * device 				预制的设备 多少分辨率屏幕 这个分辨率是屏幕密度的做屏幕适配的
+ * Target 				系统版本
+ * cpu/ABI 				cpu 是 inter 还是 arm 如何用到了加速器这里就必须是inter的 没有加速器arm会比较快一些 cpu镜像是要有一个的否则创建不了.
+ * 						2.3(包括)系统之前的自带arm  
+ * keyboard 			是否有实体按键最好勾上
+ * skin 				是否物理按键皮肤 勾上
+ * front camera 		前置摄像头 默认不可用
+ * back camera 			后置摄像头 模拟个摄像头 但是拍不了，可以获取摄像头的一些参数
+ * memory option 		内存ram 运行内存（默认不用改）      vm heep  （虚拟机堆内存大小）每个应用最大只有 设置的那么多m    堆大小应用最大就只能站到那么大 主流128 或 256
+ * internal storage     手机自带的存储空间 200 就够了 必须写。
+ * SD Card 				可有可无的 可以不写 就没有 写上就有  这个占用硬盘空间。
+ * 
+ * snapshot use host Gpu 这两建议不勾  
+ * 
+ * snapshot 			存储快照，类似一个休眠，之前关闭状态恢复出来。 下次开机恢复到上次开机状态
+ * use host Gpu			如果模拟器比较慢可以勾选，这个是使用电脑的硬件的gpu  刷新的时候比较快些最好不用。
+ * 
  */
 package videoandroid;
 
