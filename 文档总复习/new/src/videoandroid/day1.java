@@ -92,10 +92,10 @@
  * 不同系统的版本，给模拟器用的 用哪个版本模拟器就下那个否则创建不了模拟器
  * Tools
  *     Android SDK Tools android 的可执行程序 SDK 工具集 这个必须下载  （这个不要更新）  --这个位于adt-bundle-windows-x86_64-20140702->sdk->platform-tools下面
- *     这里需要手动用的
+ *     这里的工具大部分都是自动调用的，很少需要手动调用。
  *     
  *     Android SDK Platform-tools 平台工具集  --这个位于adt-bundle-windows-x86_64-20140702->sdk->tools下面
- *     这里的工具大部分都是自动调用的，很少需要手动调用。
+ *     这里需要手动用的
  * 
  * Android 4.3 (API 18) 18 这个是api的等级  android 代码中 用 18表示4.3  每个版本都有等级
  *     SDK Platform     						SDK的平台这个就是系统平台 这个下载就可以创建4.3的模拟器了   在 adt-bundle-windows-x86_64-20140702->sdk->platforms 这里会有好多平台的进入相应的平台的即可
