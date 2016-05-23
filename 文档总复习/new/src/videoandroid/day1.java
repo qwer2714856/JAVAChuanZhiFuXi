@@ -180,9 +180,77 @@
  * android 所有的输出都是在logcat 查看而不是 console 了。
  * 
  * 
+ * 项目的目录结构分析
+ * src				项目的java代码  Activity 是个java类
+ * gen				BuildConfig.java 是不需要改的自动生成的public final static boolean DEBUG = true; 是不是可以调试
+ * 					R.java 这个很重要 自动生成的，所有的资源ID都在这。
+ * Andorid 6.0 		android  api jar 包   这个是编译的版本所决定的。
+ * 					如果报android api 找不到的错误 右键项目properties android 找到一个就行了。
+ * Android Dependencies为了让低版本运行某些高版本的特性而导入的jar文件。知识包
+ * 					这个可以删掉 注意 是在libs里面删掉自动就没了。
+ * assets 			存放资源的（无资源ID），这个理的资源和R文件没关系，存大资源的，如视频等，用IO流读取。
+ * bin				打包编译后所产生的文件
+ * 					.dex .apk这个是可以安装的（自动打包的）每次部署到机器时候，先打apk包在往模拟器去安装的。
+ * libs 			存放三方jar包，有什么包就放这行了
  * 
+ * res 				资源文件夹，有资源ID 读取通过资源ID。
+ * 					布局文件 xml
+ * 					配置文件 xml
+ * 					图片
+ * 					drawable-hdpi 图片文件加
+ * 					ic_launcher.png 是有资源ID的
+ * 					如何找到资源id?
+ * 					类是用的文件夹命名的所以先找类,public static final class 文件夹前面的那块名字 drawable public static final class drawable
+ * 					在去内部类找到对应文件的名字 ic_launcher 没有扩展名。 这里的名字该了，资源ID的变量名字也该。	
+ * 					R文件不能有中文所以图片不能有中文，也不能是数字开头。图片名字也不能相同，因为R变量不能相同
+ * 					剩下那些个drawable是做屏幕适配的。--调用哪个是根据手机的密度决定的（也就是分辨率）.
+ * 					"HVGA    mdpi"
+					"WVGA   hdpi "
+					"FWVGA hdpi "
+					"QHD      hdpi "
+					"720P     xhdpi"
+					"1080P   xxhdpi "
+					http://blog.csdn.net/sarsscofy/article/details/9249397
+ *					这些目录只放一个也是可以的，没有任何影响。只是没了屏幕适配，如果不做就放第一个目录就行了，任何目录都行默认放第一个行了。
+ *layout 			布局文件夹，保存布局文件，所有的布局都是XML。
+ *					双击activity_main.xml会在graphical看到现在的样子，如果看不到就切换一下sdk
+ *					MainActivity setContentView(R.layout.activity_main); 
+ *					启动以后设置使用哪个布局文件
+ *					创建MainActivity 这个对象的时候onCreate调用
+ *menu 				菜单的配置文件夹，保存菜单样式文件. 点击手机menu 弹出来的
+ *
+ *values 			
+ *					这里的内容不用用老套路找资源ID
+ *					strings.xml	配置字符串资源的。用来定义字符串资源的。
+ *					<string name="app_name">helloworld</string>
+ *					字符串name就是这个字符串的资源ID。
+ *					如何找资源ID？
+ *					string 内部类里面
+ *					public static final class string
+ *					找对应的name 的变量
+ *					public static final int app_name=0x7f0a0014;
+ *
+ *					如何在视图调用字符串 资源ID 
+ *					"@string/mapreduce"
+ *					
+ *					xml 文件调用
+ *					@内部类/资源name
+ *
+ *					java 类调用
+ *					R.layout.什么什么
+ *
+ *				
+ *					dimens.xml 定义长度的资源id的  数字加dp 是个长度    dp 和 px（这个是固定死的，不同分辨率都固定死了）  dp 是和屏幕密度有关的。
+ *
+ * 
+ * 					style.xml 定义样式和主题的
+ *				
+ *					
+ * 						
  */
 package videoandroid;
+
+ 
 
 /**
  * @author www.23.com
