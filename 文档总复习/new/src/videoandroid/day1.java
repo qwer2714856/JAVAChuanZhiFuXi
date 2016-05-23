@@ -151,7 +151,7 @@
  * 
  * 
  * 创建第一个android 项目
- * application name 	这个是应用的名字
+ * application name 	这个是应用的名字 会在多个地方有用
  * project name 		这两个一般都用同一个名字--在项目列表里的标示
  * 不同点：
  * 
@@ -169,6 +169,17 @@
  * mark.this project as a library 把当前项目变成一个类库供给别人使用。 这个基本没有用，如果给别人使用就勾上
  * 
  * create Activity 一般都选 空白的那个 样式自己写，不会让系统去辅助。
+ * 
+ * 
+ * 在虚拟机上运行一个android 项目 选中项目右键 run as -> android application 
+ * 
+ * 
+ * 
+ * eclipse devices 是当前和eclipse 建立连接的设备，模拟器和真实机器都会在这上面。
+ * 
+ * android 所有的输出都是在logcat 查看而不是 console 了。
+ * 
+ * 
  * 
  */
 package videoandroid;
