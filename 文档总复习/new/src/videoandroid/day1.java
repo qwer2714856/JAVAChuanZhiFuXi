@@ -252,8 +252,33 @@
  *
  *
  *AndroidMainfest.xml 清单配置文件
- *					
- * 						
+ *manifest 
+ *package			 默认和代码包是一样的，这个是系统在应用中的唯一识别，应用的唯一的ID，如何进行覆盖？通过包名，包名相同认为是同一个应用。
+ *versionCode 		代码属于哪个版本，高版本替换低版本通常是+1  这个是写给系统看的。谁大谁是高版本。
+ *versionName 		这个是写给程序员看的					
+ *
+ * <uses-sdk
+ *     android:minSdkVersion="10" 			最低支持到哪个版本 10 是api的代码
+ *     android:targetSdkVersion="17"		当前版本 不用管它
+ * 
+ * <application
+ * 		icon		指定应用的图标张什么样子。
+ * 		label		指定应用的  -- 这里的label 应用管理界面。
+ * <activity
+ * 		label 		这里的才是应用的名字。 （icon,label 如果没有 就会是application的)
+ * 		icon 		这是设置桌面显示的图标
+ * 
+ * 写死的
+ * <inter-filter> 决定android 应用的入口  点击应用图标的时候  <activity> 这个标签会有多个，谁有下面这个谁是入口
+ *     <action android:name ="android.intent.action.MAIN" /> 
+ *     <category android:name="android.intent.category.LAUNCHER" />
+ *  
+ * </inter-filter>						
+ * 
+ * 
+ * 
+ * project.properties
+ * target=android-18   决定编译的版本 ，也可以右键项目properties->android->勾选一个行了
  */
 package videoandroid;
 
