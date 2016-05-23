@@ -135,7 +135,40 @@
  * snapshot use host Gpu 这两建议不勾  
  * 
  * snapshot 			存储快照，类似一个休眠，之前关闭状态恢复出来。 下次开机恢复到上次开机状态
- * use host Gpu			如果模拟器比较慢可以勾选，这个是使用电脑的硬件的gpu  刷新的时候比较快些最好不用。
+ * use host Gpu			如果模拟器比较慢可以勾选，这个是使用电脑的硬件的gpu  刷新的时候比较快些最好不用。 有加速器这个可以不用。
+ * 
+ * 启动模拟的时候  勾选wipe user data 启动的时候会回复出场设置
+ * 
+ * scale display to real size 调整缩放尺寸  缩放后在显示，缩放为原来的多少倍。
+ * 
+ * 有hax is working 说明加速器 启动了。 分辨率越小，启动速度越快。  建议用320的 做业务逻辑。  系统版本低的启动也快些。
+ * 
+ * 两个模拟器互相打电话发短信
+ * 模拟器的左上角有个数字那个就是
+ * 
+ * 
+ * 多个模拟器可以打电话发短息。
+ * 
+ * 
+ * 创建第一个android 项目
+ * application name 	这个是应用的名字
+ * project name 		这两个一般都用同一个名字--在项目列表里的标示
+ * 不同点：
+ * 
+ * package name 		包名，代码的包名com.23.项目名
+ * 
+ * minimum required sdk 项目创建出来最低可以跑在什么SDK上，最低需要什么就这个决定的。
+ * =================================
+ * target sdk 			项目创建出来运行在什么版本。没有任何一个应用只能运行在一个版本所以没有意义默认就好		
+ * compile with 		项目用哪个版本编译 用最新的
+ * theme 				主题 和样式有关 默认就行了
+ * 这三个用默认的行了
+ * 
+ * create custom launchar icon 创建自定义图片作为桌面的显示图标.
+ * create activity 创建一个界面，任何一个界面都是一个activity 这个钩钩上就是让系统自动创建一个
+ * mark.this project as a library 把当前项目变成一个类库供给别人使用。 这个基本没有用，如果给别人使用就勾上
+ * 
+ * create Activity 一般都选 空白的那个 样式自己写，不会让系统去辅助。
  * 
  */
 package videoandroid;
