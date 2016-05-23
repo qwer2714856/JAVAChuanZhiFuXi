@@ -299,6 +299,31 @@
  * 
  * data/data/包名作为命名的，保存使用过程中产生的文件。系统为每个应用生成的专属文件夹,不能挎包访问的
  * 
+ * DDMS 使用
+ * eclipse 右上角，java前面那个小方块，找到ddms
+ * delvck debug monitor service 调试监控服务.
+ * 
+ * device 当前与eclipse 建立连接的设备
+ * 点开设备后
+ * 展开的是运行在手机上所有的进程。
+ * 选择某一个进程后，上方的工具被点亮了
+ * 有些进程是无法关闭，关闭了就会启动。
+ * stop  				停止该进程
+ * 
+ * 
+ * 右侧的功能卡，emulator control 工具
+ * speed 限制模拟器网速
+ * incoming number 随意写个好
+ * sms 
+ * message 向当前设备发个短信  这个不能发中文
+ * 
+ * 选择voice 
+ * call 就可以打电话  这里有个bug 一打电话设备就断了，需要重启下adb
+ * device 右侧向下小箭头，reset adb 就好了
+ * 
+ * 
+ * 
+ *  
  */
 package videoandroid;
 
