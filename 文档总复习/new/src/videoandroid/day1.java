@@ -322,6 +322,27 @@
  * device 右侧向下小箭头，reset adb 就好了
  * 
  * 
+ * adb 进程 
+ * android debug bridge 安卓调制桥 
+ * 建立eclipse 和  android 设备之间的连接,如果adb 死了11秒自动重启。
+ * 
+ * 命令
+ * adb start-server 启动adb进程
+ * adb kill-server  关闭adb进程
+ * adb install 安装apk   
+ * adb -s emulator-5554 install ....apk
+ * adb -s emulator-5554 uninstall com.......apk 注意卸载需要使用应用的包名。 
+ * 使用genymotion 
+ * 先设置genymotion
+ * setting -> adb -> 设置sdk 
+ * 
+ * adb devices 显示所有可用设备,列出与开发环境建立连接的android设备列表
+ * 
+ * adb shell 进入adb命令行 android 命令行 用的是linux 
+ * 
+ * adb 用的是5037端口 被占了就起不来了。
+ * 
+ * 
  * 
  *  
  */
