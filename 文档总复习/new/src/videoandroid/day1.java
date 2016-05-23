@@ -279,6 +279,26 @@
  * 
  * project.properties
  * target=android-18   决定编译的版本 ，也可以右键项目properties->android->勾选一个行了
+ * 
+ * 
+ * 
+ * 项目部署到手机都发生了什么
+ * 过程是系统自动完成了。																		   (产权保护，故意搞个一样包名也无法覆盖别人的，检查签名是否相同，商业机密，只有同签名，同包名才能覆盖。)
+ * android project -> class 编译成 .dex -> 所有的文件打包成apk(包括资源，资源不编译,只有.class编译的)-> 添加一个签名 ->  adb 安装到模拟器/手机
+ * 
+ * 启动一个应用的时候，查看logcat 就会看到 应用包名 
+ * system_process cmp="应用包名/.哪个activity"
+ * 
+ * 
+ * adb 进程是模拟器和eclipse建立连接的。
+ * 
+ * 
+ * android 安装不能选择安装路径 file explorer 查看android 文档目录结构的。
+ * 用户级的应用都在data/app 里面 可以删掉
+ * 系统级的应用在 system/app 里面 不可以删的除非获取root权限
+ * 
+ * data/data/包名作为命名的，保存使用过程中产生的文件。系统为每个应用生成的专属文件夹,不能挎包访问的
+ * 
  */
 package videoandroid;
 
