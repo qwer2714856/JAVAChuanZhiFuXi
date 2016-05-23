@@ -245,6 +245,13 @@
  * 
  * 					style.xml 定义样式和主题的
  *				
+ *
+ *	values 多个是		国际化（需要自己创建新的values-什么文 values-en等等），适配
+ *
+ *
+ *
+ *
+ *AndroidMainfest.xml 清单配置文件
  *					
  * 						
  */
