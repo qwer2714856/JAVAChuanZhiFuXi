@@ -417,8 +417,25 @@
    //手机输入*#*#4636#*#* 查看手机的信息，ip 网段 等等
    smsManager.sendTextMessage(pstr, null, pMsg, null, null);
  * 
+ * ===============================================================
+ * 如果有多个模拟器同时开着，双机一下devices中的某一个设备,就可以查看指定logcat.||
+ * ===============================================================
+ * 短信有固定字数的，如果大于运营商固定长度，就发不出去。
+ * 
+ * 
+ * ArrayList<String> sList = smsManager.divideMessage(pMsg);
+   for (String smString : sList) {
+   // 发短信 目标地址，短信服务中心（通常不会手动指定,运营商自动获取，真机也没填）,短信的内容,sentIntent
+   // 这是一个广播，这个消息出去是成功了还是失败了，会有一个返回码。deliveryIntent
+   // 广播，消息被对方接受会有一个返回。
+   // 手机输入*#*#4636#*#* 查看手机的信息，ip 网段 等等
+   smsManager.sendTextMessage(pstr, null, smString, null, null);
+   }
+ * 
  */
 package videoandroid;
+
+import java.util.ArrayList;
 
 
 /**
