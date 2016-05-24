@@ -194,7 +194,7 @@
  * libs 			存放三方jar包，有什么包就放这行了
  * 
  * res 				资源文件夹，有资源ID 读取通过资源ID。
- * 					布局文件 xml
+ * 					布局文件 xml 布局文件内容标签是通过 android:id="@+id/call" 这种形式调用的 如果在xml中调用是@id/... 定义是@+id/...
  * 					配置文件 xml
  * 					图片
  * 					drawable-hdpi 图片文件加
@@ -343,12 +343,55 @@
  * adb 用的是5037端口 被占了就起不来了。
  * 
  * 
+ * 第一个案例打电话
+ * 打电话是一个应用 system/app/phone.apk
+ * 拨号也是一个应用 system/app/dialer.apk 
+ * 
+ * 拨号能重写，打电话不能重写，有些api 上层程序员是无法访问的。已经是系统app的不允许重写的（除非是系统级的开发，跟着系统一起编译）。
+ * 
+ * 
+ * 
+ * 
  * 
  *  
+ *  
+ *  
+ *  
+ *  
+ *  
+ * 所有的组件都要指定宽高
+ * 标签 
+ * TextView  			android:text 内容
+ * 						这两个必须指定
+ * 			 			android:layout_width  宽		值 fill_parent match_parent 匹配父节点，父节点多大就多大，没有父节点就匹配屏幕  wrap_content 是包裹内容，内容多大就多大
+ * 						android:layout_height 高		值
+ * 						值可以是dp 用关键字适配方便
+ * 输入框
+ * EditText				
+ * Button 
+ * 
+ * Button bt = (Button)findViewById(R.id.call); 找到一个对象 xml 定义id android:id="@+id/call"
+ * 
+ * bt.setOnClickListener 注册事件
+ * 
+ * 
+ * 在一个应用中启动另一个应用。
+ * 告诉系统系统你要干嘛，就启动要干嘛的。不能完成就报错。基于动作。告诉系统你的动作。
+ * Intent it = new Intent(); 创建一个意图
+ * it.setAction(Intent.ACTION_CALL); 创建动作
+ * // 打给谁 
+ * it.setData(Uri.parse("tel:" + text));
+ * //告诉系统
+ * startActivity(it); 为什么叫做startActivity因为开启打电话就是一个Activity android 任何页面都是Activity
+ * 
+ * 有些应用需要开启相应的权限，得到用户许可，关系到【钱，用户隐私的】都要开权限。得到用户的许可。
+ * 
+ * 如何申请权限
+ * 去清单文件添加就可以了
+ * AndroidMainfets->add(的那个地方下面有一堆选项卡)->Permission->add->uses permission->选择权限(logcat 报错告诉你的那个权限)
+ * 
  */
 package videoandroid;
-
- 
 
 /**
  * @author www.23.com

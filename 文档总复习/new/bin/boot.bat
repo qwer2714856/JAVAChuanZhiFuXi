@@ -1,1 +1,0 @@
-java -classpath ./test.zip test.SkemAwtAd
