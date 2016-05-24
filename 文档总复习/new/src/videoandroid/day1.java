@@ -390,6 +390,14 @@
  * 去清单文件添加就可以了
  * AndroidMainfets->add(的那个地方下面有一堆选项卡)->Permission->add->uses permission->选择权限(logcat 报错告诉你的那个权限)
  * 
+ * 
+ * click 事件 点击的多个写法  MoreClick 项目看看
+ * bt.setOnClickListener(this); 当前类实现 OnClickListener 接口
+ * 在xml上直接写事件
+ * <Button 	android:onlcick="getScore" />
+ * activity 里面设置一个getScore 方法 public void getScore(View v){} 这些都不能改。
+ * 
+ * 
  */
 package videoandroid;
 
