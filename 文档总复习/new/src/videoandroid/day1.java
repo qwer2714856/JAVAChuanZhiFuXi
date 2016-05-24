@@ -397,9 +397,29 @@
  * <Button 	android:onlcick="getScore" />
  * activity 里面设置一个getScore 方法 public void getScore(View v){} 这些都不能改。
  * 
+ * 多行文本框
+ *  <EditText 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+ 		android:id="@+id/msg"
+ 		android:lines="5"	几行
+ 		android:hint="请输入短信内容" 提示内容
+ 		android:gravity="top" 输入框内容顶部对其
+        android:inputType="textMultiLine"/>
+ * 
+ * 
+ * 短信
+ * 
+ * //发短信可以直接调用应用逻辑成的api 不需要  Intent了
+   //短信管理器
+   SmsManager smsManager = SmsManager.getDefault();
+   //发短信 目标地址，短信服务中心（通常不会手动指定,运营商自动获取，真机也没填）,短信的内容,sentIntent 这是一个广播，这个消息出去是成功了还是失败了，会有一个返回码。deliveryIntent 广播，消息被对方接受会有一个返回。
+   //手机输入*#*#4636#*#* 查看手机的信息，ip 网段 等等
+   smsManager.sendTextMessage(pstr, null, pMsg, null, null);
  * 
  */
 package videoandroid;
+
 
 /**
  * @author www.23.com
