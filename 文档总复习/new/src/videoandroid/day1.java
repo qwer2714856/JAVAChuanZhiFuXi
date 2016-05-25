@@ -432,6 +432,16 @@
    smsManager.sendTextMessage(pstr, null, smString, null, null);
    }
  * 
+ * View v 干嘛用的？
+ * xml onlick 多个按钮点击都会调用同一个方法，如何区分?
+ * View 是系统传进来的，系统会把触发这个方法的那个组件传进来。
+ * 通过对view对象的判断就知道用户点的是哪个按钮。
+ * v.getId();//可以拿到组件的id
+ * 用switch判断下就行了
+ * int id = v.getId();
+ * switch(id){
+ * case R.id....:;break;
+ * 
  */
 package videoandroid;
 
