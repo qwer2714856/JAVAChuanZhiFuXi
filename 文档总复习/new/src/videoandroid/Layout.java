@@ -39,6 +39,24 @@
  * 组件没有方向和权重（这个只有线性才有的）。
  * 相对布局组件和组件可以重叠的。 
  * 
+ * 默认组件 左对齐和顶部对其
+ * 组件的属性
+ * android:layout_alignParentTop=""          值是true 或 false 对其父辈的方向。
+ * ...
+ * 这些属性可以一起搞
+ * android:layout_alignParentTop="true"
+ * android:layout_alignParentLeft="true"
+ * 
+ * 还可以对其其它的组件
+ * 但是其它的组件必须设置id 本组件根据其它组件的id进行对其
+ * android:layout_toRightOf="@id/要对其元素的id"		这个意思是在什么什么的右边，什么什么是id
+ * ...
+ * 也可以多个一起搞
+ * 
+ * 
+ *  android:layout_centerHorizontal="" 水平居中
+ *  android:layout_centerVertical=""   垂直居中
+ *  android:layout_centerInParent=""   水平垂直都居中
  * 
  * 单位
  * 
