@@ -50,13 +50,21 @@
  * 还可以对其其它的组件
  * 但是其它的组件必须设置id 本组件根据其它组件的id进行对其
  * android:layout_toRightOf="@id/要对其元素的id"		这个意思是在什么什么的右边，什么什么是id
+ * android:layout_above="@id" 						上
+ * android:layout_below="@id"						下
  * ...
  * 也可以多个一起搞
  * 
+ * 相对于组件对其
+ * android:layout_alignLeft=""  					组件和组件的左边对其
+ * ...
+ * 
+ * android:layout_alignLeft=""
+ * android:layout_alignRight=""						相对的那个组件有多宽这个组件就有多宽
  * 
  *  android:layout_centerHorizontal="" 水平居中
  *  android:layout_centerVertical=""   垂直居中
- *  android:layout_centerInParent=""   水平垂直都居中
+ *  android:layout_centerInParent=""   水平垂直都居中 
  * 
  * 单位
  * 
