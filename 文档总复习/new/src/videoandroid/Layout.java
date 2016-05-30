@@ -65,6 +65,22 @@
  *  android:layout_centerHorizontal="" 水平居中
  *  android:layout_centerVertical=""   垂直居中
  *  android:layout_centerInParent=""   水平垂直都居中 
+ *  
+ *  
+ * 表格布局 -- TableLayout 				
+ * 一些属性
+ * android:stretchColumns="number"		拉伸列 拉伸第几列0 开始 拉伸的这一列屏幕剩余宽度都将给它。
+ * 
+ * 
+ * <TableRow ></TableRow>				行节点，里面的组件可以不定义宽高。(包括tablerow) 给了也没用。改了也无效。
+ * TableRow 							里面有几个子节点就有几列
+ * 组件可以和tablerow是同级节点，显示出来的效果是组建占了一行。
+ * 
+ * 组件的属性
+ * android:layout_column="1" 			将列号修改 android:stretchColumns 修改后对它起作用。
+ * android:layout_span="2"				当前列占用两列	
+ * 
+ * 如果组件嵌套在tablerow里面组件就是列，如果放到布局里面和tablerow并行就是行。
  * 
  * 单位
  * 
