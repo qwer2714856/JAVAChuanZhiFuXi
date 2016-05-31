@@ -372,6 +372,18 @@
  * 
  * Button bt = (Button)findViewById(R.id.call); 找到一个对象 xml 定义id android:id="@+id/call"
  * 
+ * <CheckBox
+            android:id="@+id/comfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:checked="true"
+            android:text="记住用户名密码" />
+            
+ * CheckBox cBox = (CheckBox) findViewById(R.id.comfirm);
+ * cBox.isChecked() 判断是否被点击。
+ * 
  * bt.setOnClickListener 注册事件
  * 
  * 
@@ -442,6 +454,8 @@
  * switch(id){
  * case R.id....:;break;
  * 
+ * 
+ * ctrl + f11 部署项目
  */
 package videoandroid;
 
