@@ -44,8 +44,46 @@
  * 手机上的clear cache 删除的是cache 下面的内容
  * 手机上的clear data 删除的是应用报名下面所有的内容， files + cache 全部删掉（包括目录）。
  * 
+ * 外部文件
+ * 外部存储空间sd卡
+ * /storage(这里为什么搞个软连接，android2.2之前sd卡就在这)  	->		/storage/emulated/legacy
+ * /storage/emulated/legacy（4.3之前在这）					->		/mnt/shell/emulated/0  这个地方有挂在点sd卡（后来就到这了）
+ * 
+ * 用输入输出流写入
+ * 路径就是
+ * File fl = new File("/storage/info.txt"); 这里sdk 访问拒绝，需要在清单文件里面添加权限。
+ * 权限是什么？
+ * android.permission.WRITE_EXTERNAL_STORAGE
+ * android.permission.READ_EXTERNAL_STORAGE（这个只有开发者模式下开启了sd卡读保护这个选项才有用，一般不用）。
+ * //读没有权限没有必要加的。
+ * 
+ * api 提供sdk 路径
+ * Environment.getExternalStorageDirectory(); 返回的也是个file对象目录 sdk的真实路径目录。 需要用这个。因为手机厂商都自己改掉了/storage
+ * 
+ * 
+ * 检测sd卡的状态
+ * 外部存储可有可无的，所以需要先检测下存在否
+ * 
+ * Environment.getExternalStorageState(); 获取sd卡的状态.
+ * 返回的是个字符串，会有很多中状态。
+ * MEDIA_UNKNOWN, 						不能识别sd卡
+ * MEDIA_REMOVED, 						sd 卡根本就不存在
+ * MEDIA_UNMOUNTED, 					sd 卡卸载，挂在点不存在，卡存在，但是没挂载
+ * MEDIA_CHECKING, 						sd 卡正在检测（正在准备sd卡）
+ * MEDIA_MOUNTED,						sd 卡已经挂在可用，返回值是这个就代表sd可用 
+ * MEDIA_MOUNTED_READ_ONLY,				sd 卡可用只读. 
+ * 比较的时候是
+ * if(Environment.MEDIA_UNKNOWN.equals(Environment.getExternalStorageState())){
+ * ...
+ * }
+ * 2.3 和之前版本是可以卸载sd卡的。 
+ * 
+ * 
  */
 package videoandroid;
+
+ 
+
 
 /**
  * @author www.23.com
