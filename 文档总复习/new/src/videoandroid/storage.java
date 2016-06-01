@@ -78,12 +78,30 @@
  * }
  * 2.3 和之前版本是可以卸载sd卡的。 
  * 
+ * 查看sd卡的剩余空间
+ * android 的源码是开源的，可以下载下来看看，每个系统级应用的源码都有。
+ * 系统级的源码在
+ * packages/apps 里面
+ * 导入一个非ecplise 的android 的项目
+ * file->import->android->...existing
  * 
+ * 所有的存储设备会被划分为区块，容量是		区块数量*区块大小 = 总容量
+ * 							  		可用区块数量*区块大小 = 剩余容量
+ * 单位是字节
+ * 		//获取sd 卡的目录
+		File fl = Environment.getExternalStorageDirectory();
+		//获取文件系统的信息
+		StatFs fs = new StatFs(fl.getAbsolutePath());
+		long size = fs.getBlockSize();//区块大小 
+		long counts = fs.getBlockCount();//一共多少区块
+		int av = fs.getAvailableBlocks();//剩余区块量
+		long l = size*counts;
+		TextView tx = (TextView) findViewById(R.id.txt);
+		tx.setText(Formatter.formatFileSize(this, l));
  */
 package videoandroid;
 
- 
-
+import java.io.File;
 
 /**
  * @author www.23.com
