@@ -100,6 +100,24 @@
 		tx.setText(Formatter.formatFileSize(this, l));
 		
  * Build.VERSION.SDK_INT 判断系统的等级level	18 19 等 用常量这么表示Build.VERSION_CODES.JELLY_BEAN_MR2	
+ * 
+ * 
+ * 文件访问权限
+ * 用的是linux的访问权限。
+ * rwx
+ * android 中每一个应用都是一个用户。
+ * 
+ * 路径已经默认为/data/data/项目/files 不可更改。（内部存储空间）
+ * openFileInput(name); 直接返回一个输入流 name 是文件名字
+ * openFileOutput(name, mode); 直接返回一个输出流 name 是文件名字 mode是模式 
+ * 			用普通的方式建立的是rw- --- ---
+ * 
+ * 注意如果跨项目读取，看看其它的项目文件夹是否有rx权限否则进不去。
+ * mode 值： 	MODE_PRIVATE  私有的 权限是rw-rw----
+ * 			MODE_WORLD_REA... 						全部可以读 rw-rw-r
+ * 			MODE_WORLD_W...   						全部可写    rw-rw--w
+ * 			MODE_WORLD_W... | MODE_WORLD_REA...  	这个是可读可写的。
+ * 
  */
 package videoandroid;
 
