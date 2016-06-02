@@ -98,10 +98,13 @@
 		long l = size*counts;
 		TextView tx = (TextView) findViewById(R.id.txt);
 		tx.setText(Formatter.formatFileSize(this, l));
+		
+ * Build.VERSION.SDK_INT 判断系统的等级level	18 19 等 用常量这么表示Build.VERSION_CODES.JELLY_BEAN_MR2	
  */
 package videoandroid;
 
 import java.io.File;
+
 
 /**
  * @author www.23.com
