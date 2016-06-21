@@ -140,12 +140,45 @@
  * xml
  * 将大量的数据写入到xml中去
  * 比如短信的备份
+ * 理论就是把短信全部读出来，然后用循环写入字符串，最后写入到文件里面去。
+ * 这里牵扯到一个写到sd卡的问题，写sd卡是需要权限的。
+ * 查看
+ * createxmltosdcard project
+ * 手动生成的xml非常不健壮。
  * 
+ * 这时候需要xml 序列化器
+ * 会自动过滤掉那种标签，不会造成闭合错误，它会转定义的。
+ * 
+ * //获取 xml 序列化生成器
+	XmlSerializer xs = Xml.newSerializer();
+	//第一个参数输入流，第二个用什么编码写入
+ *  xs.setOutput(new FileOutputStream(new File("/storage/sdcard0/ding.luchao.xml")), "utf-8");
+ *  
+ *  //生成头结点
+	//@param encoding xml 头上的编码
+	//@param st... 是否是独立的xml
+	xs.startDocument("utf-8", true);
+	//第一个命名空间 第二个是标签开始
+	xs.startTag(null, "msg");
+	//设置标签内容
+	xs.text("aaa");
+	//第一个命名空间 第二个标签结束
+	xs.endTag(null, "msg");
+	
+	//结束xml的创建
+	xs.endDocument();
+ * 
+ * 
+ * 
+ * 解析xml
+ * pull 解析
  * 
  */
 package videoandroid;
 
 import java.io.File;
+import java.io.FileOutputStream;
+
 
 
 /**
