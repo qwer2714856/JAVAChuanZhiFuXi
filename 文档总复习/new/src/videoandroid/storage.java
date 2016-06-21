@@ -118,6 +118,30 @@
  * 			MODE_WORLD_W...   						全部可写    rw-rw--w
  * 			MODE_WORLD_W... | MODE_WORLD_REA...  	这个是可读可写的。
  * 
+ * 
+ * 
+ * SharedPreferences
+ * 非常适合保存零散简单的数据。
+ * @param name file name 这里文件加不加后缀都行
+ * @param name mode 模式和openFileOutput同  -- 一般都私有
+ * 路径在/data/data/项目/专门为sharedPreferences 创建的文件夹(shared_prefs/(你指定的文件name).xml) 注意如果这里的文件如果不存也不会报错。
+ * SharedPreferences sp = getSharedPreferences(name, mode);
+ * //拿到sp的编辑器
+ * Editor ed = sp.edit();
+ * //放置内容
+ * ed.putString(key,value);
+ * //提交
+ * ed.commit();
+ * //获取数据不需要编辑器了直接
+ * @param key 索引值
+ * @param defValue 如果没有就用这个做默认值
+ * sp.getString(key, defValue);
+ * 
+ * xml
+ * 将大量的数据写入到xml中去
+ * 比如短信的备份
+ * 
+ * 
  */
 package videoandroid;
 
