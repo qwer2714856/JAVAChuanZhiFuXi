@@ -53,6 +53,22 @@
 		}
 		
 	}
+	
+	如果多个values 建议每次用 values.clear();清空一下
+	
+	public void sw(){
+		try{
+		//开启事物
+		db.beginTransaction();
+		//sql 语句
+		//设置 事物执行成功开始执行。 如果没有使用这句 endTransaction 这个提交了也没用。
+		db.setTransactionSuccessful();
+		}finally{
+		//关闭事物并提交
+		db.endTransaction();
+		}
+		
+	}
  */
 package videoandroid;
 
