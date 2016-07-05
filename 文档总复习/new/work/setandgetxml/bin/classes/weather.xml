@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weather>
+    <item>
+        <city>北京</city>
+        <pm>80</pm>
+    </item>
+</weather>

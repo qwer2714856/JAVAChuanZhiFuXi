@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package zxcz;
+
+/**
+ * @author www.23.com
+ *
+ */
+public class Description {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
