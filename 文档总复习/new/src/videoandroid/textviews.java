@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 
 把一个布局文件填充成一个view对象
 layout_file_to_view_ist_listview project
- * 
+ *
  */
 package videoandroid;
 
